@@ -117,7 +117,7 @@ function TeamCard({ icon, iconColor, name, role, status, bio, actionLabel, onAct
     return (
         <motion.div
             whileHover={{ y: -5 }}
-            className={`glass-card p-10 rounded-[3rem] border transition-all flex flex-col h-full relative overflow-hidden group ${
+            className={`glass-card p-6 md:p-10 rounded-[3rem] border transition-all flex flex-col h-full relative overflow-hidden group ${
                 isAI 
                     ? 'border-cyan-500/20 bg-slate-950/60' 
                     : 'border-white/5 bg-slate-950/40 hover:border-white/10'

@@ -91,15 +91,15 @@ export function WhatsAppDemo() {
         <div className="flex flex-col items-center justify-center min-h-full bg-slate-950 p-4 relative overflow-hidden space-y-10">
             {/* --- HEADER --- */}
             <div className="w-full max-w-4xl px-2 text-center md:text-left">
-                <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight uppercase font-[family-name:var(--font-outfit)]">Care Hub</h2>
-                <p className="text-sm text-slate-500 font-light font-[family-name:var(--font-inter)] tracking-wide mt-2">Sample messaging interface demonstration with a care companion.</p>
+                <h2 className="text-2xl md:text-5xl font-bold text-white tracking-tight uppercase font-[family-name:var(--font-outfit)]">Care Hub</h2>
+                <p className="text-xs md:text-sm text-slate-500 font-light font-[family-name:var(--font-inter)] tracking-wide mt-1.5 md:mt-2">Sample messaging interface demonstration with a care companion.</p>
             </div>
             {/* Ambient Background Glows */}
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/5 blur-[120px] rounded-full animate-pulse" />
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 blur-[120px] rounded-full animate-pulse delay-700" />
 
             {/* PHONE FRAME */}
-            <div className="w-[390px] h-[750px] bg-slate-950 rounded-[4rem] p-3 shadow-3xl relative border-[1px] border-white/10 ring-[6px] ring-slate-900/50">
+            <div className="w-full max-w-[390px] h-[700px] md:h-[750px] bg-slate-950 rounded-[3rem] md:rounded-[4rem] p-2 md:p-3 shadow-3xl relative border-[1px] border-white/10 ring-4 md:ring-[6px] ring-slate-900/50">
 
                 {/* Dynamic island / Notch */}
                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-30 shadow-inner"></div>
@@ -123,7 +123,7 @@ export function WhatsAppDemo() {
                                 <h3 className="font-bold text-[13px] uppercase tracking-tight leading-tight font-[family-name:var(--font-outfit)]">Parents-Health Care</h3>
                                 <div className="flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-                                    <p className="data-label !text-[8px] !text-cyan-400/60 !tracking-[0.1em]">PROTOTYPE CHAT</p>
+                                    <p className="data-label !text-[8px] !text-cyan-400 !tracking-[0.1em]">PROTOTYPE CHAT</p>
                                 </div>
                             </div>
                         </div>
@@ -151,7 +151,7 @@ export function WhatsAppDemo() {
                                         }`}
                                 >
                                     <p className="whitespace-pre-line leading-relaxed tracking-normal">{msg.text}</p>
-                                    <div className="flex items-center justify-end gap-2 mt-3 opacity-40">
+                                    <div className="flex items-center justify-end gap-2 mt-3 opacity-80">
                                         <span className="data-label !text-[7px]">{msg.timestamp}</span>
                                         {msg.sender === "user" && <CheckCheck size={12} strokeWidth={1.5} className="text-slate-950" />}
                                     </div>

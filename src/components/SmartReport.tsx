@@ -186,15 +186,15 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
 
     if (isLocked) {
         return (
-            <div className="w-full h-full flex flex-col items-center justify-center min-h-[500px] text-center p-12 glass-card rounded-[3.5rem] border-white/5 relative overflow-hidden bg-slate-950/40 backdrop-blur-3xl">
+            <div className="w-full h-full flex flex-col items-center justify-center min-h-[500px] text-center p-6 md:p-12 glass-card rounded-[3.5rem] border-white/5 relative overflow-hidden bg-slate-950/40 backdrop-blur-3xl">
                 <div className="absolute top-0 right-0 p-24 opacity-[0.03] scale-150 rotate-12">
                    <Lock size={150} className="text-cyan-400" />
                 </div>
                 <div className="relative z-10 flex flex-col items-center">
-                    <div className="mb-10 h-20 w-20 bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center text-cyan-400/60 shadow-inner">
+                    <div className="mb-10 h-20 w-20 bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center text-cyan-400 shadow-inner">
                         <Lock size={40} strokeWidth={1.5} />
                     </div>
-                    <h3 className="text-4xl font-bold text-white mb-5 font-[family-name:var(--font-outfit)] uppercase tracking-tight">Profile Setup Required</h3>
+                    <h3 className="text-2xl md:text-4xl font-bold text-white mb-5 font-[family-name:var(--font-outfit)] uppercase tracking-tight">Profile Setup Required</h3>
                     <p className="text-slate-500 font-light max-w-md mb-12 text-lg font-[family-name:var(--font-inter)] leading-relaxed">
                         To unlock automated insights, Parents-Health requires your baseline profile. Complete the 15-point assessment to view the demo analysis.
                     </p>
@@ -212,13 +212,13 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
     return (
         <div className="w-full max-w-7xl mx-auto space-y-10 pb-20">
             {/* --- HEADER --- */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8 px-2">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 px-2">
                 <div>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white font-[family-name:var(--font-outfit)] tracking-tight uppercase">Health View</h2>
-                    <p className="text-sm text-slate-500 font-light font-[family-name:var(--font-inter)] tracking-wide mt-2">AI-assisted synthesis of longitudinal health records and laboratory scans.</p>
+                    <h2 className="text-2xl md:text-5xl font-bold text-white font-[family-name:var(--font-outfit)] tracking-tight uppercase">Health View</h2>
+                    <p className="text-xs md:text-sm text-slate-500 font-light font-[family-name:var(--font-inter)] tracking-wide mt-1.5 md:mt-2">AI-assisted synthesis of longitudinal health records and laboratory scans.</p>
                 </div>
                 <div className="flex items-center gap-4 data-label !text-cyan-400 bg-white/[0.03] px-6 py-4 rounded-2xl border border-white/5">
-                    <ShieldCheck size={20} className="text-cyan-400/60" strokeWidth={1.5} />
+                    <ShieldCheck size={20} className="text-cyan-400" strokeWidth={1.5} />
                     <span>Cross-Sync: {history.length} Records</span>
                 </div>
             </div>
@@ -230,7 +230,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                 <div className="lg:col-span-4 space-y-8">
                     <div
                         {...getRootProps()}
-                        className={`glass-card rounded-[3rem] p-12 flex flex-col items-center justify-center text-center cursor-pointer transition-all min-h-[18rem] relative overflow-hidden border-dashed ${isDragActive
+                        className={`glass-card rounded-[3rem] p-6 md:p-12 flex flex-col items-center justify-center text-center cursor-pointer transition-all min-h-[18rem] relative overflow-hidden border-dashed ${isDragActive
                             ? "border-cyan-500 bg-cyan-500/5"
                             : "border-white/5 hover:bg-white/[0.03]"
                             }`}
@@ -245,7 +245,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                             </div>
                         ) : file ? (
                             <div className="flex flex-col items-center z-10">
-                                <div className="h-14 w-14 rounded-2xl bg-white/5 flex items-center justify-center text-cyan-400/60 mb-5 border border-white/5 shadow-inner">
+                                <div className="h-14 w-14 rounded-2xl bg-white/5 flex items-center justify-center text-cyan-400 mb-5 border border-white/5 shadow-inner">
                                     <FileText size={28} strokeWidth={1.5} />
                                 </div>
                                 <p className="text-white font-bold tracking-tight px-4 truncate w-full font-[family-name:var(--font-outfit)]">{file.name}</p>
@@ -253,7 +253,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                             </div>
                         ) : (
                             <>
-                                <div className="h-14 w-14 rounded-2xl bg-white/5 border border-white/10 text-slate-600 flex items-center justify-center mb-6 group-hover:text-cyan-400/60 transition-all">
+                                <div className="h-14 w-14 rounded-2xl bg-white/5 border border-white/10 text-slate-600 flex items-center justify-center mb-6 group-hover:text-cyan-400 transition-all">
                                     <UploadCloud size={32} strokeWidth={1.5} />
                                 </div>
                                 <p className="text-white font-bold tracking-tight mb-2 uppercase text-sm font-[family-name:var(--font-outfit)]">Select Source</p>
@@ -275,7 +275,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                     )}
 
                     {status === "analyzing" && (
-                        <div className="w-full p-10 glass-card rounded-[2rem] border-white/5 flex flex-col items-center justify-center gap-6 text-center">
+                        <div className="w-full p-6 md:p-10 glass-card rounded-[2rem] border-white/5 flex flex-col items-center justify-center gap-6 text-center">
                             <div className="relative h-14 w-14">
                                 <Loader2 size={56} className="animate-spin text-cyan-500/40" strokeWidth={1.5} />
                                 <div className="absolute inset-0 flex items-center justify-center">
@@ -366,18 +366,18 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                 animate={{ opacity: 1, y: 0 }}
                                 className="glass-card rounded-[3rem] border-white/10 bg-slate-950/60 backdrop-blur-3xl shadow-2xl h-full flex flex-col overflow-hidden relative"
                             >
-                                <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+                                <div className="absolute top-0 right-0 p-6 md:p-12 opacity-5 pointer-events-none">
                                     <ShieldCheck size={180} className="text-cyan-400" />
                                 </div>
 
                                   {analysisData.isSummary ? (
-                                    <div className="flex-1 overflow-y-auto p-12 custom-scrollbar relative z-10">
+                                    <div className="flex-1 overflow-y-auto p-6 md:p-12 custom-scrollbar relative z-10">
                                         <div className="flex items-center gap-8 mb-14">
-                                            <div className="h-20 w-20 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400/60 shadow-inner">
+                                            <div className="h-20 w-20 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400 shadow-inner">
                                                 <Brain size={40} strokeWidth={1.5} />
                                             </div>
                                             <div>
-                                                <h3 className="text-4xl font-bold text-white tracking-tight uppercase font-[family-name:var(--font-outfit)]">{analysisData.title || "Health Summary"}</h3>
+                                                <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight uppercase font-[family-name:var(--font-outfit)]">{analysisData.title || "Health Summary"}</h3>
                                                 <div className="data-label !text-cyan-400 mt-3 flex items-center gap-3">
                                                      <div className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
                                                      Health Trajectory Sync Active
@@ -386,7 +386,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                         </div>
 
                                         <div className="space-y-12">
-                                            <div className="glass-card p-10 rounded-[3rem] bg-white/[0.02] border-white/5">
+                                            <div className="glass-card p-6 md:p-10 rounded-[3rem] bg-white/[0.02] border-white/5">
                                                 <h4 className="data-label !text-slate-600 mb-6 flex items-center gap-3">
                                                     <Activity size={20} className="text-cyan-400 opacity-60" strokeWidth={1.5} /> Physiological Trajectory
                                                 </h4>
@@ -396,7 +396,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                             </div>
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                                <div className="glass-card p-10 rounded-[3rem] bg-white/[0.01] border-white/5">
+                                                <div className="glass-card p-6 md:p-10 rounded-[3rem] bg-white/[0.01] border-white/5">
                                                     <h4 className="data-label !text-slate-600 mb-6 flex items-center gap-3">
                                                         <FileSearch size={20} className="text-amber-500 opacity-60" strokeWidth={1.5} /> Key Interventions
                                                     </h4>
@@ -410,7 +410,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                                     </ul>
                                                 </div>
 
-                                                <div className="glass-card p-10 rounded-[3rem] bg-cyan-500/[0.03] border-cyan-500/10 shadow-3xl shadow-cyan-500/5">
+                                                <div className="glass-card p-6 md:p-10 rounded-[3rem] bg-cyan-500/[0.03] border-cyan-500/10 shadow-3xl shadow-cyan-500/5">
                                                     <h4 className="data-label !text-cyan-400 mb-6 flex items-center gap-3">
                                                         <ShieldCheck size={20} strokeWidth={1.5} /> Care Focus
                                                     </h4>
@@ -424,20 +424,20 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                 ) : (
                                     <>
                                         {/* SINGLE REPORT VIEW */}
-                                        <div className="p-12 border-b border-white/5 relative bg-white/[0.02] z-10">
+                                        <div className="p-6 md:p-12 border-b border-white/5 relative bg-white/[0.02] z-10">
                                             <div className="flex items-start justify-between mb-8">
                                                 <div>
-                                                    <span className={`data-label !text-[8px] px-5 py-2 rounded-full border border-white/10 bg-white/5 ${analysisData.meta?.reportType?.includes('Rx') ? 'text-blue-400' : 'text-cyan-400'}`}>
+                                                    <span className={`data-label !text-[7px] md:!text-[8px] px-4 md:py-2 rounded-full border border-white/10 bg-white/5 ${analysisData.meta?.reportType?.includes('Rx') ? 'text-blue-400' : 'text-cyan-400'}`}>
                                                         NODE ID: {analysisData.meta?.reportType || analysisData.docType || "DATA_STREAM"}
                                                     </span>
-                                                    <h3 className="text-5xl font-bold text-white tracking-tight mt-6 uppercase font-[family-name:var(--font-outfit)]">Report Summary</h3>
+                                                    <h3 className="text-2xl md:text-5xl font-bold text-white tracking-tight mt-4 md:mt-6 uppercase font-[family-name:var(--font-outfit)]">Report Summary</h3>
                                                 </div>
                                                 <div className="h-14 w-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center data-label !text-cyan-400 shadow-inner">Y</div>
                                             </div>
                                             <p className="text-xl text-slate-400 font-light font-[family-name:var(--font-inter)] leading-relaxed max-w-4xl">{analysisData.summary}</p>
                                         </div>
 
-                                        <div className="flex-1 overflow-y-auto p-12 custom-scrollbar space-y-14 z-10">
+                                        <div className="flex-1 overflow-y-auto p-6 md:p-12 custom-scrollbar space-y-14 z-10">
                                             {/* Biomarker Table */}
                                             {analysisData.biomarkers && analysisData.biomarkers.length > 0 && (
                                                 <div>
@@ -488,7 +488,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                             )}
 
                                             {/* Analysis Markdown */}
-                                            <div className="glass-card p-12 rounded-[3.5rem] bg-white/[0.02] border-white/5">
+                                            <div className="glass-card p-6 md:p-12 rounded-[3.5rem] bg-white/[0.02] border-white/5">
                                                 <h4 className="data-label !text-slate-600 mb-8 uppercase tracking-[0.3em]">AI Insight Stream</h4>
                                                 <div className="prose prose-invert prose-lg max-w-none text-slate-400 font-light font-[family-name:var(--font-inter)] leading-relaxed">
                                                     <ReactMarkdown>{analysisData.analysis}</ReactMarkdown>
@@ -496,8 +496,8 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                             </div>
                                         </div>
 
-                                        <div className="p-10 bg-white/[0.02] border-t border-white/5 text-center relative z-10 overflow-hidden">
-                                           <div className="absolute top-0 right-0 p-12 opacity-[0.03]">
+                                        <div className="p-6 md:p-10 bg-white/[0.02] border-t border-white/5 text-center relative z-10 overflow-hidden">
+                                           <div className="absolute top-0 right-0 p-6 md:p-12 opacity-[0.03]">
                                                <AlertCircle size={100} className="text-amber-600" />
                                            </div>
                                             <p className="data-label !text-amber-600 !tracking-[0.5em] flex items-center justify-center gap-4">
@@ -511,9 +511,9 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                 )}
                             </motion.div>
                         ) : (
-                            <div className="h-full w-full flex flex-col items-center justify-center text-slate-400 glass-card rounded-[4rem] border-white/5 bg-slate-950/20 backdrop-blur-3xl p-16 text-center group">
+                            <div className="h-full w-full flex flex-col items-center justify-center text-slate-400 glass-card rounded-[4rem] border-white/5 bg-slate-950/20 backdrop-blur-3xl p-8 md:p-16 text-center group">
                                 <div className="animate-float mb-12">
-                                    <div className="h-28 w-28 rounded-[2.5rem] bg-white/5 border border-white/10 flex items-center justify-center text-slate-800 group-hover:text-cyan-400/60 group-hover:border-cyan-500/20 transition-all duration-1000 shadow-3xl shadow-black">
+                                    <div className="h-28 w-28 rounded-[2.5rem] bg-white/5 border border-white/10 flex items-center justify-center text-slate-800 group-hover:text-cyan-400 group-hover:border-cyan-500/20 transition-all duration-1000 shadow-3xl shadow-black">
                                         <Brain size={80} strokeWidth={1} className="opacity-10 group-hover:opacity-100 transition-opacity" />
                                     </div>
                                 </div>

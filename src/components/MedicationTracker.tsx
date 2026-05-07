@@ -297,7 +297,7 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
         }
 
         return (
-            <div className="glass-card p-10 rounded-[3.5rem] border-white/5 bg-slate-950/40 backdrop-blur-3xl shadow-3xl relative overflow-hidden group">
+            <div className="glass-card p-6 md:p-10 rounded-[3.5rem] border-white/5 bg-slate-950/40 backdrop-blur-3xl shadow-3xl relative overflow-hidden group">
                 <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
                 
                 <div className="flex justify-between items-center mb-10">
@@ -322,28 +322,28 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
         <div className="max-w-5xl mx-auto space-y-10">
             {/* --- HEADER --- */}
             <div className="px-2">
-                <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight uppercase font-[family-name:var(--font-outfit)]">Health Routine</h2>
-                <p className="text-sm text-slate-400 font-light font-[family-name:var(--font-inter)] tracking-wide mt-2">Management of daily health habits and physical readings.</p>
+                <h2 className="text-2xl md:text-5xl font-bold text-white tracking-tight uppercase font-[family-name:var(--font-outfit)]">Health Routine</h2>
+                <p className="text-xs md:text-sm text-slate-400 font-light font-[family-name:var(--font-inter)] tracking-wide mt-1.5 md:mt-2">Management of daily health habits and physical readings.</p>
             </div>
 
             {/* TABS HEADER */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-white/[0.02] backdrop-blur-3xl p-3 rounded-[2.5rem] border border-white/5 shadow-3xl">
-                <div className="flex gap-2 w-full md:w-auto">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-white/[0.02] backdrop-blur-3xl p-2 md:p-3 rounded-3xl md:rounded-[2.5rem] border border-white/5 shadow-3xl">
+                <div className="flex gap-1 md:gap-2 w-full md:w-auto">
                     {[
-                        { id: "daily", label: "Today's Log", icon: Check },
+                        { id: "daily", label: "Daily Log", icon: Check },
                         { id: "calendar", label: "History", icon: CalendarIcon },
-                        { id: "manage", label: "Medicine List", icon: pillIcon(meds.length) }
+                        { id: "manage", label: "Meds", icon: pillIcon(meds.length) }
                     ].map((tab) => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id as any)}
-                            className={`flex-1 md:flex-none flex items-center justify-center gap-4 px-10 py-5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all duration-700 font-[family-name:var(--font-outfit)] ${activeTab === tab.id
+                            className={`flex-1 md:flex-none flex items-center justify-center gap-2 md:gap-4 px-4 md:px-10 py-4 md:py-5 rounded-2xl text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all duration-700 font-[family-name:var(--font-outfit)] ${activeTab === tab.id
                                 ? "bg-white text-slate-950 shadow-2xl scale-[1.02]"
                                 : "text-slate-500 hover:text-white hover:bg-white/5"
                                 }`}
                         >
                             <tab.icon size={16} strokeWidth={activeTab === tab.id ? 2.5 : 1.5} className={activeTab === tab.id ? "text-slate-950" : "text-cyan-400 opacity-60"} />
-                            {tab.label}
+                            <span className="truncate">{tab.label}</span>
                         </button>
                     ))}
                 </div>
@@ -351,7 +351,7 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
                 {/* Test Call */}
                 <button 
                     onClick={onTriggerCall} 
-                    className="flex data-label !text-[9px] !text-slate-500 hover:!text-cyan-400 gap-4 items-center px-8 py-3 bg-white/[0.03] border border-white/5 rounded-full transition-all hover:bg-white/[0.06] active:scale-95 translate-x-[-10px] md:translate-x-0"
+                    className="flex data-label !text-[8px] md:!text-[9px] !text-slate-500 hover:!text-cyan-400 gap-3 md:gap-4 items-center px-6 md:px-8 py-3 bg-white/[0.03] border border-white/5 rounded-full transition-all hover:bg-white/[0.06] active:scale-95"
                 >
                     <Clock size={14} strokeWidth={1.5} className="opacity-60" /> 
                     <span>Daily Care Reminder</span>
@@ -362,28 +362,30 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
             {activeTab === "daily" && (
                 <div className="space-y-8">
                     {/* DATE NAVIGATOR */}
-                    <div className="glass-card p-8 rounded-[3rem] border-white/5 bg-slate-950/40 backdrop-blur-3xl shadow-3xl flex items-center justify-between relative overflow-hidden group">
+                    <div className="glass-card p-6 md:p-8 rounded-[2rem] md:rounded-[3rem] border-white/5 bg-slate-950/40 backdrop-blur-3xl shadow-3xl flex items-center justify-between relative overflow-hidden group">
                         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
                         
-                        <button onClick={() => changeDate(-1)} className="p-5 hover:bg-white/10 rounded-2xl text-slate-600 hover:text-cyan-400 transition-all active:scale-90 border border-white/5">
+                        <button onClick={() => changeDate(-1)} className="p-4 md:p-5 hover:bg-white/10 rounded-2xl text-slate-600 hover:text-cyan-400 transition-all active:scale-90 border border-white/5">
                             <ChevronLeft size={24} strokeWidth={1.5} />
                         </button>
                         
-                        <div className="text-center">
-                            <h3 className="text-3xl font-bold text-white tracking-tight uppercase flex items-center gap-4 justify-center font-[family-name:var(--font-outfit)]">
+                        <div className="text-center px-2">
+                            <div className="flex flex-col items-center gap-2 md:gap-4">
                                 {viewingDate === todayKey ? (
-                                    <span className="data-label !text-cyan-400 bg-white/5 border border-white/10 px-4 py-1 rounded-full !tracking-[0.4em]">CURRENT</span>
+                                    <span className="data-label !text-cyan-400 bg-white/5 border border-white/10 px-3 py-1 rounded-full !text-[7px] md:!text-[8px] !tracking-[0.2em] uppercase">CURRENT</span>
                                 ) : null}
-                                {new Date(viewingDate).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
-                            </h3>
+                                <h3 className="text-lg md:text-3xl font-bold text-white tracking-tight uppercase font-[family-name:var(--font-outfit)] leading-tight">
+                                    {new Date(viewingDate).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
+                                </h3>
+                            </div>
                             {viewingDate !== todayKey && (
-                                <button onClick={() => setViewingDate(todayKey)} className="data-label !text-cyan-500 mt-4 hover:!text-cyan-400 transition-all active:scale-95">
+                                <button onClick={() => setViewingDate(todayKey)} className="data-label !text-cyan-500 mt-3 md:mt-4 hover:!text-cyan-400 transition-all active:scale-95 text-[9px] uppercase">
                                     Reset to Today
                                 </button>
                             )}
                         </div>
                         
-                        <button onClick={() => changeDate(1)} className="p-5 hover:bg-white/10 rounded-2xl text-slate-600 hover:text-cyan-400 transition-all active:scale-90 border border-white/5">
+                        <button onClick={() => changeDate(1)} className="p-4 md:p-5 hover:bg-white/10 rounded-2xl text-slate-600 hover:text-cyan-400 transition-all active:scale-90 border border-white/5">
                             <ChevronRight size={24} strokeWidth={1.5} />
                         </button>
                     </div>
@@ -391,14 +393,14 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                         {/* LEFT: Meds Checklist (7 cols) */}
                         <div className="md:col-span-7 space-y-8">
-                            <div className="flex justify-between items-end px-3">
+                             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 px-3">
                                 <div>
-                                    <h3 className="text-2xl font-bold text-white tracking-tight uppercase mb-2 font-[family-name:var(--font-outfit)]">
+                                    <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight uppercase mb-1 font-[family-name:var(--font-outfit)]">
                                         Daily Tasks
                                     </h3>
-                                    <p className="text-[10px] data-label text-slate-500/50 !tracking-[0.2em] normal-case">Consistency tracking demo</p>
+                                    <p className="text-[10px] data-label text-slate-400 !tracking-[0.1em] uppercase">Consistency tracking demo</p>
                                 </div>
-                                <span className="data-label !text-cyan-400 bg-white/[0.03] border border-white/5 px-6 py-2 rounded-full shadow-inner">
+                                <span className="data-label !text-cyan-400 bg-white/[0.03] border border-white/5 px-4 md:px-6 py-2 rounded-full shadow-inner text-[9px] md:text-[10px] w-fit">
                                     {activeLog.meds.length} / {activeMeds.length} Completed
                                 </span>
                             </div>
@@ -414,32 +416,32 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
                                             animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: idx * 0.05 }}
                                             onClick={() => toggleMed(med.name)}
-                                            className={`group cursor-pointer p-8 rounded-[2.5rem] border transition-all duration-700 relative overflow-hidden ${isTaken
+                                            className={`group cursor-pointer p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border transition-all duration-700 relative overflow-hidden ${isTaken
                                                 ? "bg-cyan-500/[0.03] border-cyan-500/30 shadow-3xl shadow-cyan-500/5"
                                                 : "bg-white/[0.01] border-white/5 hover:border-white/20 hover:bg-white/[0.03] shadow-xl"
                                                 }`}
                                         >
-                                            <div className="flex items-center gap-7 relative z-10">
-                                                <div className={`h-14 w-14 rounded-2xl flex items-center justify-center transition-all duration-700 ${isTaken 
+                                            <div className="flex items-center gap-5 md:gap-7 relative z-10">
+                                                <div className={`h-12 w-12 md:h-14 md:w-14 rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-700 ${isTaken 
                                                     ? "bg-white text-slate-950 shadow-3xl scale-110" 
                                                     : "bg-white/5 text-slate-700 border border-white/5"
                                                     }`}>
-                                                    <Check size={28} strokeWidth={isTaken ? 3 : 1.5} className={isTaken ? "" : "opacity-40"} />
+                                                    <Check size={28} strokeWidth={isTaken ? 3 : 1.5} className={isTaken ? "" : "opacity-80"} />
                                                 </div>
                                                 <div>
-                                                    <h4 className={`font-bold tracking-tight text-xl font-[family-name:var(--font-outfit)] ${isTaken ? "text-slate-600 line-through" : "text-white"}`}>{med.name}</h4>
-                                                    <div className="flex flex-wrap items-center gap-4 mt-2">
-                                                        <span className={`data-label !text-[9px] ${isTaken ? "!text-slate-700" : "!text-cyan-400 opacity-60"}`}>{med.dosage}</span>
+                                                    <h4 className={`font-bold tracking-tight text-lg md:text-xl font-[family-name:var(--font-outfit)] ${isTaken ? "text-slate-600 line-through" : "text-white"}`}>{med.name}</h4>
+                                                    <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-1.5 md:mt-2">
+                                                        <span className={`data-label !text-[8px] md:!text-[9px] uppercase ${isTaken ? "!text-slate-700" : "!text-cyan-400 opacity-60"}`}>{med.dosage}</span>
                                                         {med.slots && med.slots.length > 0 ? (
-                                                            <div className="flex gap-2">
+                                                            <div className="flex gap-1.5">
                                                                 {med.slots.map(s => (
-                                                                    <span key={s} className={`px-2 py-1 rounded-md data-label !text-[7px] border ${
+                                                                    <span key={s} className={`px-2 py-0.5 rounded-md data-label !text-[7px] border uppercase ${
                                                                         isTaken ? "bg-white/5 border-white/5 text-slate-800" : "bg-white/5 border-white/10 text-slate-500"
                                                                     }`}>{s}</span>
                                                                 ))}
                                                             </div>
                                                         ) : (
-                                                            <span className={`data-label !text-slate-700 ${isTaken ? "!text-slate-800" : ""}`}>// {med.timing}</span>
+                                                            <span className={`data-label !text-[8px] !text-slate-700 uppercase ${isTaken ? "!text-slate-800" : ""}`}>// {med.timing}</span>
                                                         )}
                                                     </div>
                                                 </div>
@@ -462,25 +464,25 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
 
                                 <div className="space-y-6">
                                     <div>
-                                        <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2 block">Blood Pressure (Sys/Dia)</label>
-                                        <div className="flex items-center gap-3">
+                                        <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-3 block">Blood Pressure (Sys/Dia)</label>
+                                        <div className="flex items-center gap-2 md:gap-3">
                                             <div className="relative flex-1">
                                                 <input
                                                     type="number"
                                                     placeholder="120"
                                                     value={statsInput.bpSys || ""}
                                                     onChange={e => setStatsInput({ ...statsInput, bpSys: Number(e.target.value) })}
-                                                    className="w-full bg-slate-900 border border-white/5 px-4 py-3 rounded-xl text-white font-black text-lg focus:border-blue-500/50 outline-none transition-all placeholder:text-slate-700"
+                                                    className="w-full bg-slate-900 border border-white/5 px-3 md:px-4 py-3 rounded-xl text-white font-black text-base md:text-lg focus:border-blue-500/50 outline-none transition-all placeholder:text-slate-700"
                                                 />
                                             </div>
-                                            <span className="text-slate-800 text-2xl font-black">/</span>
+                                            <span className="text-slate-800 text-xl md:text-2xl font-black">/</span>
                                             <div className="relative flex-1">
                                                 <input
                                                     type="number"
                                                     placeholder="80"
                                                     value={statsInput.bpDia || ""}
                                                     onChange={e => setStatsInput({ ...statsInput, bpDia: Number(e.target.value) })}
-                                                    className="w-full bg-slate-900 border border-white/5 px-4 py-3 rounded-xl text-white font-black text-lg focus:border-blue-500/50 outline-none transition-all placeholder:text-slate-700"
+                                                    className="w-full bg-slate-900 border border-white/5 px-3 md:px-4 py-3 rounded-xl text-white font-black text-base md:text-lg focus:border-blue-500/50 outline-none transition-all placeholder:text-slate-700"
                                                 />
                                             </div>
                                         </div>
@@ -555,7 +557,7 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
                                     </div>
 
                                     {/* Card 3: BP Monitor (Disconnected) */}
-                                    <div className="bg-slate-950/40 p-4 rounded-2xl border border-white/5 border-dashed flex items-center justify-between opacity-40 hover:opacity-100 transition-all cursor-pointer group/item">
+                                    <div className="bg-slate-950/40 p-4 rounded-2xl border border-white/5 border-dashed flex items-center justify-between opacity-80 hover:opacity-100 transition-all cursor-pointer group/item">
                                         <div className="flex items-center gap-4">
                                             <div className="p-3 bg-slate-800 text-slate-600 rounded-xl group-hover/item:bg-slate-700 transition-colors">
                                                 <Heart size={18} strokeWidth={3} />
@@ -571,7 +573,7 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
                             </div>
 
                             {/* 3. HABITS CARD */}
-                            <div className="glass-card p-10 rounded-[2rem] border-white/5 bg-slate-950/40 backdrop-blur-3xl shadow-2xl relative overflow-hidden group">
+                            <div className="glass-card p-6 md:p-10 rounded-[2rem] border-white/5 bg-slate-950/40 backdrop-blur-3xl shadow-2xl relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl rounded-full -mr-16 -mt-16" />
                                 
                                 <h3 className="text-[10px] font-black text-emerald-400 flex items-center gap-3 tracking-[0.2em] uppercase mb-8">
@@ -628,12 +630,12 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
 
             {/* --- TAB 2: CALENDAR --- */}
             {activeTab === "calendar" && (
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10">
                     <div className="md:col-span-8">
                         {renderCalendar()}
                     </div>
                     <div className="md:col-span-4">
-                        <div className="glass-card p-12 rounded-[3.5rem] border-white/5 bg-slate-950/40 backdrop-blur-3xl shadow-3xl h-full flex flex-col justify-center items-center text-center relative overflow-hidden group">
+                        <div className="glass-card p-6 md:p-12 rounded-[3.5rem] border-white/5 bg-slate-950/40 backdrop-blur-3xl shadow-3xl h-full flex flex-col justify-center items-center text-center relative overflow-hidden group">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 blur-3xl rounded-full -mr-16 -mt-16" />
                             
                             <h3 className="text-2xl font-bold text-white mb-5 uppercase tracking-tight font-[family-name:var(--font-outfit)]">History Archives</h3>
@@ -664,7 +666,7 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 px-3">
                         <div>
                             <h3 className="text-3xl font-bold text-white tracking-tight uppercase mb-2 font-[family-name:var(--font-outfit)]">Medicine List</h3>
-                            <p className="text-[10px] data-label text-slate-500/50 !tracking-[0.2em] leading-relaxed max-w-lg normal-case">Review daily medications or add new entries to your health routine list.</p>
+                            <p className="text-[10px] data-label text-slate-400 !tracking-[0.2em] leading-relaxed max-w-lg normal-case">Review daily medications or add new entries to your health routine list.</p>
                         </div>
                         <button
                             onClick={() => setIsAddingMed(true)}
@@ -678,14 +680,14 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
                     <div className="grid gap-6">
                         {/* ADD NEW FORM */}
                         {isAddingMed && (
-                            <motion.div layout initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-10 rounded-[2.5rem] border-cyan-500/20 bg-slate-950/60 backdrop-blur-3xl shadow-2xl relative overflow-hidden">
+                            <motion.div layout initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-6 md:p-10 rounded-[2.5rem] border-cyan-500/20 bg-slate-950/60 backdrop-blur-3xl shadow-2xl relative overflow-hidden">
                                 <div className="absolute top-0 right-0 w-40 h-40 bg-cyan-500/10 blur-3xl rounded-full -mr-20 -mt-20" />
                                 
                                 <h4 className="text-[10px] font-black text-cyan-400 mb-8 flex items-center gap-3 tracking-[0.2em] uppercase">
                                     <PlusCircle size={14} strokeWidth={3} /> Add New Entry
                                 </h4>
                                                             <form onSubmit={addMed} className="space-y-10">
-                                    <div className="grid md:grid-cols-2 gap-10">
+                                    <div className="grid md:grid-cols-2 gap-6 md:gap-10">
                                         <div className="space-y-8">
                                             <div>
                                                 <label className="data-label !text-slate-600 mb-3 block">Formulation Identity</label>
@@ -810,7 +812,7 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
                                 // EDIT MODE (Inline)
                                 if (editingMed?.name === med.name) {
                                     return (
-                                        <motion.div key={idx} layout className="glass-card p-10 rounded-[2.5rem] border-amber-500/20 bg-slate-950/60 backdrop-blur-3xl shadow-3xl relative overflow-hidden">
+                                        <motion.div key={idx} layout className="glass-card p-6 md:p-10 rounded-[2.5rem] border-amber-500/20 bg-slate-950/60 backdrop-blur-3xl shadow-3xl relative overflow-hidden">
                                             <h4 className="data-label !text-amber-500 mb-8 flex items-center gap-4">
                                                 <Edit3 size={16} strokeWidth={1.5} className="opacity-60" /> Reconfigure formulation
                                             </h4>
@@ -880,14 +882,14 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
                                         
                                         <div className="flex items-center justify-between relative z-10">
                                             <div className="flex items-center gap-6">
-                                                <div className="h-14 w-14 rounded-2xl bg-white/5 border border-white/5 text-cyan-400/60 flex items-center justify-center shadow-inner group-hover:border-cyan-500/20 transition-all">
+                                                <div className="h-14 w-14 rounded-2xl bg-white/5 border border-white/5 text-cyan-400 flex items-center justify-center shadow-inner group-hover:border-cyan-500/20 transition-all">
                                                     <Pill size={24} strokeWidth={1.5} />
                                                 </div>
                                                 <div>
                                                     <h4 className="font-bold text-white text-base tracking-tight mb-2 group-hover:text-cyan-400 transition-colors font-[family-name:var(--font-outfit)]">{med.name}</h4>
                                                     <div className="flex items-center gap-4">
                                                         <span className="data-label !text-[8px] !text-slate-700 bg-white/5 px-3 py-1 rounded-lg border border-white/10">{med.dosage}</span>
-                                                        <span className="data-label !text-[8px] !text-cyan-400 opacity-40 group-hover:opacity-80 transition-opacity">// {med.timing}</span>
+                                                        <span className="data-label !text-[8px] !text-cyan-400 opacity-80 group-hover:opacity-80 transition-opacity">// {med.timing}</span>
                                                     </div>
                                                 </div>
                                             </div>

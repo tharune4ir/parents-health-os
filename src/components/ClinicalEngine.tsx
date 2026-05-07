@@ -110,10 +110,10 @@ export function ClinicalEngine() {
         <div className="flex flex-col lg:flex-row h-full lg:h-[calc(100vh-14rem)] gap-8 overflow-y-auto lg:overflow-hidden pb-32 lg:pb-0">
             {/* Left Panel: Questions */}
             <div className="w-full lg:flex-1 overflow-y-auto pr-1 lg:pr-8 custom-scrollbar">
-                <div className="mb-12 flex items-start justify-between px-2">
+                <div className="mb-8 md:mb-12 flex flex-col sm:flex-row sm:items-start justify-between gap-4 px-2">
                     <div>
-                        <h2 className="text-3xl md:text-5xl font-bold text-white font-[family-name:var(--font-outfit)] uppercase tracking-tight mb-3">Assessment Hub</h2>
-                        <p className="text-sm text-slate-400 font-light font-[family-name:var(--font-inter)] tracking-wide">Complete this exploratory health profiling protocol for the concept demonstration.</p>
+                        <h2 className="text-2xl md:text-5xl font-bold text-white font-[family-name:var(--font-outfit)] uppercase tracking-tight mb-2 md:mb-3">Assessment Hub</h2>
+                        <p className="text-xs md:text-sm text-slate-400 font-light font-[family-name:var(--font-inter)] tracking-wide">Complete this exploratory health profiling protocol for the concept demonstration.</p>
                     </div>
                     <button
                         onClick={handleReset}
@@ -126,12 +126,12 @@ export function ClinicalEngine() {
 
                 <div className="space-y-6">
                     {QUESTIONS.map((q, idx) => (
-                        <div key={q.id} className="glass-card p-10 rounded-[3rem] border-white/5 bg-slate-900/40 hover:bg-white/[0.03] transition-all group">
-                            <div className="mb-8 flex items-start gap-6">
-                                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/5 border border-white/10 data-label !text-cyan-400 shadow-inner">
+                        <div key={q.id} className="glass-card p-6 md:p-10 rounded-3xl md:rounded-[3rem] border-white/5 bg-slate-900/40 hover:bg-white/[0.03] transition-all group">
+                            <div className="mb-6 md:mb-8 flex items-start gap-4 md:gap-6">
+                                <span className="flex h-9 w-9 md:h-11 md:w-11 shrink-0 items-center justify-center rounded-xl md:rounded-2xl bg-white/5 border border-white/10 data-label !text-cyan-400 shadow-inner text-[10px] md:text-xs">
                                     {String(idx + 1).padStart(2, '0')}
                                 </span>
-                                <h3 className="text-xl font-semibold text-white font-[family-name:var(--font-outfit)] tracking-tight leading-snug pt-1">{q.text}</h3>
+                                <h3 className="text-lg md:text-xl font-semibold text-white font-[family-name:var(--font-outfit)] tracking-tight leading-snug pt-1">{q.text}</h3>
                             </div>
                             <div className="flex flex-wrap gap-3 pl-0 md:pl-16">
                                 {q.options.map((opt) => (
@@ -154,11 +154,11 @@ export function ClinicalEngine() {
 
             {/* Right Panel: Live Report Dashboard */}
             <div className="w-full lg:w-[400px] shrink-0">
-                <div className="glass-card p-10 rounded-[3.5rem] border-white/5 bg-slate-950/60 backdrop-blur-3xl h-full flex flex-col shadow-2xl relative overflow-hidden group">
+                <div className="glass-card p-6 md:p-10 rounded-[3.5rem] border-white/5 bg-slate-950/60 backdrop-blur-3xl h-full flex flex-col shadow-2xl relative overflow-hidden group">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-20" />
                     
                     <div className="mb-12 text-center">
-                        <p className="data-label !text-slate-500/50 !tracking-[0.2em] normal-case">Sample Health Index</p>
+                        <p className="data-label !text-slate-400 !tracking-[0.2em] normal-case">Sample Health Index</p>
                         <div className="flex items-center justify-center gap-3 mt-4">
                             <span className="text-8xl font-bold text-white font-[family-name:var(--font-outfit)] tracking-tighter">{scores.total}</span>
                             <span className="text-xl text-slate-750 font-medium font-[family-name:var(--font-inter)] self-end mb-4 opacity-30">/ 175</span>
@@ -181,7 +181,7 @@ export function ClinicalEngine() {
                     <div className="space-y-6 flex-1 overflow-y-auto pr-3 custom-scrollbar">
                         {scores.categories.map((cat) => (
                             <div key={cat.name} className="flex items-center gap-5 group/item">
-                                <div className="flex h-10 w-10 min-w-[2.5rem] items-center justify-center rounded-2xl bg-white/5 border border-white/5 text-cyan-400/60 transition-all group-hover/item:scale-110 shadow-inner">
+                                <div className="flex h-10 w-10 min-w-[2.5rem] items-center justify-center rounded-2xl bg-white/5 border border-white/5 text-cyan-400 transition-all group-hover/item:scale-110 shadow-inner">
                                     <cat.icon size={20} strokeWidth={1.5} className="opacity-80" />
                                 </div>
                                 <div className="flex-1">

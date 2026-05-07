@@ -132,7 +132,7 @@ export function CallOverlay({ isOpen, onAccept, onDecline }: CallOverlayProps) {
                             transition={{ repeat: Infinity, duration: 2 }}
                             className="h-32 w-32 rounded-full bg-slate-800 flex items-center justify-center border-4 border-slate-700 shadow-2xl"
                         >
-                            <span className="text-4xl font-bold bg-gradient-to-br from-orange-400 to-orange-600 bg-clip-text text-transparent">Y</span>
+                            <span className="text-2xl md:text-4xl font-bold bg-gradient-to-br from-orange-400 to-orange-600 bg-clip-text text-transparent">Y</span>
                         </motion.div>
                         <div className="text-center space-y-2">
                             <h2 className="text-3xl font-light tracking-wide text-slate-200">Parents-Health Care Assistant</h2>

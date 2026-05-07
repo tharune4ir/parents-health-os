@@ -22,7 +22,7 @@ export function HealthTrendChart() {
         <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="glass-card rounded-[2.5rem] border-white/5 p-10 bg-slate-950/40 backdrop-blur-3xl shadow-2xl overflow-hidden relative"
+            className="glass-card rounded-[2.5rem] border-white/5 p-6 md:p-10 bg-slate-950/40 backdrop-blur-3xl shadow-2xl overflow-hidden relative"
         >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
             
@@ -82,7 +82,7 @@ export function HealthTrendChart() {
                             >
                                 {/* Active Point / Pulse */}
                                 <div className="absolute -top-3 flex items-center justify-center">
-                                    <div className={`absolute w-10 h-10 rounded-full ${colorClass.split(' ')[0]} opacity-20 blur-xl group-hover:opacity-40 transition-opacity animate-pulse`} />
+                                    <div className={`absolute w-10 h-10 rounded-full ${colorClass.split(' ')[0]} opacity-20 blur-xl group-hover:opacity-80 transition-opacity animate-pulse`} />
                                     <div className={`w-6 h-6 rounded-full border-4 border-slate-950 shadow-2xl ${colorClass} transition-all duration-500 group-hover:scale-125 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]`} />
                                 </div>
 

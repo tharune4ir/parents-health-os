@@ -98,11 +98,11 @@ export function ClinicHub() {
         <div className="max-w-6xl mx-auto space-y-12 pb-20 relative">
             {/* HEADER */}
             <div className="px-2">
-                <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight uppercase mb-1">Care Hub</h2>
+                <h2 className="text-3xl md:text-2xl md:text-4xl font-black text-white tracking-tight uppercase mb-1">Care Hub</h2>
                 <p className="text-sm text-slate-400 font-medium tracking-tight">Manage consultations, insurance, and medical records.</p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-10">
 
                 {/* LEFT COLUMN: UPCOMING VISITS (Span 2) */}
                 <div className="lg:col-span-2 space-y-8">
@@ -289,7 +289,7 @@ export function ClinicHub() {
                             initial={{ scale: 0.9, opacity: 0, y: 20 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                            className="glass-card bg-slate-950 border border-white/10 w-full max-w-lg rounded-[3rem] p-10 shadow-[0_0_100px_rgba(0,0,0,0.5)] relative overflow-hidden"
+                            className="glass-card bg-slate-950 border border-white/10 w-full max-w-lg rounded-[3rem] p-6 md:p-10 shadow-[0_0_100px_rgba(0,0,0,0.5)] relative overflow-hidden"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 blur-[100px] rounded-full -mr-32 -mt-32" />

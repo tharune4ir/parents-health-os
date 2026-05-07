@@ -43,7 +43,7 @@ export default function Home() {
               <span className="data-label opacity-70">SYST-ID: PARENTS-HEALTH-V2.5 // CONCEPT PROTOTYPE (WIP)</span>
             </motion.div>
             
-            <h1 className="text-7xl md:text-9xl font-bold tracking-tighter mb-8 font-[family-name:var(--font-outfit)]">
+            <h1 className="text-5xl md:text-7xl lg:text-9xl font-bold tracking-tighter mb-8 font-[family-name:var(--font-outfit)]">
               <span className="text-gradient">Parents Health OS</span>
             </h1>
             
@@ -75,7 +75,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="flex flex-col items-center gap-10">
+          <div className="flex flex-col items-center gap-6 md:gap-10">
             <button
               onClick={handleInitialize}
               className="group relative flex items-center gap-6 rounded-2xl bg-white text-slate-950 px-14 py-6 font-bold text-lg transition-all hover:scale-[1.02] active:scale-[0.98] shadow-3xl"
@@ -174,14 +174,14 @@ function DashboardShell() {
 
         {/* Sidebar */}
         <aside className={`fixed inset-y-0 left-0 z-50 w-72 border-r border-white/5 bg-slate-950/40 backdrop-blur-3xl transform transition-transform duration-500 ease-out ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:static md:inset-auto`}>
-          <div className="flex h-24 items-center justify-between px-8 mb-6">
-            <div className="flex items-center gap-4 cursor-pointer" onClick={() => { setActiveView("dashboard"); setIsMobileMenuOpen(false); }}>
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-white font-black shadow-lg shadow-cyan-500/20">
+          <div className="flex h-20 md:h-24 items-center justify-between px-6 md:px-8 mb-4 md:mb-6">
+            <div className="flex items-center gap-3 md:gap-4 cursor-pointer" onClick={() => { setActiveView("dashboard"); setIsMobileMenuOpen(false); }}>
+              <div className="h-8 w-8 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-white font-black shadow-lg shadow-cyan-500/20 text-sm md:text-base">
                 Y
               </div>
               <div className="flex flex-col">
-                <span className="font-[family-name:var(--font-outfit)] font-black text-white text-lg leading-tight tracking-tighter uppercase">PARENTS HEALTH OS</span>
-                <span className="data-label text-cyan-400/60 !text-[8px] !tracking-[0.4em]">PROTOTYPE HUB</span>
+                <span className="font-[family-name:var(--font-outfit)] font-black text-white text-base md:text-lg leading-tight tracking-tight uppercase">PARENTS HEALTH OS</span>
+                <span className="data-label text-cyan-400 !text-[7px] md:!text-[8px] uppercase !tracking-[0.2em]">PROTOTYPE HUB</span>
               </div>
             </div>
           </div>
@@ -196,45 +196,47 @@ function DashboardShell() {
 
             <div className="pt-24 px-2">
               <div className="h-px bg-white/5 mb-10" />
-              <button onClick={handleSystemReset} className="group flex w-full items-center gap-5 rounded-xl px-5 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500/40 hover:bg-red-500/10 hover:text-red-400 transition-all mt-2 font-[family-name:var(--font-outfit)]">
-                <Trash2 size={16} strokeWidth={1.5} className="opacity-40" /> RESET PROTOTYPE
+              <button onClick={handleSystemReset} className="group flex w-full items-center gap-5 rounded-xl px-5 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 hover:bg-red-500/10 hover:text-red-400 transition-all mt-2 font-[family-name:var(--font-outfit)]">
+                <Trash2 size={16} strokeWidth={1.5} className="opacity-80" /> RESET PROTOTYPE
               </button>
             </div>
           </nav>
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-4 pt-20 md:p-10 lg:p-12 overflow-x-hidden relative">
-          <header className="mb-16 flex items-center justify-between">
-            <div className="flex items-center gap-6">
-               <div className="h-14 w-14 rounded-3xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 shadow-inner group-hover:border-cyan-500/20 transition-all">
+        <main className="flex-1 p-4 pt-20 md:p-6 md:p-10 lg:p-6 md:p-12 overflow-x-hidden relative">
+          <header className="mb-10 md:mb-16 flex flex-col sm:flex-row sm:items-center justify-between gap-6 md:gap-8">
+            <div className="flex items-center gap-4 md:gap-6">
+               <div className="h-12 w-12 md:h-14 md:w-14 rounded-2xl md:rounded-3xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 shadow-inner">
                 <Users size={24} strokeWidth={1.5} />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-white font-[family-name:var(--font-outfit)] tracking-tight">
-                  {typeof window !== 'undefined' ? (localStorage.getItem('parents_health_user_name') || 'Patient Identity') : 'Patient Identity'} <span className="text-slate-800 font-light mx-4">/</span> <span className="text-slate-500 font-medium">PERSONAL DASHBOARD</span>
+                <h1 className="text-xl md:text-2xl font-bold text-white font-[family-name:var(--font-outfit)] tracking-tight flex flex-col md:flex-row md:items-center">
+                  <span className="truncate max-w-[150px] md:max-w-none">{typeof window !== 'undefined' ? (localStorage.getItem('parents_health_user_name') || 'Patient Identity') : 'Patient Identity'}</span>
+                  <span className="hidden md:inline text-slate-800 font-light mx-4">/</span>
+                  <span className="text-slate-500 font-medium text-sm md:text-base md:mt-0 mt-1 uppercase md:normal-case">PERSONAL DASHBOARD</span>
                 </h1>
-                <div className="flex items-center gap-3 mt-2">
+                <div className="flex items-center gap-3 mt-1.5 md:mt-2">
                   <div className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
-                  <p className="data-label opacity-40 !tracking-[0.5em]">LOCAL CONTEXT (WIP) // SAMPLE CONNECTION</p>
+                  <p className="data-label text-slate-500 text-[8px] md:text-[10px] !tracking-[0.2em] uppercase">LOCAL CONTEXT // SAMPLE CONNECTION</p>
                 </div>
               </div>
             </div>
             
-            <div className="flex items-center gap-8">
+            <div className="flex items-center gap-4 md:gap-8 self-end sm:self-auto">
               <HeaderIcons />
             </div>
           </header>
 
           {activeView === "dashboard" && (
             <div className="space-y-10">
-              <div className="glass-card p-14 rounded-[4rem] relative overflow-hidden group border-white/5 bg-white/[0.01]">
-                <div className="absolute top-0 right-0 p-20 opacity-[0.02] transition-transform duration-1000 group-hover:scale-110">
+              <div className="glass-card p-8 md:p-14 rounded-[4rem] relative overflow-hidden group border-white/5 bg-white/[0.01]">
+                <div className="absolute top-0 right-0 p-10 md:p-20 opacity-[0.02] transition-transform duration-1000 group-hover:scale-110">
                    <Activity size={240} strokeWidth={1} className="text-white" />
                 </div>
-                <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-16">
+                <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-16">
                   <div className="max-w-3xl">
-                    <h2 className="text-5xl md:text-6xl font-bold text-white font-[family-name:var(--font-outfit)] tracking-tight mb-6">
+                    <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-white font-[family-name:var(--font-outfit)] tracking-tight mb-4 md:mb-6 leading-tight">
                       Routine Active, {typeof window !== 'undefined' ? (localStorage.getItem('parents_health_user_name')?.split(' ')[0] || 'Member') : 'Member'}
                     </h2>
                     <p className="text-lg text-slate-500 font-light leading-relaxed font-[family-name:var(--font-inter)]">
@@ -254,9 +256,9 @@ function DashboardShell() {
                 <PillarCard type="reports" activeView={activeView} setActiveView={setActiveView} />
               </div>
 
-              <div onClick={() => setActiveView("whatsapp")} className="cursor-pointer glass-card p-12 rounded-[3.5rem] border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-all group lg:col-span-2 shadow-2xl">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-10">
-                  <div className="flex gap-10 items-center">
+              <div onClick={() => setActiveView("whatsapp")} className="cursor-pointer glass-card p-6 md:p-12 rounded-[3.5rem] border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-all group lg:col-span-2 shadow-2xl">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10">
+                  <div className="flex gap-6 md:gap-10 items-center">
                     <div className="h-16 w-16 rounded-3xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 group-hover:scale-105 transition-transform shadow-inner">
                       <MessageCircle size={32} strokeWidth={1.5} />
                     </div>
@@ -279,14 +281,14 @@ function DashboardShell() {
           {activeView === "whatsapp" && <WhatsAppDemo />}
 
           {/* FOOTER */}
-          <footer className="mt-32 py-16 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-10">
-            <div className="data-label !text-slate-500/50 !tracking-[0.4em]">
+          <footer className="mt-20 md:mt-32 py-12 md:py-16 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 text-center md:text-left">
+            <div className="data-label !text-slate-500 text-[9px] md:text-[10px] !tracking-[0.2em]">
               A CONCEPT PROTOTYPE (WIP) BY THARUN GAJULA
             </div>
-            <div className="flex items-center gap-12">
-              <span className="data-label !text-slate-600/40 !tracking-[0.3em]">AES-X / RSA-4096</span>
-              <span className="data-label !text-slate-600/40 !tracking-[0.3em]">PROD-HUD-25</span>
-              <div className="h-1.5 w-1.5 rounded-full bg-slate-500/20" />
+            <div className="flex items-center gap-6 md:gap-12">
+              <span className="data-label !text-slate-600 text-[9px] !tracking-[0.1em]">AES-X / RSA-4096</span>
+              <span className="data-label !text-slate-600 text-[9px] !tracking-[0.1em]">PROD-HUD-25</span>
+              <div className="h-1.5 w-1.5 rounded-full bg-slate-500/20 hidden md:block" />
             </div>
           </footer>
         </main>
@@ -305,19 +307,19 @@ function PillarCard({ type, activeView, setActiveView }: { type: string, activeV
   return (
     <div 
       onClick={() => setActiveView(type === 'clinical' ? 'clinical' : type === 'wellness' ? 'medicines' : 'smart-reports')}
-      className="glass-card p-10 rounded-[2.5rem] h-72 flex flex-col justify-between group cursor-pointer hover:bg-white/[0.03] border-white/5"
+      className="glass-card p-6 md:p-10 rounded-[2.5rem] min-h-[14rem] md:h-72 flex flex-col justify-between group cursor-pointer hover:bg-white/[0.03] border-white/5"
     >
       <div className="flex items-center justify-between">
-        <div className="h-11 w-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400/60 group-hover:scale-110 transition-transform">
+        <div className="h-11 w-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
           {type === 'clinical' ? <Stethoscope size={22} strokeWidth={1.5} /> : type === 'wellness' ? <BookOpen size={22} strokeWidth={1.5} /> : <FileText size={22} strokeWidth={1.5} />}
         </div>
-        <div className="data-label !text-[8px] opacity-40">READY</div>
+        <div className="data-label !text-[8px] opacity-80">READY</div>
       </div>
       <div>
         <h4 className="data-label mb-3 !text-slate-500">
           {type === 'clinical' ? 'Health Summary' : type === 'wellness' ? 'Daily Adherence' : 'AI Processing'}
         </h4>
-        <h3 className="text-4xl font-bold text-white font-[family-name:var(--font-outfit)] tracking-tighter uppercase">
+        <h3 className="text-2xl md:text-4xl font-bold text-white font-[family-name:var(--font-outfit)] tracking-tighter uppercase">
           {type === 'clinical' ? 'Sync' : type === 'wellness' ? '98.2%' : 'Deep'}
         </h3>
       </div>
