@@ -27,7 +27,7 @@ export function ClinicalEngine() {
     // Lazy init to avoid race conditions
     const [answers, setAnswers] = useState<Record<string, string>>(() => {
         if (typeof window !== "undefined") {
-            const saved = localStorage.getItem("yukti_assessment_data_v2");
+            const saved = localStorage.getItem("parents_health_assessment_data_v2");
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
@@ -91,7 +91,7 @@ export function ClinicalEngine() {
 
     // Save to LocalStorage on change
     useEffect(() => {
-        localStorage.setItem("yukti_assessment_data_v2", JSON.stringify({ answers, scores }));
+        localStorage.setItem("parents_health_assessment_data_v2", JSON.stringify({ answers, scores }));
     }, [answers, scores]);
 
 
@@ -101,7 +101,7 @@ export function ClinicalEngine() {
 
     const handleReset = () => {
         if (confirm("Are you sure? This will clear your health profile and lock Smart Reports.")) {
-            localStorage.removeItem("yukti_assessment_data_v2");
+            localStorage.removeItem("parents_health_assessment_data_v2");
             setAnswers({}); // Clear state to reset UI
         }
     };

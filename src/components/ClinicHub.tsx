@@ -214,7 +214,7 @@ export function ClinicHub() {
                             <div>
                                 <p className="text-slate-500 text-[9px] font-black uppercase tracking-[0.2em] mb-2">Insurance Coverage</p>
                                 <h4 className="font-black text-lg flex items-center gap-3">
-                                    <ShieldCheck size={18} className="text-cyan-400" /> Yukti Health Shield
+                                    <ShieldCheck size={18} className="text-cyan-400" /> Parents-Health Health Shield
                                 </h4>
                             </div>
                             <span className="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-[9px] font-black border border-cyan-500/20 tracking-widest">

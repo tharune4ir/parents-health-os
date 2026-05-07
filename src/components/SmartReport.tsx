@@ -24,7 +24,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
     // Load Context & History on Mount
     useEffect(() => {
         // 1. Clinical Context (Gate)
-        const savedData = localStorage.getItem("yukti_assessment_data_v2");
+        const savedData = localStorage.getItem("parents_health_assessment_data_v2");
         if (savedData) {
             try {
                 const parsed = JSON.parse(savedData);
@@ -52,7 +52,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
         }
 
         // 2. Report History (Memory)
-        const savedHistory = localStorage.getItem("yukti_history");
+        const savedHistory = localStorage.getItem("parents_health_history");
         if (savedHistory) {
             try {
                 setHistory(JSON.parse(savedHistory));
@@ -60,7 +60,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
         }
 
         // 3. Holistic Summary Persistence (New)
-        const savedSummary = localStorage.getItem("yukti_latest_summary");
+        const savedSummary = localStorage.getItem("parents_health_latest_summary");
         if (savedSummary) {
             try {
                 const summaryData = JSON.parse(savedSummary);
@@ -123,12 +123,12 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                 const newHistoryItem = { ...result, timestamp: new Date().toISOString() };
                 const updatedHistory = [newHistoryItem, ...history];
                 setHistory(updatedHistory);
-                localStorage.setItem("yukti_history", JSON.stringify(updatedHistory));
+                localStorage.setItem("parents_health_history", JSON.stringify(updatedHistory));
 
                 // AUTO-SYNC WORKFLOW: Update Active Meds
                 if (result.medicines && result.medicines.length > 0) {
                     // Get existing meds
-                    const existingMedsRaw = localStorage.getItem("yukti_active_meds");
+                    const existingMedsRaw = localStorage.getItem("parents_health_active_meds");
                     const existingMeds = existingMedsRaw ? JSON.parse(existingMedsRaw) : [];
 
                     // Merge new meds (prevent duplicates by name)
@@ -155,7 +155,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                         }
                     });
 
-                    localStorage.setItem("yukti_active_meds", JSON.stringify(mergedMeds));
+                    localStorage.setItem("parents_health_active_meds", JSON.stringify(mergedMeds));
                     // Optional: You could trigger a toast here "Meds Updated"
                 }
 
@@ -175,7 +175,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
         if (confirm("Remove this report from history?")) {
             const updated = history.filter((_, i) => i !== index);
             setHistory(updated);
-            localStorage.setItem("yukti_history", JSON.stringify(updated));
+            localStorage.setItem("parents_health_history", JSON.stringify(updated));
             // If deleting the currently viewed report, clear the view
             if (activeTab === "current" && analysisData === history[index]) {
                 setAnalysisData(null);
@@ -196,7 +196,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                     </div>
                     <h3 className="text-4xl font-bold text-white mb-5 font-[family-name:var(--font-outfit)] uppercase tracking-tight">Profile Setup Required</h3>
                     <p className="text-slate-500 font-light max-w-md mb-12 text-lg font-[family-name:var(--font-inter)] leading-relaxed">
-                        To unlock automated insights, Yukti requires your baseline profile. Complete the 15-point assessment to view the demo analysis.
+                        To unlock automated insights, Parents-Health requires your baseline profile. Complete the 15-point assessment to view the demo analysis.
                     </p>
                     <button
                         onClick={onNavigate}
@@ -343,7 +343,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                 if (response.ok) {
                                     setAnalysisData({ ...data.result, isSummary: true });
                                     setStatus("done");
-                                    localStorage.setItem("yukti_latest_summary", JSON.stringify({ ...data.result, isSummary: true }));
+                                    localStorage.setItem("parents_health_latest_summary", JSON.stringify({ ...data.result, isSummary: true }));
                                 } else {
                                     setAnalysisData({ error: "Holistic sync failed." });
                                     setStatus("error");
@@ -519,7 +519,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                 </div>
                                 <h3 className="text-2xl font-bold text-white tracking-tight uppercase mb-5 font-[family-name:var(--font-outfit)]">Digital Health Vault</h3>
                                 <p className="text-slate-600 font-light max-w-md leading-relaxed text-lg font-[family-name:var(--font-inter)]">
-                                    Establish your health history by uploading laboratory scans. Yukti reviews trends across your biological timeline.
+                                    Establish your health history by uploading laboratory scans. Parents-Health reviews trends across your biological timeline.
                                 </p>
                             </div>
                         )}

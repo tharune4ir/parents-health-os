@@ -20,7 +20,7 @@ export function CareTeam() {
             {/* 6-MEMBER GRID */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                {/* 1. YUKTI AI */}
+                {/* 1. PARENTS-HEALTH AI */}
                 <TeamCard
                     icon={<Sparkles size={28} strokeWidth={2.5} />}
                     iconColor="bg-slate-950 border-cyan-500/30 text-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.2)]"
@@ -106,7 +106,7 @@ export function CareTeam() {
             {/* DISCLAIMER FOOTER */}
             <div className="text-center pt-16 border-t border-white/5">
                 <p className="data-label !text-slate-800 !tracking-[0.3em] leading-relaxed">
-                    * Team configurations are representative of the Yukti OS prototype. Specialist allocation is determined by user health requirements.
+                    * Team configurations are representative of the Parents Health OS prototype. Specialist allocation is determined by user health requirements.
                 </p>
             </div>
         </div>

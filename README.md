@@ -1,20 +1,20 @@
-# Yukti OS: The Context-Aware Health OS for the Elderly
+# Parents Health OS: The Context-Aware Health OS for the Elderly
 **Current Version:** 2.2+ (Premium Dark Glassmorphism & Neural Typography Edition)
 
-![Yukti OS Dashboard](https://via.placeholder.com/1200x600?text=Yukti+OS+Dark+Glassmorphism+Interface)
+![Parents Health OS Dashboard](https://via.placeholder.com/1200x600?text=Parents-Health+OS+Dark+Glassmorphism+Interface)
 
 ---
 
 ## 🚀 The Core Innovation: "Context-Awareness"
 
 Most health apps see medical data in isolation. If a patient has blood sugar of `160 mg/dL`, a standard app flags it as "High".
-**Yukti OS** interprets data through its **Clinical Engine** first. It sees:
+**Parents Health OS** interprets data through its **Clinical Engine** first. It sees:
 > *"Patient is 75 years old + has a history of hypoglycemia (low sugar falls)."*
 
 It then intelligently decides:
 > *"For this specific patient, 160 is actually a SAFE target to prevent fatal falls. Do not alarm."*
 
-This **System Context** is what separates Yukti from generic AI wrappers. It builds a digital twin of the patient to provide personalized, clinical-grade insights, now presented through a world-class **Dark Glassmorphism UI** with high-contrast **Neural Typography**.
+This **System Context** is what separates Parents-Health from generic AI wrappers. It builds a digital twin of the patient to provide personalized, clinical-grade insights, now presented through a world-class **Dark Glassmorphism UI** with high-contrast **Neural Typography**.
 
 ---
 
@@ -26,7 +26,7 @@ This **System Context** is what separates Yukti from generic AI wrappers. It bui
 
 ### 2. 🏥 Clinic Hub (Clinical Operations)
 *   **Protocol Schedule:** Streamlined glassmorphic interface for booking geriatric specialists and care team nodes.
-*   **Yukti Senior Shield:** Integrated insurance wallet system with real-time operational credit management.
+*   **Parents-Health Senior Shield:** Integrated insurance wallet system with real-time operational credit management.
 
 ### 📄 Diagnostics & Trends (Smart Reports)
 *   **Gemini AI Engine:** Deep neural analysis of PDFs, lab reports, and medical artifacts using Google Gemini 2.5 Flash.
@@ -37,7 +37,7 @@ This **System Context** is what separates Yukti from generic AI wrappers. It bui
 *   **IoT Synchronization:** Real-time dual-sync simulation for **FreeStyle Libre (CGM)** and **Apple Watch**.
 
 ### 💬 WhatsApp Bot (Neural Companion)
-*   A zero-learning-curve interface demonstrating how seniors can interact with Yukti OS using familiar tools (WhatsApp), re-imagined with a premium dark frame.
+*   A zero-learning-curve interface demonstrating how seniors can interact with Parents Health OS using familiar tools (WhatsApp), re-imagined with a premium dark frame.
 
 ---
 
@@ -59,8 +59,8 @@ This **System Context** is what separates Yukti from generic AI wrappers. It bui
 ## ⚡ Getting Started
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/tharungajula2/yukti-os.git
-    cd yukti-os
+    git clone https://github.com/tharungajula2/parents-health-os.git
+    cd parents-health-os
     ```
 2.  **Install Dependencies:**
     ```bash

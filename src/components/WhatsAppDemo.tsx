@@ -120,7 +120,7 @@ export function WhatsAppDemo() {
                                 <div className="absolute bottom-0.5 right-0.5 h-3 w-3 bg-cyan-400 rounded-full border-2 border-slate-950 shadow-[0_0_10px_rgba(34,211,238,0.6)]"></div>
                             </div>
                             <div>
-                                <h3 className="font-bold text-[13px] uppercase tracking-tight leading-tight font-[family-name:var(--font-outfit)]">Yukti Care</h3>
+                                <h3 className="font-bold text-[13px] uppercase tracking-tight leading-tight font-[family-name:var(--font-outfit)]">Parents-Health Care</h3>
                                 <div className="flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
                                     <p className="data-label !text-[8px] !text-cyan-400/60 !tracking-[0.1em]">PROTOTYPE CHAT</p>

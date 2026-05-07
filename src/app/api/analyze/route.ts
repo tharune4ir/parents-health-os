@@ -20,7 +20,7 @@ export async function POST(req: Request) {
        let modelString = "gemini-2.5-flash"; // Primary: 2.5 Flash
        let model = genAI.getGenerativeModel({ model: modelString });
        
-       const summaryPrompt = `You are "Yukti AI", a senior medical data analyst.
+       const summaryPrompt = `You are "Parents Health AI", a senior medical data analyst.
        
        OBJECTIVE: Generate a "Holistic Health Summary" for a patient based on their Clinical Profile and Report History.
        
@@ -109,7 +109,7 @@ export async function POST(req: Request) {
     let modelString = "gemini-2.5-flash"; 
     let model = genAI.getGenerativeModel({ model: modelString });
 
-    const prompt = `You are "Yukti AI", an automated health data analyst.
+    const prompt = `You are "Parents Health AI", an automated health data analyst.
     Your Tone: Empathetic, Reassuring, Beginner-Friendly (Explain medical terms).
     
     Patient Clinical Context (Profile):
@@ -226,7 +226,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ result: parsedResult, modelUsed: modelString });
 
   } catch (error: any) {
-    console.error("Yukti AI Analysis Error:", error);
+    console.error("Parents Health AI Analysis Error:", error);
     return NextResponse.json(
       { 
         error: "Failed to analyze the report.", 

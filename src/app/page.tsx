@@ -10,7 +10,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const auth = localStorage.getItem("yukti_auth_v2");
+    const auth = localStorage.getItem("parents_health_auth_v2");
     if (auth === "true") {
       setIsAuthenticated(true);
     }
@@ -18,7 +18,7 @@ export default function Home() {
   }, []);
 
   const handleInitialize = () => {
-    localStorage.setItem("yukti_auth_v2", "true");
+    localStorage.setItem("parents_health_auth_v2", "true");
     setIsAuthenticated(true);
   };
 
@@ -40,11 +40,11 @@ export default function Home() {
               className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-10"
             >
               <div className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
-              <span className="data-label opacity-70">SYST-ID: YUKTI-V2.5 // CONCEPT PROTOTYPE (WIP)</span>
+              <span className="data-label opacity-70">SYST-ID: PARENTS-HEALTH-V2.5 // CONCEPT PROTOTYPE (WIP)</span>
             </motion.div>
             
             <h1 className="text-7xl md:text-9xl font-bold tracking-tighter mb-8 font-[family-name:var(--font-outfit)]">
-              <span className="text-gradient">Yukti OS</span>
+              <span className="text-gradient">Parents Health OS</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed font-[family-name:var(--font-inter)]">
@@ -129,18 +129,18 @@ function DashboardShell() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleSystemReset = () => {
-    if (confirm("⚠️ DANGER: Wipe Yukti's memory? This is irreversible.")) {
+    if (confirm("⚠️ DANGER: Wipe Parents-Health's memory? This is irreversible.")) {
       if (confirm("Final confirmation required.")) {
-        localStorage.removeItem("yukti_auth_v2");
-        localStorage.removeItem("yukti_assessment_data_v2");
-        localStorage.removeItem("yukti_history");
-        localStorage.removeItem("yukti_latest_summary");
-        localStorage.removeItem("yukti_active_meds");
-        localStorage.removeItem("yukti_user_name");
-        localStorage.removeItem("yukti_user_gender");
-        localStorage.removeItem("yukti_user_age");
+        localStorage.removeItem("parents_health_auth_v2");
+        localStorage.removeItem("parents_health_assessment_data_v2");
+        localStorage.removeItem("parents_health_history");
+        localStorage.removeItem("parents_health_latest_summary");
+        localStorage.removeItem("parents_health_active_meds");
+        localStorage.removeItem("parents_health_user_name");
+        localStorage.removeItem("parents_health_user_gender");
+        localStorage.removeItem("parents_health_user_age");
         Object.keys(localStorage).forEach((key) => {
-          if (key.startsWith("yukti_med_log_") || key.startsWith("yukti_daily_log_")) {
+          if (key.startsWith("parents_health_med_log_") || key.startsWith("parents_health_daily_log_")) {
             localStorage.removeItem(key);
           }
         });
@@ -159,7 +159,7 @@ function DashboardShell() {
           </button>
           <div className="flex items-center gap-2">
             <div className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
-            <span className="font-bold tracking-tight text-white">Yukti OS</span>
+            <span className="font-bold tracking-tight text-white">Parents Health OS</span>
           </div>
           <div className="w-10"></div>
         </div>
@@ -180,7 +180,7 @@ function DashboardShell() {
                 Y
               </div>
               <div className="flex flex-col">
-                <span className="font-[family-name:var(--font-outfit)] font-black text-white text-lg leading-tight tracking-tighter uppercase">YUKTI OS</span>
+                <span className="font-[family-name:var(--font-outfit)] font-black text-white text-lg leading-tight tracking-tighter uppercase">PARENTS HEALTH OS</span>
                 <span className="data-label text-cyan-400/60 !text-[8px] !tracking-[0.4em]">PROTOTYPE HUB</span>
               </div>
             </div>
@@ -212,7 +212,7 @@ function DashboardShell() {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-white font-[family-name:var(--font-outfit)] tracking-tight">
-                  {typeof window !== 'undefined' ? (localStorage.getItem('yukti_user_name') || 'Patient Identity') : 'Patient Identity'} <span className="text-slate-800 font-light mx-4">/</span> <span className="text-slate-500 font-medium">PERSONAL DASHBOARD</span>
+                  {typeof window !== 'undefined' ? (localStorage.getItem('parents_health_user_name') || 'Patient Identity') : 'Patient Identity'} <span className="text-slate-800 font-light mx-4">/</span> <span className="text-slate-500 font-medium">PERSONAL DASHBOARD</span>
                 </h1>
                 <div className="flex items-center gap-3 mt-2">
                   <div className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
@@ -235,7 +235,7 @@ function DashboardShell() {
                 <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-16">
                   <div className="max-w-3xl">
                     <h2 className="text-5xl md:text-6xl font-bold text-white font-[family-name:var(--font-outfit)] tracking-tight mb-6">
-                      Routine Active, {typeof window !== 'undefined' ? (localStorage.getItem('yukti_user_name')?.split(' ')[0] || 'Member') : 'Member'}
+                      Routine Active, {typeof window !== 'undefined' ? (localStorage.getItem('parents_health_user_name')?.split(' ')[0] || 'Member') : 'Member'}
                     </h2>
                     <p className="text-lg text-slate-500 font-light leading-relaxed font-[family-name:var(--font-inter)]">
                       Care tracking is currently <span className="text-white font-medium">initialized</span> in this prototype. This dashboard demonstrates how health data and daily routines could be synchronized into a single unified view.

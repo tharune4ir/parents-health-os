@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yukti OS | Tharun Gajula",
+  title: "Parents Health OS | Tharun Gajula",
   description: "Experience the future of Geriatric Care through context-aware longevity systems.",
 };
 

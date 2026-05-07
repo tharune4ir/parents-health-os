@@ -1,21 +1,21 @@
 export function loadDemoData() {
     // 1. CLEAR EXISTING DATA
-    localStorage.removeItem("yukti_auth_v2");
-    localStorage.removeItem("yukti_assessment_data_v2");
-    localStorage.removeItem("yukti_history");
-    localStorage.removeItem("yukti_latest_summary");
-    localStorage.removeItem("yukti_active_meds");
+    localStorage.removeItem("parents_health_auth_v2");
+    localStorage.removeItem("parents_health_assessment_data_v2");
+    localStorage.removeItem("parents_health_history");
+    localStorage.removeItem("parents_health_latest_summary");
+    localStorage.removeItem("parents_health_active_meds");
     Object.keys(localStorage).forEach((key) => {
-        if (key.startsWith("yukti_med_log_") || key.startsWith("yukti_daily_log_")) {
+        if (key.startsWith("parents_health_med_log_") || key.startsWith("parents_health_daily_log_")) {
             localStorage.removeItem(key);
         }
     });
 
     // 2. SET AUTH & IDENTITY
-    localStorage.setItem("yukti_auth_v2", "true");
-    localStorage.setItem('yukti_user_name', 'Chaaya');
-    localStorage.setItem('yukti_user_gender', 'Female');
-    localStorage.setItem('yukti_user_age', '61');
+    localStorage.setItem("parents_health_auth_v2", "true");
+    localStorage.setItem('parents_health_user_name', 'Chaaya');
+    localStorage.setItem('parents_health_user_gender', 'Female');
+    localStorage.setItem('parents_health_user_age', '61');
 
     // 3. CLINICAL ASSESSMENT (Mapped to Engine Format)
     // Using the EXACT answers requested by the user.
@@ -57,7 +57,7 @@ export function loadDemoData() {
         ]
     };
 
-    localStorage.setItem('yukti_assessment_data_v2', JSON.stringify({
+    localStorage.setItem('parents_health_assessment_data_v2', JSON.stringify({
         answers,
         scores,
         riskLevel: "High Risk: Immediate Action Required",
@@ -92,7 +92,7 @@ export function loadDemoData() {
             status: 'Active', category: 'Supportive'
         }
     ];
-    localStorage.setItem('yukti_active_meds', JSON.stringify(meds));
+    localStorage.setItem('parents_health_active_meds', JSON.stringify(meds));
 
     // 5. HISTORY & SMART REPORTS
     // Added 'meta' field for compatibility
@@ -108,7 +108,7 @@ export function loadDemoData() {
             ]
         }
     ];
-    localStorage.setItem('yukti_history', JSON.stringify(history));
+    localStorage.setItem('parents_health_history', JSON.stringify(history));
 
     // 6. LATEST HOLISTIC SUMMARY (Pre-loaded)
     const holisticSummary = {
@@ -124,14 +124,14 @@ export function loadDemoData() {
         recommendation: "Integrated care plan focusing on anti-inflammatory diet, stress reduction, and strict adherence to Levolin/Combihale. Consult Orthopedist for joint pain.",
         disclaimer: "AI-Generated Summary. Verify with Doctor."
     };
-    localStorage.setItem("yukti_latest_summary", JSON.stringify(holisticSummary));
+    localStorage.setItem("parents_health_latest_summary", JSON.stringify(holisticSummary));
 
     // 7. DAILY LOGS (Generate some history for the calendar)
     const today = new Date();
     const todayStr = today.toISOString().split('T')[0];
     
     // Today: Empty for user interaction
-    localStorage.setItem('yukti_daily_log_' + todayStr, JSON.stringify({
+    localStorage.setItem('parents_health_daily_log_' + todayStr, JSON.stringify({
         meds: [], 
         vitals: {}  // Clean slate
     }));
@@ -139,7 +139,7 @@ export function loadDemoData() {
     // Yesterday: Empty for user interaction
     const yest = new Date(today); yest.setDate(yest.getDate() - 1);
     const yestStr = yest.toISOString().split('T')[0];
-    localStorage.setItem('yukti_daily_log_' + yestStr, JSON.stringify({
+    localStorage.setItem('parents_health_daily_log_' + yestStr, JSON.stringify({
         meds: [], 
         vitals: {}
     }));

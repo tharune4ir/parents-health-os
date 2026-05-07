@@ -13,7 +13,7 @@ export function HeaderIcons() {
     // Load User Name for Profile
     useEffect(() => {
         if (typeof window !== "undefined") {
-            setUserName(localStorage.getItem("yukti_user_name") || "User");
+            setUserName(localStorage.getItem("parents_health_user_name") || "User");
         }
     }, []);
 
@@ -38,7 +38,7 @@ export function HeaderIcons() {
         if (confirm("Are you sure you want to sign out?")) {
             // Clear IDENTITY only, keeps data for next demo load technically, 
             // but enables "Login" screen to appear.
-            localStorage.removeItem("yukti_auth_v2");
+            localStorage.removeItem("parents_health_auth_v2");
             window.location.reload();
         }
     };
@@ -151,7 +151,7 @@ export function HeaderIcons() {
                                     <div>
                                         <h3 className="font-bold text-lg text-white tracking-tight font-[family-name:var(--font-outfit)]">{userName}</h3>
                                         <p className="data-label !text-cyan-400 !tracking-[0.1em] mt-1 uppercase">
-                                            {localStorage.getItem('yukti_user_age') ? `${localStorage.getItem('yukti_user_age')} • ${localStorage.getItem('yukti_user_gender')}` : 'Clinical Identity'}
+                                            {localStorage.getItem('parents_health_user_age') ? `${localStorage.getItem('parents_health_user_age')} • ${localStorage.getItem('parents_health_user_gender')}` : 'Clinical Identity'}
                                         </p>
                                     </div>
                                 </div>

@@ -135,7 +135,7 @@ export function CallOverlay({ isOpen, onAccept, onDecline }: CallOverlayProps) {
                             <span className="text-4xl font-bold bg-gradient-to-br from-orange-400 to-orange-600 bg-clip-text text-transparent">Y</span>
                         </motion.div>
                         <div className="text-center space-y-2">
-                            <h2 className="text-3xl font-light tracking-wide text-slate-200">Yukti Care Assistant</h2>
+                            <h2 className="text-3xl font-light tracking-wide text-slate-200">Parents-Health Care Assistant</h2>
                             <p className="text-orange-400 font-medium tracking-widest uppercase text-sm">Medicine Reminder</p>
                         </div>
                     </div>

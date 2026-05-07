@@ -1,4 +1,4 @@
-# Yukti OS: The Definitive Architectural Blueprint
+# Parents Health OS: The Definitive Architectural Blueprint
 **Version:** 3.4 (Humble Prototype Edition / WIP)
 **Status:** Concept Exploration & Demo Blueprint
 **Branding:** A concept prototype by Tharun Gajula
@@ -7,7 +7,7 @@
 ---
 
 ## 1. The Core Thesis: Supportive Context & AI Companion
-Yukti OS is built on a humble health postulate: **Health data is most helpful when paired with personal routine context.** 
+Parents Health OS is built on a humble health postulate: **Health data is most helpful when paired with personal routine context.** 
 
 The system operates as an exploratory "Care Companion" interface. It does not provide medical diagnoses; instead, it demonstrates how laboratory results, medication logs, and vital readings can be synthesized through a smart, AI-assisted health profile to support daily well-being.
 
@@ -20,7 +20,7 @@ The system operates as an exploratory "Care Companion" interface. It does not pr
 ---
 
 ## 2. Technical Stack & Prototype Infrastructure
-To replicate the Yukti OS prototype environment, the following stack is utilized:
+To replicate the Parents Health OS prototype environment, the following stack is utilized:
 
 - **Core Framework**: `Next.js 16.1+` (App Router).
 - **Runtime Environment**: `Node.js 20+`.
@@ -80,7 +80,7 @@ Scores are aggregated into 10 categories (Metabolic, Cardiovascular, Cognitive, 
 #### AI Assistant Tone (Care Companion Prototype)
 - **Identity**: "Nani-Bot", a warm, respectful health assistant. 
 - **Style**: Uses simple language to explain complex findings, prioritizing clarity and encouragement over clinical prescription.
-- **Merge Logic**: The analysis logic maps new prescriptions into `yukti_active_meds` to demonstrate seamless routine updates.
+- **Merge Logic**: The analysis logic maps new prescriptions into `parents_health_active_meds` to demonstrate seamless routine updates.
 
 ---
 
@@ -88,7 +88,7 @@ Scores are aggregated into 10 categories (Metabolic, Cardiovascular, Cognitive, 
 **Path:** `src/components/MedicationTracker.tsx`
 
 #### Tracking Demonstration
-- **Today's Log**: Compares `yukti_daily_log` entries against the `yukti_active_meds` list.
+- **Today's Log**: Compares `parents_health_daily_log` entries against the `parents_health_active_meds` list.
 - **History Matrix**:
     - **Green Dot**: Routine fully completed + Vitals logged.
     - **Amber Dot**: Partial habits or vitals missing.
@@ -105,7 +105,7 @@ Scores are aggregated into 10 categories (Metabolic, Cardiovascular, Cognitive, 
 **Path:** `src/components/WhatsAppDemo.tsx`
 
 #### Demo Persona
-- **Name**: Yukti Care (Warm and respectful).
+- **Name**: Parents-Health Care (Warm and respectful).
 - **Communication**: Uses emojis and polite greetings (e.g., "Namaste").
 - **Interactive Logic**:
     - Confirms habit completion (Meds taken).
@@ -131,24 +131,24 @@ Scores are aggregated into 10 categories (Metabolic, Cardiovascular, Cognitive, 
 
 ## 4. Data Registry (Local Persistence Only)
 
-Yukti OS v3.4 uses the following browser `localStorage` keys for the prototype demo:
+Parents Health OS v3.4 uses the following browser `localStorage` keys for the prototype demo:
 
 | Key | Type | Purpose |
 |:---|:---|:---|
-| `yukti_auth_v2` | Boolean | Initialization flag for the demo. |
-| `yukti_user_name` | String | Sample user identity for the dashboard. |
-| `yukti_assessment_data_v2` | Object | `{ answers: Record<id, label>, scores: Object }`. |
-| `yukti_active_meds` | Array | Sample medication list (Dose, timing, type). |
-| `yukti_history` | Array | Archival memory of analyzed demo reports. |
-| `yukti_latest_summary` | Object | The most recent AI synthesis summary. |
-| `yukti_daily_log_YYYY-MM-DD`| Object | `{ meds: string[], vitals: Vitals, habits: Habits }`. |
+| `parents_health_auth_v2` | Boolean | Initialization flag for the demo. |
+| `parents_health_user_name` | String | Sample user identity for the dashboard. |
+| `parents_health_assessment_data_v2` | Object | `{ answers: Record<id, label>, scores: Object }`. |
+| `parents_health_active_meds` | Array | Sample medication list (Dose, timing, type). |
+| `parents_health_history` | Array | Archival memory of analyzed demo reports. |
+| `parents_health_latest_summary` | Object | The most recent AI synthesis summary. |
+| `parents_health_daily_log_YYYY-MM-DD`| Object | `{ meds: string[], vitals: Vitals, habits: Habits }`. |
 
 ---
 
 ## 5. Setup & Design Philosophy
 
 ### The Neural Glass System
-Yukti OS utilizes a "Neural Glass" shader system to create a premium, calm environment for seniors:
+Parents Health OS utilizes a "Neural Glass" shader system to create a premium, calm environment for seniors:
 ```css
 :root {
   --background: #010413;
@@ -168,4 +168,4 @@ Yukti OS utilizes a "Neural Glass" shader system to create a premium, calm envir
 - **Premium**: High-fidelity animations and glassmorphic depth.
 
 ---
-*End of Blueprint. This document is the final authority on the Yukti OS v3.4 Concept Prototype.*
+*End of Blueprint. This document is the final authority on the Parents Health OS v3.4 Concept Prototype.*

@@ -81,7 +81,7 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
         if (!viewingDate) setViewingDate(today);
 
         // 1. Load Meds
-        const savedMeds = localStorage.getItem("yukti_active_meds");
+        const savedMeds = localStorage.getItem("parents_health_active_meds");
         if (savedMeds) {
             try {
                 const parsed = JSON.parse(savedMeds);
@@ -132,7 +132,7 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
 
     // --- LOGIC: DATA IO ---
 
-    const getLogKey = (date: string) => `yukti_daily_log_${date}`;
+    const getLogKey = (date: string) => `parents_health_daily_log_${date}`;
 
     const loadDailyLog = async (date: string): Promise<DailyLog> => {
         const key = getLogKey(date);
@@ -149,8 +149,8 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
         const cache: Record<string, DailyLog> = {};
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
-            if (key?.startsWith("yukti_daily_log_")) {
-                const date = key.replace("yukti_daily_log_", "");
+            if (key?.startsWith("parents_health_daily_log_")) {
+                const date = key.replace("parents_health_daily_log_", "");
                 try {
                     cache[date] = JSON.parse(localStorage.getItem(key) || "{}");
                 } catch (e) { }
@@ -208,7 +208,7 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
 
     const saveMedsList = (newMeds: Medication[]) => {
         setMeds(newMeds);
-        localStorage.setItem("yukti_active_meds", JSON.stringify(newMeds));
+        localStorage.setItem("parents_health_active_meds", JSON.stringify(newMeds));
     };
 
     const changeDate = (days: number) => {
@@ -265,7 +265,7 @@ export function MedicationTracker({ onTriggerCall }: MedicationTrackerProps) {
             let dotColor = null;
 
             if (new Date(dateStr) <= new Date()) {
-                const activeMedsRaw = localStorage.getItem("yukti_active_meds");
+                const activeMedsRaw = localStorage.getItem("parents_health_active_meds");
                 const currentMedsList = activeMedsRaw ? JSON.parse(activeMedsRaw) : [];
                 const activeMedsCount = currentMedsList.filter((m: any) => !m.status || m.status === 'Active').length || 1;
 

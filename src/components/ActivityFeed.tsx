@@ -18,7 +18,7 @@ const ACTIVITIES = [
     {
         id: 2,
         time: "Today, 8:15 AM",
-        author: "Yukti AI",
+        author: "Parents Health AI",
         role: "System Monitor",
         action: "flagged a potential drug interaction.",
         detail: "Low Severity: Aspirin + Garlic Supplements.",
