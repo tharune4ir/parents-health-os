@@ -98,8 +98,8 @@ export function ClinicHub() {
         <div className="max-w-6xl mx-auto space-y-12 pb-20 relative">
             {/* HEADER */}
             <div className="px-2">
-                <h2 className="text-3xl md:text-2xl md:text-4xl font-black text-white tracking-tight uppercase mb-1">Care Hub</h2>
-                <p className="text-sm text-slate-400 font-medium tracking-tight">Manage consultations, insurance, and medical records.</p>
+                <h2 className="text-3xl md:text-2xl md:text-4xl font-black text-[#0E5E5A] tracking-tight uppercase mb-1 font-[family-name:var(--font-outfit)]">Care Hub</h2>
+                <p className="text-sm text-slate-500 font-medium tracking-tight">Manage consultations, insurance, and medical records.</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-10">
@@ -107,15 +107,15 @@ export function ClinicHub() {
                 {/* LEFT COLUMN: UPCOMING VISITS (Span 2) */}
                 <div className="lg:col-span-2 space-y-8">
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
-                        <h3 className="text-xl font-black text-white tracking-tighter uppercase flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.1)]">
+                        <h3 className="text-xl font-black text-[#0E5E5A] tracking-tighter uppercase flex items-center gap-4 font-[family-name:var(--font-outfit)]">
+                            <div className="w-10 h-10 rounded-xl bg-[#0E5E5A]/5 border border-[#0E5E5A]/15 flex items-center justify-center text-[#0E5E5A] shadow-[0_0_20px_rgba(14,94,90,0.05)]">
                                 <Calendar size={20} strokeWidth={2.5} />
                             </div>
                             Appointment Schedule
                         </h3>
                         <button
                             onClick={() => setShowBookingModal(true)}
-                            className="flex items-center gap-3 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-[1.5rem] font-black text-[10px] uppercase tracking-[0.2em] transition-all border border-white/5 active:scale-95 shadow-xl"
+                            className="flex items-center gap-3 bg-[#0E5E5A] hover:bg-[#0c4e4b] text-white px-8 py-4 rounded-[1.5rem] font-black text-[10px] uppercase tracking-[0.2em] transition-all active:scale-95 shadow-md cursor-pointer border-0"
                         >
                             <Plus size={14} strokeWidth={4} /> Book Appointment
                         </button>
@@ -152,18 +152,18 @@ export function ClinicHub() {
                                     <div className="flex flex-col md:flex-row gap-8 items-center md:items-start relative z-10">
                                         {/* Date Box */}
                                         <div className={`rounded-2xl p-6 flex flex-col items-center justify-center text-center w-full md:w-28 shrink-0 border shadow-inner ${appt.isPast 
-                                            ? "bg-slate-950 border-white/5 text-slate-600" 
-                                            : "bg-slate-950 border-cyan-500/20"
+                                            ? "bg-slate-100/50 border-[#e2ded5] text-slate-500" 
+                                            : "bg-[#0E5E5A]/5 border-[#0E5E5A]/15"
                                             }`}>
-                                            <span className={`text-[10px] font-black uppercase tracking-widest mb-1 ${appt.isPast ? "text-slate-700" : "text-cyan-500/60"}`}>{appt.date.split(' ')[0]}</span>
-                                            <span className={`text-3xl font-black tracking-tighter ${appt.isPast ? "text-slate-500" : "text-white"}`}>{appt.date.split(' ')[1]}</span>
-                                            {!appt.isPast && <span className="text-[10px] font-black text-slate-500 mt-2 uppercase tracking-tighter">{appt.time}</span>}
+                                            <span className={`text-[10px] font-black uppercase tracking-widest mb-1 ${appt.isPast ? "text-slate-400" : "text-[#0E5E5A]"}`}>{appt.date.split(' ')[0]}</span>
+                                            <span className={`text-3xl font-black tracking-tighter ${appt.isPast ? "text-slate-400" : "text-slate-800"}`}>{appt.date.split(' ')[1]}</span>
+                                            {!appt.isPast && <span className="text-[10px] font-black text-[#E05E1B] mt-2 uppercase tracking-tighter">{appt.time}</span>}
                                         </div>
 
                                         <div className="flex-1 w-full text-center md:text-left">
                                             <div className="flex flex-col md:flex-row justify-between items-start mb-6">
                                                 <div>
-                                                    <h4 className={`text-xl font-black tracking-tight mb-2 ${appt.isPast ? "text-slate-400" : "text-white group-hover:text-cyan-400 transition-colors uppercase"}`}>{appt.doctor}</h4>
+                                                    <h4 className={`text-xl font-black tracking-tight mb-2 ${appt.isPast ? "text-slate-400" : "text-slate-800 group-hover:text-[#0E5E5A] transition-colors uppercase font-[family-name:var(--font-outfit)]"}`}>{appt.doctor}</h4>
                                                     <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{appt.type}</p>
                                                 </div>
                                                 {appt.isPast && (
@@ -175,16 +175,16 @@ export function ClinicHub() {
 
                                             {!appt.isPast && (
                                                 <div className="flex flex-col md:flex-row gap-4">
-                                                    <button className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-8 py-4 rounded-[1.25rem] font-black text-[10px] uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all shadow-lg active:scale-95">
+                                                    <button className="bg-[#0E5E5A] hover:bg-[#0c4e4b] text-white px-8 py-4 rounded-[1.25rem] font-black text-[10px] uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all shadow-lg active:scale-95 cursor-pointer">
                                                         <Video size={14} strokeWidth={3} /> Join Call
                                                     </button>
-                                                    <button className="bg-slate-950 hover:bg-slate-900 border border-white/5 text-slate-400 hover:text-white px-8 py-4 rounded-[1.25rem] font-black text-[10px] uppercase tracking-[0.2em] transition-all">
+                                                    <button className="bg-white hover:bg-slate-50 border border-[#e2ded5] text-[#0E5E5A] px-8 py-4 rounded-[1.25rem] font-black text-[10px] uppercase tracking-[0.2em] transition-all cursor-pointer">
                                                         Reschedule
                                                     </button>
                                                 </div>
                                             )}
                                             {appt.isPast && (
-                                                <button className="text-slate-400 text-[10px] font-black uppercase tracking-widest hover:text-cyan-400 transition-colors border-b border-transparent hover:border-cyan-500/30 pb-1">Review Visit Summary</button>
+                                                <button className="text-slate-500 text-[10px] font-black uppercase tracking-widest hover:text-[#0E5E5A] transition-colors border-b border-transparent hover:border-[#0E5E5A]/30 pb-1 cursor-pointer">Review Visit Summary</button>
                                             )}
                                         </div>
                                     </div>
@@ -196,8 +196,8 @@ export function ClinicHub() {
 
                 {/* RIGHT COLUMN: FINANCE (Span 1) */}
                 <div className="lg:col-span-1 space-y-10">
-                    <h3 className="text-xl font-black text-white tracking-tighter uppercase flex items-center gap-4 px-2">
-                        <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+                    <h3 className="text-xl font-black text-[#0E5E5A] tracking-tighter uppercase flex items-center gap-4 px-2 font-[family-name:var(--font-outfit)]">
+                        <div className="w-10 h-10 rounded-xl bg-[#0E5E5A]/5 border border-[#0E5E5A]/15 flex items-center justify-center text-[#0E5E5A]">
                             <Wallet size={20} strokeWidth={2.5} />
                         </div>
                         Health Finance
@@ -213,18 +213,18 @@ export function ClinicHub() {
                         <div className="flex justify-between items-start mb-10 relative z-10">
                             <div>
                                 <p className="text-slate-500 text-[9px] font-black uppercase tracking-[0.2em] mb-2">Insurance Coverage</p>
-                                <h4 className="font-black text-lg flex items-center gap-3">
-                                    <ShieldCheck size={18} className="text-cyan-400" /> Parents-Health Health Shield
+                                <h4 className="font-black text-lg text-slate-800 flex items-center gap-3">
+                                    <ShieldCheck size={18} className="text-[#E05E1B]" /> Parents-Health Health Shield
                                 </h4>
                             </div>
-                            <span className="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-[9px] font-black border border-cyan-500/20 tracking-widest">
+                            <span className="bg-[#E05E1B]/10 text-[#E05E1B] px-3 py-1 rounded-full text-[9px] font-black border border-[#E05E1B]/20 tracking-widest">
                                 ACTIVE
                             </span>
                         </div>
 
                         <div className="space-y-1 relative z-10 mb-10">
                             <p className="text-slate-500 text-[9px] font-black uppercase tracking-[0.2em] mb-2">Policy Number</p>
-                            <p className="font-mono text-xl tracking-[0.3em] text-white">YUK-8829-X</p>
+                            <p className="font-mono text-xl tracking-[0.3em] text-slate-800">YUK-8829-X</p>
                         </div>
 
                         <div className="pt-8 border-t border-white/5 flex justify-between items-end relative z-10">
@@ -235,7 +235,7 @@ export function ClinicHub() {
                                         key={balance}
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="text-3xl font-black tracking-tighter text-white"
+                                        className="text-3xl font-black tracking-tighter text-slate-800"
                                     >
                                         ₹{balance.toLocaleString()}
                                     </motion.p>
@@ -243,7 +243,7 @@ export function ClinicHub() {
                             </div>
                             <button
                                 onClick={handleTopUp}
-                                className="bg-white hover:bg-slate-200 text-slate-950 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest active:scale-95 transition-all shadow-lg"
+                                className="bg-[#0E5E5A] hover:bg-[#0c4e4b] text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest active:scale-95 transition-all shadow-lg cursor-pointer"
                             >
                                 Top Up
                             </button>
@@ -252,23 +252,23 @@ export function ClinicHub() {
 
                     {/* QUICK ACTIONS */}
                     <div className="glass-card bg-slate-950/40 border border-white/5 p-4 rounded-[2rem] space-y-3">
-                        <button className="w-full flex items-center justify-between p-4 hover:bg-slate-900/60 rounded-2xl transition-all group">
+                        <button className="w-full flex items-center justify-between p-4 hover:bg-[#0E5E5A]/5 rounded-2xl transition-all group cursor-pointer border-0">
                             <div className="flex items-center gap-4">
-                                <div className="p-3 bg-slate-950 border border-white/5 text-cyan-400 rounded-xl group-hover:border-cyan-500/30 transition-all">
+                                <div className="p-3 bg-[#0E5E5A]/5 border border-[#0E5E5A]/15 text-[#0E5E5A] rounded-xl group-hover:border-[#0E5E5A]/30 transition-all">
                                     <FileText size={18} />
                                 </div>
-                                <span className="text-[10px] font-black text-slate-400 group-hover:text-white uppercase tracking-widest transition-colors">Review Claims History</span>
+                                <span className="text-[10px] font-black text-slate-600 group-hover:text-[#0E5E5A] uppercase tracking-widest transition-colors">Review Claims History</span>
                             </div>
-                            <ChevronRight size={14} className="text-slate-600 group-hover:translate-x-1 transition-transform" />
+                            <ChevronRight size={14} className="text-[#0E5E5A]/60 group-hover:translate-x-1 transition-transform" />
                         </button>
-                        <button className="w-full flex items-center justify-between p-4 hover:bg-slate-900/60 rounded-2xl transition-all group">
+                        <button className="w-full flex items-center justify-between p-4 hover:bg-[#E05E1B]/5 rounded-2xl transition-all group cursor-pointer border-0">
                             <div className="flex items-center gap-4">
-                                <div className="p-3 bg-slate-950 border border-white/5 text-white/40 rounded-xl group-hover:border-white/20 transition-all">
+                                <div className="p-3 bg-[#E05E1B]/5 border border-[#E05E1B]/15 text-[#E05E1B] rounded-xl group-hover:border-[#E05E1B]/30 transition-all">
                                     <CreditCard size={18} />
                                 </div>
-                                <span className="text-[10px] font-black text-slate-400 group-hover:text-white uppercase tracking-widest transition-colors">Manage Payment Cards</span>
+                                <span className="text-[10px] font-black text-slate-600 group-hover:text-[#E05E1B] uppercase tracking-widest transition-colors">Manage Payment Cards</span>
                             </div>
-                            <ChevronRight size={14} className="text-slate-600 group-hover:translate-x-1 transition-transform" />
+                            <ChevronRight size={14} className="text-[#E05E1B]/60 group-hover:translate-x-1 transition-transform" />
                         </button>
                     </div>
                 </div>
@@ -282,52 +282,52 @@ export function ClinicHub() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[100] flex items-center justify-center p-4"
+                        className="fixed inset-0 bg-black/65 backdrop-blur-md z-[100] flex items-center justify-center p-4"
                         onClick={() => setShowBookingModal(false)}
                     >
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0, y: 20 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                            className="glass-card bg-slate-950 border border-white/10 w-full max-w-lg rounded-[3rem] p-6 md:p-10 shadow-[0_0_100px_rgba(0,0,0,0.5)] relative overflow-hidden"
+                            className="glass-card bg-white border border-[#e2ded5] w-full max-w-lg rounded-[3rem] p-6 md:p-10 shadow-[0_20px_50px_rgba(18,35,33,0.15)] relative overflow-hidden"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 blur-[100px] rounded-full -mr-32 -mt-32" />
                             
                             <button
                                 onClick={() => setShowBookingModal(false)}
-                                className="absolute top-8 right-8 p-3 bg-slate-900 border border-white/5 text-slate-500 hover:text-white rounded-full transition-all hover:rotate-90"
+                                className="absolute top-8 right-8 p-3 bg-slate-50 border border-[#e2ded5] text-slate-500 hover:text-[#0E5E5A] hover:bg-slate-100 rounded-full transition-all hover:rotate-90 cursor-pointer"
                             >
                                 <X size={20} />
                             </button>
 
-                            <h3 className="text-2xl font-black text-white tracking-tighter uppercase mb-2">Schedule Appointment</h3>
+                            <h3 className="text-2xl font-black text-[#0E5E5A] tracking-tighter uppercase mb-2 font-[family-name:var(--font-outfit)]">Schedule Appointment</h3>
                             <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-10">Request a time for a virtual or clinic-based visit.</p>
 
                             <form onSubmit={handleBookAppointment} className="space-y-8 relative z-10">
                                 <div>
                                     <label className="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em] flex items-center gap-3 mb-3">
-                                        <User size={12} className="text-cyan-500" /> Select Specialist
+                                        <User size={12} className="text-[#0E5E5A]" /> Select Specialist
                                     </label>
                                     <select
-                                        className="w-full p-4 bg-slate-900/50 border border-white/10 rounded-2xl font-black text-slate-300 focus:text-white focus:border-cyan-500/50 outline-none appearance-none cursor-pointer transition-all"
+                                        className="w-full p-4 bg-slate-50 border border-[#e2ded5] rounded-2xl font-black text-slate-800 focus:bg-white focus:border-[#0E5E5A] outline-none appearance-none cursor-pointer transition-all font-[family-name:var(--font-outfit)]"
                                         value={bookForm.specialist}
                                         onChange={(e) => setBookForm({ ...bookForm, specialist: e.target.value })}
                                     >
-                                        <option value="Dr. Aruna Desai" className="bg-slate-950">Dr. Aruna Desai (Geriatric Optimization)</option>
-                                        <option value="Dr. Esha Solanki" className="bg-slate-950">Dr. Esha Solanki (Cardiovascular)</option>
-                                        <option value="Coach Vikram" className="bg-slate-950">Coach Vikram (Physio-Kinetics)</option>
+                                        <option value="Dr. Aruna Desai" className="bg-white text-slate-800 font-[family-name:var(--font-outfit)]">Dr. Aruna Desai (Geriatric Optimization)</option>
+                                        <option value="Dr. Esha Solanki" className="bg-white text-slate-800 font-[family-name:var(--font-outfit)]">Dr. Esha Solanki (Cardiovascular)</option>
+                                        <option value="Coach Vikram" className="bg-white text-slate-800 font-[family-name:var(--font-outfit)]">Coach Vikram (Physio-Kinetics)</option>
                                     </select>
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-6">
                                     <div>
                                     <label className="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em] flex items-center gap-3 mb-3">
-                                        <Calendar size={12} className="text-cyan-500" /> Select Date
+                                        <Calendar size={12} className="text-[#0E5E5A]" /> Select Date
                                     </label>
                                         <input
                                             type="date"
-                                            className="w-full p-4 bg-slate-900/50 border border-white/10 rounded-2xl font-black text-slate-300 focus:text-white focus:border-cyan-500/50 outline-none transition-all text-xs"
+                                            className="w-full p-4 bg-slate-50 border border-[#e2ded5] rounded-2xl font-black text-slate-800 focus:bg-white focus:border-[#0E5E5A] outline-none transition-all text-xs font-[family-name:var(--font-outfit)]"
                                             value={bookForm.date}
                                             onChange={(e) => setBookForm({ ...bookForm, date: e.target.value })}
                                             required
@@ -335,11 +335,11 @@ export function ClinicHub() {
                                     </div>
                                     <div>
                                         <label className="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em] flex items-center gap-3 mb-3">
-                                            <Clock size={12} className="text-cyan-500" /> Select Time
+                                            <Clock size={12} className="text-[#0E5E5A]" /> Select Time
                                         </label>
                                         <input
                                             type="time"
-                                            className="w-full p-4 bg-slate-900/50 border border-white/10 rounded-2xl font-black text-slate-300 focus:text-white focus:border-cyan-500/50 outline-none transition-all text-xs"
+                                            className="w-full p-4 bg-slate-50 border border-[#e2ded5] rounded-2xl font-black text-slate-800 focus:bg-white focus:border-[#0E5E5A] outline-none transition-all text-xs font-[family-name:var(--font-outfit)]"
                                             value={bookForm.time}
                                             onChange={(e) => setBookForm({ ...bookForm, time: e.target.value })}
                                             required
@@ -350,7 +350,7 @@ export function ClinicHub() {
                                 <div className="pt-6">
                                     <button
                                         type="submit"
-                                        className="w-full py-5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black rounded-2xl text-[10px] uppercase tracking-[0.3em] transition-all shadow-[0_0_30px_rgba(34,211,238,0.2)] active:scale-95"
+                                        className="w-full py-5 bg-[#0E5E5A] hover:bg-[#0c4e4b] text-white font-black rounded-2xl text-[10px] uppercase tracking-[0.3em] transition-all shadow-[0_0_30px_rgba(14,94,90,0.2)] active:scale-95 cursor-pointer"
                                     >
                                         Confirm Appointment
                                     </button>

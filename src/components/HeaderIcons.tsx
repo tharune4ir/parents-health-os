@@ -3,19 +3,18 @@
 import { useState, useEffect, useRef } from "react";
 import { Bell, User, Settings, LogOut, CheckCheck, AlertTriangle, Pill, Activity } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useParentsAuth } from "../lib/supabase/context";
 
 export function HeaderIcons() {
+    const { profile, parents, signOut } = useParentsAuth();
     const [showNotifications, setShowNotifications] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
     const [hasUnread, setHasUnread] = useState(true);
-    const [userName, setUserName] = useState("User");
 
-    // Load User Name for Profile
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            setUserName(localStorage.getItem("parents_health_user_name") || "User");
-        }
-    }, []);
+    const parent = parents[0];
+    const userName = parent?.name || "Geriatric Profile";
+    const userAge = typeof window !== "undefined" ? localStorage.getItem("parents_health_user_age") || "72" : "72";
+    const userGender = typeof window !== "undefined" ? localStorage.getItem("parents_health_user_gender") || "Female" : "Female";
 
     // Close dropdowns when clicking outside
     const notifRef = useRef<HTMLDivElement>(null);
@@ -36,10 +35,7 @@ export function HeaderIcons() {
 
     const handleSignOut = () => {
         if (confirm("Are you sure you want to sign out?")) {
-            // Clear IDENTITY only, keeps data for next demo load technically, 
-            // but enables "Login" screen to appear.
-            localStorage.removeItem("parents_health_auth_v2");
-            window.location.reload();
+            signOut();
         }
     };
 
@@ -77,11 +73,11 @@ export function HeaderIcons() {
             <div className="relative" ref={notifRef}>
                 <button
                     onClick={() => { setShowNotifications(!showNotifications); setShowProfile(false); }}
-                    className="h-10 w-10 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-slate-500 hover:text-white hover:bg-white/10 transition-all relative group"
+                    className="h-10 w-10 flex items-center justify-center rounded-full bg-[#0E5E5A]/5 border border-[#0E5E5A]/15 text-[#0E5E5A] hover:bg-[#0E5E5A]/10 hover:border-[#0E5E5A]/30 transition-all relative group shadow-sm cursor-pointer"
                 >
-                    <Bell size={20} strokeWidth={1.5} className="opacity-60 group-hover:opacity-100 transition-opacity" />
+                    <Bell size={18} strokeWidth={2} className="opacity-90 group-hover:scale-110 transition-all" />
                     {hasUnread && (
-                        <span className="absolute top-2.5 right-2.5 h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]"></span>
+                        <span className="absolute top-2 right-2 h-2.5 w-2.5 rounded-full bg-[#E05E1B] border border-[#FAF9F6] shadow-[0_0_8px_rgba(224,94,27,0.5)]"></span>
                     )}
                 </button>
 
@@ -94,11 +90,11 @@ export function HeaderIcons() {
                             className="absolute right-0 mt-6 w-85 bg-slate-950/90 backdrop-blur-3xl shadow-3xl rounded-[2.5rem] border border-white/10 overflow-hidden origin-top-right z-[60]"
                         >
                             <div className="p-6 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
-                                <h3 className="data-label !text-white !tracking-[0.2em]">Care Activity</h3>
+                                <h3 className="data-label !text-[#122321] !tracking-[0.2em]">Care Activity</h3>
                                 {hasUnread && (
                                     <button
                                         onClick={() => setHasUnread(false)}
-                                        className="text-[9px] text-cyan-400 font-bold uppercase tracking-widest hover:text-cyan-300 flex items-center gap-2 transition-colors font-[family-name:var(--font-outfit)]"
+                                        className="text-[9px] text-[#E05E1B] font-bold uppercase tracking-widest hover:text-[#0E5E5A] flex items-center gap-2 transition-colors font-[family-name:var(--font-outfit)]"
                                     >
                                         <CheckCheck size={12} strokeWidth={1.5} /> Mark Read
                                     </button>
@@ -111,7 +107,7 @@ export function HeaderIcons() {
                                             {n.icon}
                                         </div>
                                         <div>
-                                            <h4 className="text-sm font-bold text-white tracking-tight font-[family-name:var(--font-outfit)]">{n.title}</h4>
+                                            <h4 className="text-sm font-bold text-[#0E5E5A] tracking-tight font-[family-name:var(--font-outfit)]">{n.title}</h4>
                                             <p className="text-[11px] text-slate-500 font-light mt-1 font-[family-name:var(--font-inter)] leading-relaxed">{n.desc}</p>
                                             <p className="data-label !text-[8px] !text-slate-700 !tracking-[0.1em] mt-3 uppercase">{n.time}</p>
                                         </div>
@@ -119,7 +115,7 @@ export function HeaderIcons() {
                                 ))}
                             </div>
                             <div className="p-4 text-center bg-white/[0.02]">
-                                <button className="data-label !text-slate-600 hover:!text-white transition-colors cursor-pointer text-[9px]">View All Signals</button>
+                                <button className="data-label !text-slate-600 hover:!text-[#0E5E5A] transition-colors cursor-pointer text-[9px]">View All Signals</button>
                             </div>
                         </motion.div>
                     )}
@@ -130,9 +126,9 @@ export function HeaderIcons() {
             <div className="relative" ref={profileRef}>
                 <button
                     onClick={() => { setShowProfile(!showProfile); setShowNotifications(false); }}
-                    className="h-10 w-10 overflow-hidden rounded-full bg-white/[0.03] border border-white/10 hover:ring-2 hover:ring-white/5 transition-all flex items-center justify-center group"
+                    className="h-10 w-10 overflow-hidden rounded-full bg-[#0E5E5A]/5 border border-[#0E5E5A]/15 text-[#0E5E5A] hover:bg-[#0E5E5A]/10 hover:border-[#0E5E5A]/30 transition-all flex items-center justify-center group shadow-sm cursor-pointer"
                 >
-                    <span className="text-white font-bold text-sm font-[family-name:var(--font-outfit)] opacity-60 group-hover:opacity-100 transition-opacity">{userName.charAt(0).toUpperCase()}</span>
+                    <User size={18} strokeWidth={2} className="opacity-90 group-hover:scale-110 transition-all" />
                 </button>
 
                 <AnimatePresence>
@@ -145,13 +141,13 @@ export function HeaderIcons() {
                         >
                             <div className="p-8 bg-white/[0.02] border-b border-white/5">
                                 <div className="flex items-center gap-5">
-                                    <div className="h-14 w-14 rounded-3xl bg-white text-slate-950 flex items-center justify-center text-xl font-bold shadow-3xl font-[family-name:var(--font-outfit)]">
+                                    <div className="h-14 w-14 rounded-3xl bg-[#0E5E5A] text-white flex items-center justify-center text-xl font-bold shadow-3xl font-[family-name:var(--font-outfit)]">
                                         {userName.charAt(0).toUpperCase()}
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-lg text-white tracking-tight font-[family-name:var(--font-outfit)]">{userName}</h3>
-                                        <p className="data-label !text-cyan-400 !tracking-[0.1em] mt-1 uppercase">
-                                            {localStorage.getItem('parents_health_user_age') ? `${localStorage.getItem('parents_health_user_age')} • ${localStorage.getItem('parents_health_user_gender')}` : 'Clinical Identity'}
+                                        <h3 className="font-bold text-lg text-slate-200 tracking-tight font-[family-name:var(--font-outfit)]">{userName}</h3>
+                                        <p className="data-label !text-[#E05E1B] !tracking-[0.1em] mt-1 uppercase">
+                                            {userAge} • {userGender}
                                         </p>
                                     </div>
                                 </div>
@@ -160,7 +156,7 @@ export function HeaderIcons() {
                             <div className="p-3 space-y-2">
                                 <button
                                     onClick={() => alert("Protocol settings are currently locked.")}
-                                    className="w-full flex items-center justify-between px-5 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:bg-white/[0.04] hover:text-white rounded-2xl transition-all font-[family-name:var(--font-outfit)]"
+                                    className="w-full flex items-center justify-between px-5 py-4 text-[10px] font-bold uppercase tracking-widest text-[#a1aeac] hover:bg-[#0E5E5A]/10 hover:text-white rounded-2xl transition-all font-[family-name:var(--font-outfit)] cursor-pointer"
                                 >
                                     <div className="flex items-center gap-4">
                                         <Settings size={14} strokeWidth={1.5} /> Profile & Protocol
@@ -171,7 +167,7 @@ export function HeaderIcons() {
 
                                 <button
                                     onClick={handleSignOut}
-                                    className="w-full flex items-center justify-between px-5 py-4 text-[10px] font-bold uppercase tracking-widest text-red-500 hover:bg-red-500/10 hover:text-red-400 rounded-2xl transition-all font-[family-name:var(--font-outfit)]"
+                                    className="w-full flex items-center justify-between px-5 py-4 text-[10px] font-bold uppercase tracking-widest text-red-500 hover:bg-red-500/10 hover:text-red-400 rounded-2xl transition-all font-[family-name:var(--font-outfit)] cursor-pointer"
                                 >
                                     <div className="flex items-center gap-4">
                                         <LogOut size={14} strokeWidth={1.5} /> Secure Sign-Out
@@ -186,3 +182,4 @@ export function HeaderIcons() {
         </div>
     );
 }
+

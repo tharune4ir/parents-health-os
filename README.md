@@ -80,5 +80,20 @@ This **System Context** is what separates Parents-Health from generic AI wrapper
 
 ---
 
+## 🔒 Project Safety & Agent Rules
+
+This repository has strict guardrails to prevent accidental database operations on protected live projects.
+
+| Document | Purpose |
+|---|---|
+| [`PROJECT_SAFETY_LOCK.md`](./PROJECT_SAFETY_LOCK.md) | Hard safety boundary — protected projects, forbidden operations, env rules |
+| [`AGENT_RULES.md`](./AGENT_RULES.md) | AI agent operational rules — read before every session |
+| [`LIVE_BACKEND_PREFLIGHT.md`](./LIVE_BACKEND_PREFLIGHT.md) | Step-by-step process for future live Supabase backend migration |
+
+> **Current backend mode:** Sandbox / localStorage only. No live Supabase project is connected.
+> The protected project `trelis-life` must never be used for Parents Health OS.
+
+---
+
 **Designed & Conceptualized by [Tharun Gajula](https://github.com/tharungajula2)**
 *Strategic Vision Prototype for Geriatrics & Clinical Product Architecture.*
