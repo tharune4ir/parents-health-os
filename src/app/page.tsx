@@ -113,99 +113,84 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="w-full max-w-4xl relative z-10"
+            className="w-full max-w-4xl relative z-10 py-2 md:py-6"
           >
-            <div className="text-center mb-16">
+            <div className="text-center mb-6">
               <motion.div 
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-[#e2ded5] shadow-sm mb-10"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#e2ded5] shadow-sm mb-6"
               >
                 <div className="h-1.5 w-1.5 rounded-full bg-[#E05E1B] animate-pulse" />
-                <span className="data-label text-[#0E5E5A]/80 uppercase tracking-widest text-[9px]">PARENTS-HEALTH // LIVE FAMILY CARE CONNECTED</span>
+                <span className="data-label text-[#0E5E5A]/80 uppercase tracking-widest text-[8px]">PARENTS-HEALTH // LIVE FAMILY CARE CONNECTED</span>
               </motion.div>
               
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 font-[family-name:var(--font-outfit)]">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-4 font-[family-name:var(--font-outfit)]">
                 <span className="text-gradient">Parents Health OS</span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-slate-600 font-light max-w-2xl mx-auto leading-relaxed font-[family-name:var(--font-inter)]">
+              <p className="text-sm md:text-base text-slate-600 font-light max-w-2xl mx-auto leading-relaxed mb-6 font-[family-name:var(--font-inter)]">
                 A warm, family-first dashboard for <span className="text-[#0E5E5A] font-semibold">Indian Elder-Care</span>, linking parents on WhatsApp with remote care oversight for adult children.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20 px-4 md:px-0">
+            {/* Premium Public Knowledge Base Banner (Now Mounted Above Features!) */}
+            <div className="w-full bg-white border border-[#e2ded5] rounded-2xl p-4 mb-6 shadow-sm max-w-2xl mx-auto text-left flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all hover:border-[#0E5E5A]/20">
+              <div className="space-y-0.5">
+                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#E05E1B]/10 text-[#E05E1B] text-[8px] font-bold uppercase tracking-wider font-mono">
+                  <BookOpen className="w-2.5 h-2.5" />
+                  Family Health Curriculum
+                </span>
+                <h3 className="text-xs md:text-sm font-bold font-outfit text-[#122321]">Body & Mind OS — A Health Curriculum for Indian Families</h3>
+                <p className="text-[10px] text-slate-500 font-normal">A structured health, prevention, nutrition, and screening system for families.</p>
+              </div>
+              
+              <Link 
+                href="/resources/body-mind-os"
+                className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-[#0E5E5A] hover:bg-[#E05E1B] text-white text-[10px] font-bold uppercase tracking-wider font-outfit transition-all shrink-0 hover:scale-[1.02] active:scale-[0.98] text-white-only"
+              >
+                Read Deck
+                <ArrowRight size={10} className="ml-1.5" />
+              </Link>
+            </div>
+
+            {/* Compressed Core App Modules */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8 px-4 md:px-0 max-w-3xl mx-auto">
               <ModuleBrief 
-                icon={<Stethoscope className="text-[#0E5E5A]" size={20} strokeWidth={1.5} />}
+                icon={<Stethoscope className="text-[#0E5E5A]" size={16} strokeWidth={1.5} />}
                 title="Health Profile"
-                desc="Comprehensive geriatric health scorecard and risk assessment."
+                desc="Geriatric health scorecard & risk profile."
               />
               <ModuleBrief 
-                icon={<FileText className="text-[#0E5E5A]" size={20} strokeWidth={1.5} />}
+                icon={<FileText className="text-[#0E5E5A]" size={16} strokeWidth={1.5} />}
                 title="Smart Reports"
-                desc="Clinical records synthesized into actionable insights."
+                desc="AI lab analysis & health summaries."
               />
               <ModuleBrief 
-                icon={<BookOpen className="text-[#0E5E5A]" size={20} strokeWidth={1.5} />}
+                icon={<BookOpen className="text-[#0E5E5A]" size={16} strokeWidth={1.5} />}
                 title="Daily Care"
-                desc="Adherence logging and automated vitals checking."
+                desc="Habit trackers, logs, & vital alerts."
               />
               <ModuleBrief 
-                icon={<MessageCircle className="text-[#0E5E5A]" size={20} strokeWidth={1.5} />}
+                icon={<MessageCircle className="text-[#0E5E5A]" size={16} strokeWidth={1.5} />}
                 title="WhatsApp Bridge"
-                desc="Simulated dialogue interface with Anaya AI Care companion."
+                desc="Dialogue gate with Anaya AI Care companion."
               />
             </div>
 
-            {/* Resources/Knowledge Base Segment */}
-            <div className="w-full bg-white border border-[#e2ded5] rounded-3xl p-6 md:p-8 mb-20 shadow-sm max-w-4xl mx-auto text-left">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6 pb-6 border-b border-[#e2ded5]">
-                <div className="space-y-1">
-                  <span className="data-label text-[#E05E1B] font-mono text-[9px] uppercase tracking-widest font-bold">Public Knowledge Base</span>
-                  <h3 className="text-xl md:text-2xl font-bold font-outfit text-[#122321]">Explore the Parents Health OS knowledge base</h3>
-                  <p className="text-xs text-slate-500 font-medium">Founder-built health education and product operating decks for Indian families and caregivers.</p>
-                </div>
-                
-                <Link 
-                  href="/resources"
-                  className="inline-flex items-center text-xs font-bold text-[#0E5E5A] hover:text-[#E05E1B] transition-colors shrink-0"
-                >
-                  View All Resources
-                  <ArrowRight size={14} className="ml-1.5" />
-                </Link>
-              </div>
-
-              <div className="max-w-md mx-auto">
-                <div className="p-5 rounded-2xl bg-[#FAF9F6] border border-[#e2ded5] flex flex-col justify-between space-y-4 hover:border-[#0E5E5A]/20 transition-all text-left">
-                  <div className="space-y-2">
-                    <span className="inline-block px-2.5 py-0.5 rounded-full text-[9px] font-bold tracking-wide bg-[#0E5E5A]/10 text-[#0E5E5A] uppercase">Health Curriculum</span>
-                    <h4 className="font-bold text-sm text-[#122321]">Body & Mind OS — A Health Curriculum for Indian Families</h4>
-                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed line-clamp-2">A structured family health curriculum covering prevention, nutrition, movement, sleep, and screening.</p>
-                  </div>
-                  <Link 
-                    href="/resources/body-mind-os" 
-                    className="inline-flex items-center text-xs font-semibold text-[#0E5E5A] hover:text-[#E05E1B]"
-                  >
-                    Read Curriculum
-                    <ArrowRight size={12} className="ml-1" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center gap-6 md:gap-10">
+            <div className="flex flex-col items-center gap-4">
               <button
                 onClick={() => setMode("login")}
-                className="group relative flex items-center gap-6 rounded-2xl bg-[#0E5E5A] hover:bg-[#0c4e4b] text-white px-14 py-6 font-bold text-lg transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-teal-900/10 animate-bounce-subtle"
+                className="group relative flex items-center gap-4 rounded-xl bg-[#0E5E5A] hover:bg-[#0c4e4b] text-white px-10 py-4 font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-teal-900/10 active:scale-95"
               >
                 <span className="font-[family-name:var(--font-outfit)] uppercase tracking-[0.2em] text-[10px]">Establish Care Link</span>
-                <ArrowRight size={18} strokeWidth={1.5} className="transition-transform group-hover:translate-x-1" />
+                <ArrowRight size={14} strokeWidth={1.5} className="transition-transform group-hover:translate-x-1" />
               </button>
 
               <div className="flex flex-col items-center gap-2">
-                <p className="data-label text-slate-400">
-                  A premium family care platform by <span className="text-slate-500">Tharun Gajula</span>
+                <p className="data-label text-slate-400 text-[9px] uppercase tracking-widest font-bold">
+                  A family care platform by <span className="text-slate-500">Tharun Gajula</span>
                 </p>
                 <div className="h-px w-12 bg-[#e2ded5]" />
               </div>
@@ -492,12 +477,14 @@ export default function Home() {
 
 function ModuleBrief({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) {
   return (
-    <div className="glass-card group p-8 rounded-[2rem] transition-all hover:bg-white hover:border-[#0E5E5A]/20">
-      <div className="h-10 w-10 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-        {icon}
+    <div className="glass-card group p-5 rounded-2xl transition-all hover:bg-white hover:border-[#0E5E5A]/20 text-left flex flex-col justify-between h-full min-h-[120px]">
+      <div>
+        <div className="h-8 w-8 rounded-lg bg-teal-50 border border-teal-100 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform text-[#0E5E5A]">
+          {icon}
+        </div>
+        <h3 className="text-[10px] font-[family-name:var(--font-outfit)] font-bold text-slate-800 mb-1 uppercase tracking-wider">{title}</h3>
+        <p className="text-[9px] text-slate-500 font-normal leading-snug font-[family-name:var(--font-inter)]">{desc}</p>
       </div>
-      <h3 className="text-xs font-[family-name:var(--font-outfit)] font-bold text-slate-800 mb-2 uppercase tracking-wider">{title}</h3>
-      <p className="text-[11px] text-slate-500 font-normal leading-relaxed font-[family-name:var(--font-inter)]">{desc}</p>
     </div>
   );
 }
