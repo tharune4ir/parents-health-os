@@ -22,16 +22,6 @@ export const DECKS: DeckMetadata[] = [
     pdfPath: "/resources/decks/body-mind-os/body-mind-os.pdf",
     statusBadge: "Educational Draft",
     disclaimer: "Educational curriculum draft. Clinical facts should be reviewed before formal medical distribution."
-  },
-  {
-    slug: "parents-health-os-vision",
-    title: "Parents Health OS — Vision & Operating Deck",
-    category: "Product Vision",
-    slideCount: 82,
-    description: "The founder vision, problem, product architecture, prototype, roadmap, operating model, privacy posture, and go-to-market plan for Parents Health OS.",
-    pdfPath: "/resources/decks/parents-health-os-vision/parents-health-os-vision.pdf",
-    statusBadge: "Strategic Roadmap",
-    disclaimer: "Founder/product strategy deck. Market, pricing, roadmap, and operating assumptions may evolve."
   }
 ];
 

@@ -176,8 +176,8 @@ export default function Home() {
                 </Link>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-5 rounded-2xl bg-[#FAF9F6] border border-[#e2ded5] flex flex-col justify-between space-y-4 hover:border-[#0E5E5A]/20 transition-all">
+              <div className="max-w-md mx-auto">
+                <div className="p-5 rounded-2xl bg-[#FAF9F6] border border-[#e2ded5] flex flex-col justify-between space-y-4 hover:border-[#0E5E5A]/20 transition-all text-left">
                   <div className="space-y-2">
                     <span className="inline-block px-2.5 py-0.5 rounded-full text-[9px] font-bold tracking-wide bg-[#0E5E5A]/10 text-[#0E5E5A] uppercase">Health Curriculum</span>
                     <h4 className="font-bold text-sm text-[#122321]">Body & Mind OS — A Health Curriculum for Indian Families</h4>
@@ -188,21 +188,6 @@ export default function Home() {
                     className="inline-flex items-center text-xs font-semibold text-[#0E5E5A] hover:text-[#E05E1B]"
                   >
                     Read Curriculum
-                    <ArrowRight size={12} className="ml-1" />
-                  </Link>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-[#FAF9F6] border border-[#e2ded5] flex flex-col justify-between space-y-4 hover:border-[#0E5E5A]/20 transition-all">
-                  <div className="space-y-2">
-                    <span className="inline-block px-2.5 py-0.5 rounded-full text-[9px] font-bold tracking-wide bg-[#E05E1B]/10 text-[#E05E1B] uppercase">Product Vision</span>
-                    <h4 className="font-bold text-sm text-[#122321]">Parents Health OS — Vision & Operating Deck</h4>
-                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed line-clamp-2">The founder vision, architecture, operating model, privacy posture, and GTM plan.</p>
-                  </div>
-                  <Link 
-                    href="/resources/parents-health-os-vision" 
-                    className="inline-flex items-center text-xs font-semibold text-[#0E5E5A] hover:text-[#E05E1B]"
-                  >
-                    Read Operating Deck
                     <ArrowRight size={12} className="ml-1" />
                   </Link>
                 </div>
