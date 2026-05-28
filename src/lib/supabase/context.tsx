@@ -10,6 +10,14 @@ import {
   getPendingLocalChangesCount,
   resetPendingLocalChanges
 } from "../offline/localPersistence";
+import {
+  addSyncEvent,
+  SyncEvent,
+  getPendingQueueCount,
+  getLastQueuedEvent,
+  simulateSyncAll,
+  dismissAllSyncEvents
+} from "../offline/syncQueue";
 
 type TableRow<T extends keyof Database["public"]["Tables"]> = Database["public"]["Tables"][T]["Row"];
 
@@ -41,6 +49,12 @@ interface ParentsAuthContextType {
   lastSaved: string;
   pendingChanges: number;
   resetLocalPendingChanges: () => void;
+
+  // Future Sync Queue (Phase 2B.3)
+  pendingSyncCount: number;
+  lastSyncEvent: SyncEvent | null;
+  simulateCloudSyncAction: () => void;
+  dismissSyncQueueAction: () => void;
   
   // Actions
   signIn: (email: string, password: string) => Promise<{ error: any }>;
@@ -91,10 +105,21 @@ export function ParentsAuthProvider({ children }: { children: React.ReactNode })
   const [lastSaved, setLastSaved] = useState<string>("Never");
   const [pendingChanges, setPendingChanges] = useState<number>(0);
 
+  // Future Sync Queue State (Phase 2B.3)
+  const [pendingSyncCount, setPendingSyncCount] = useState<number>(0);
+  const [lastSyncEvent, setLastSyncEvent] = useState<SyncEvent | null>(null);
+
+  const updateSyncQueueTelemetry = (parentId: string) => {
+    setPendingSyncCount(getPendingQueueCount(parentId));
+    setLastSyncEvent(getLastQueuedEvent(parentId));
+  };
+
   const registerChange = () => {
     registerLocalChange();
     setLastSaved(getLastSavedTimestamp());
     setPendingChanges(getPendingLocalChangesCount());
+    const pId = activeParent?.id || "sandbox-parent-id";
+    updateSyncQueueTelemetry(pId);
   };
 
   const handleResetLocalPendingChanges = () => {
@@ -103,13 +128,34 @@ export function ParentsAuthProvider({ children }: { children: React.ReactNode })
     setPendingChanges(0);
   };
 
+  const simulateCloudSyncAction = () => {
+    const pId = activeParent?.id || "sandbox-parent-id";
+    simulateSyncAll(pId);
+    updateSyncQueueTelemetry(pId);
+  };
+
+  const dismissSyncQueueAction = () => {
+    const pId = activeParent?.id || "sandbox-parent-id";
+    dismissAllSyncEvents(pId);
+    updateSyncQueueTelemetry(pId);
+  };
+
   const supabase = createClient();
 
   useEffect(() => {
     // Initialize offline persistence metadata on load
     setLastSaved(getLastSavedTimestamp());
     setPendingChanges(getPendingLocalChangesCount());
+    const pId = activeParent?.id || "sandbox-parent-id";
+    updateSyncQueueTelemetry(pId);
+  }, []);
 
+  useEffect(() => {
+    const pId = activeParent?.id || "sandbox-parent-id";
+    updateSyncQueueTelemetry(pId);
+  }, [activeParent]);
+
+  useEffect(() => {
     // Check if Supabase keys exist in process.env
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -826,6 +872,13 @@ export function ParentsAuthProvider({ children }: { children: React.ReactNode })
       localStorage.setItem(`parents_health_history_${pId}`, JSON.stringify(rawHistory));
       localStorage.setItem("parents_health_history", JSON.stringify(rawHistory));
       registerChange();
+      addSyncEvent(pId, "vitals_logged", {
+        bp_sys: data.bp_sys,
+        bp_dia: data.bp_dia,
+        sugar: data.sugar,
+        weight: data.weight,
+        source: data.source || "manual"
+      });
 
       return { success: true, data: newMockVital };
     }
@@ -876,6 +929,11 @@ export function ParentsAuthProvider({ children }: { children: React.ReactNode })
       localStorage.setItem(`parents_health_active_meds_${pId}`, JSON.stringify(updated));
       localStorage.setItem("parents_health_active_meds", JSON.stringify(updated));
       registerChange();
+      addSyncEvent(pId, "medication_updated", {
+        name: data.name,
+        dosage: data.dosage,
+        timing: data.timing
+      });
       return { success: true, data: newMockMed };
     }
   };
@@ -957,6 +1015,11 @@ export function ParentsAuthProvider({ children }: { children: React.ReactNode })
       
       setMedicationLogs(mappedLogs);
       registerChange();
+      addSyncEvent(pId, "checklist_updated", {
+        medicationId,
+        taken,
+        logDate
+      });
       return { success: true };
     }
   };
@@ -1025,6 +1088,10 @@ export function ParentsAuthProvider({ children }: { children: React.ReactNode })
       localStorage.setItem(`parents_health_history_${pId}`, JSON.stringify(parsedHist));
       localStorage.setItem("parents_health_history", JSON.stringify(parsedHist));
       registerChange();
+      addSyncEvent(pId, "report_analysis_saved", {
+        report_date: data.report_date,
+        report_type: data.report_type
+      });
 
       return { success: true, data: mockReport };
     }
@@ -1140,6 +1207,10 @@ export function ParentsAuthProvider({ children }: { children: React.ReactNode })
         setActiveParent(updated);
       }
       registerChange();
+      addSyncEvent(pId, "assessment_saved", {
+        riskLevel: scores.riskLevel || "Healthy Baseline",
+        totalScore: scores.total || 0
+      });
       return { success: true };
     }
   };
@@ -1249,6 +1320,9 @@ export function ParentsAuthProvider({ children }: { children: React.ReactNode })
         setActiveParent(newActive);
       }
       registerChange();
+      addSyncEvent(parentId, "profile_updated", {
+        name: updatedFields.name || activeParent?.name || "Amma Demo"
+      });
       return { success: true };
     }
   };
@@ -1341,6 +1415,11 @@ export function ParentsAuthProvider({ children }: { children: React.ReactNode })
         lastSaved,
         pendingChanges,
         resetLocalPendingChanges: handleResetLocalPendingChanges,
+        
+        pendingSyncCount,
+        lastSyncEvent,
+        simulateCloudSyncAction,
+        dismissSyncQueueAction,
         
         selectActiveParent,
         refreshData

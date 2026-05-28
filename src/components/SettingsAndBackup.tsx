@@ -32,7 +32,11 @@ export function SettingsAndBackup() {
     isSupabaseEnabled,
     lastSaved,
     pendingChanges,
-    resetLocalPendingChanges
+    resetLocalPendingChanges,
+    pendingSyncCount,
+    lastSyncEvent,
+    simulateCloudSyncAction,
+    dismissSyncQueueAction
   } = useParentsAuth();
   
   const { showToast } = useToast();
@@ -731,7 +735,7 @@ export function SettingsAndBackup() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 pt-2 font-[family-name:var(--font-inter)]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 pt-2 font-[family-name:var(--font-inter)]">
               <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/50">
                 <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Last Secure Save</span>
                 <span className="text-xs font-semibold text-slate-700">
@@ -773,6 +777,18 @@ export function SettingsAndBackup() {
                   {swStatus}
                 </span>
               </div>
+
+              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/50">
+                <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Simulated Cloud Queue</span>
+                <span className={`text-xs font-bold flex items-center gap-1.5 ${
+                  pendingSyncCount > 0 ? "text-amber-600" : "text-emerald-600"
+                }`}>
+                  <span className={`h-1.5 w-1.5 rounded-full ${
+                    pendingSyncCount > 0 ? "bg-amber-500 animate-pulse" : "bg-emerald-500"
+                  }`} />
+                  {pendingSyncCount === 0 ? "0 pending" : `${pendingSyncCount} pending evt${pendingSyncCount > 1 ? "s" : ""}`}
+                </span>
+              </div>
             </div>
 
             {pendingChanges > 0 && (
@@ -797,6 +813,89 @@ export function SettingsAndBackup() {
                 </button>
               </div>
             )}
+
+            {/* Phase 2B.3: Simulated Future Cloud Sync Queue details block */}
+            <div className="p-5 bg-slate-50/50 rounded-3xl border border-slate-200/40 font-[family-name:var(--font-inter)] text-xs text-slate-600 mt-2 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">Simulated Event Pipeline Status</span>
+                  <span className="text-xs text-slate-500 leading-normal">
+                    This mutation pipeline records all dashboard modifications (vitals, meds, scorecards) with isolated local metadata to mock downstream syncing safely.
+                  </span>
+                </div>
+                <div className="flex gap-2 shrink-0">
+                  <button
+                    disabled={pendingSyncCount === 0}
+                    onClick={() => {
+                      simulateCloudSyncAction();
+                      showToast("☁️ Simulated sync: Logged events pushed to cloud queue with success!", "success");
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all flex items-center gap-1 shadow-sm ${
+                      pendingSyncCount > 0
+                        ? "bg-[#0E5E5A] hover:bg-[#0c4e4b] text-white cursor-pointer"
+                        : "bg-slate-200 text-slate-400 cursor-not-allowed"
+                    }`}
+                  >
+                    Simulate Sync
+                  </button>
+                  <button
+                    disabled={pendingSyncCount === 0}
+                    onClick={() => {
+                      dismissSyncQueueAction();
+                      showToast("🧹 Simulated sync queue buffer cleared.", "info");
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${
+                      pendingSyncCount > 0
+                        ? "bg-slate-200 hover:bg-slate-300 text-slate-600 cursor-pointer"
+                        : "bg-slate-100 text-slate-300 cursor-not-allowed"
+                    }`}
+                  >
+                    Clear Queue
+                  </button>
+                </div>
+              </div>
+
+              {lastSyncEvent ? (
+                <div className="p-4 bg-white/70 rounded-2xl border border-slate-200/40 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-slate-700">Latest Event Logged</span>
+                    <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${
+                      lastSyncEvent.status === "pending"
+                        ? "bg-amber-100 text-amber-800"
+                        : lastSyncEvent.status === "simulated_synced"
+                        ? "bg-emerald-100 text-emerald-800"
+                        : "bg-slate-100 text-slate-600"
+                    }`}>
+                      {lastSyncEvent.status}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-[11px] pt-1">
+                    <div>
+                      <span className="text-slate-400 block mb-0.5 uppercase tracking-wide text-[8px] font-bold">Event Type</span>
+                      <code className="text-slate-800 font-mono bg-slate-100 px-1.5 py-0.5 rounded">{lastSyncEvent.type}</code>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 block mb-0.5 uppercase tracking-wide text-[8px] font-bold">Logged At</span>
+                      <span className="text-slate-700">{new Date(lastSyncEvent.createdAt).toLocaleTimeString()}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 block mb-0.5 uppercase tracking-wide text-[8px] font-bold">Data Residency</span>
+                      <span className="text-slate-700 font-semibold">{lastSyncEvent.source}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 block mb-0.5 uppercase tracking-wide text-[8px] font-bold">Payload Metadata</span>
+                      <code className="text-slate-500 font-mono text-[9px] bg-slate-50 p-1 block rounded truncate max-w-full">
+                        {JSON.stringify(lastSyncEvent.metadata)}
+                      </code>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-[11px] text-slate-400 italic text-center py-2">
+                  No local sync events queued yet. Record a vital, log a medicine, or switch profiles to generate simulated events.
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

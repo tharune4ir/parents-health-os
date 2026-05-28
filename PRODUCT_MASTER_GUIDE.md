@@ -1,5 +1,5 @@
 # Parents Health OS: The Definitive Product Architecture, Strategy, & Replication Manual
-**Version:** 6.2 (The Unified Production-Grade Reference Authority)  
+**Version:** 6.3 (The Unified Production-Grade Reference Authority)  
 **Status:** Approved for Sandbox Release / Phase-Ready for Live Migration  
 **Principal Architect:** Tharun Gajula  
 **Last Updated:** May 28, 2026
@@ -9,7 +9,7 @@
 ## 📌 Current Continuity Snapshot — Read This First
 
 ### 1. Current State in One Paragraph
-**Parents Health OS** is currently a fully stable, high-fidelity interactive sandbox prototype running in **Next.js 16 / TypeScript / Tailwind CSS v4 / PostCSS**. All clinical scores, daily habit checklist compliance indices, and user-profile isolated states are managed **100% client-side** using browser-based local storage (`localStorage`). Optional multimodal medical report analysis is powered by the **Google Gemini 2.5 Flash API** (with automatic rate-limit failover to `gemini-2.5-flash-lite`) via a dynamic serverless API endpoint, requiring explicit client-side user opt-in and consent. The public-facing Resource Library (`/resources`) features a premium client-side canvas-rendered PDF viewer (`DeckViewer.tsx`) that enforces a strict no-download presentation policy. A production-grade Service Worker caching shell (`sw.js`) guarantees offline resilience by caching static assets and pre-rendering curriculum content.
+**Parents Health OS** is currently a fully stable, high-fidelity interactive sandbox prototype running in **Next.js 16 / TypeScript / Tailwind CSS v4 / PostCSS**. All clinical scores, daily habit checklist compliance indices, and user-profile isolated states are managed **100% client-side** using browser-based local storage (`localStorage`). Optional multimodal medical report analysis is powered by the **Google Gemini 2.5 Flash API** (with automatic rate-limit failover to `gemini-2.5-flash-lite`) via a dynamic serverless API endpoint, requiring explicit client-side user opt-in and consent. The public-facing Resource Library (`/resources`) features a premium client-side canvas-rendered PDF viewer (`DeckViewer.tsx`) that enforces a strict no-download presentation policy. A production-grade Service Worker caching shell (`sw.js`) guarantees offline resilience by caching static assets and pre-rendering curriculum content. To support downstream cloud migration without actual transmission, an isolated local sync events engine (`syncQueue.ts`) records structured event metadata for checklist updates, vitals logging, scorecard saves, and profile edits, monitored via a dynamic Settings panel.
 
 ### 2. Completed Phases Summary
 -   **Branding & Core Baseline Setup:** Established a high-contrast, premium, warm teal and cream healthcare aesthetic ("Sanskaar-UX") optimized for senior legibility and family trust.
@@ -21,12 +21,13 @@
 -   **Phase 2A (Public Resources Library & Slider Viewer):** Deployed index library and dynamic routes rendering static curriculum decks.
 -   **Phase 2B.1 (Local Offline Resilience & Sync Telemetry):** Implemented client-side write trackers, metadata managers, and interactive Sync simulation widgets in the Caregiver Dashboard and Sandbox Settings.
 -   **Phase 2B.2 (Offline Service Worker Layer):** Created standard-compliant browser service worker (`sw.js`) and dynamic register controls (`ServiceWorkerRegister.tsx`) caching the premium static app shell and curriculum assets with strict caching bypass lists (avoiding dynamic health records, Gemini endpoints, and WhatsApp simulations).
+-   **Phase 2B.3 (Future Cloud Sync Queue):** Engineered a high-fidelity local mutation pipeline (`syncQueue.ts`) that records metadata-safe offline events across all dashboard mutations. Deployed premium sync management tools and a dynamic event logger details widget inside the Settings & Backup UI.
 
 ### 3. Current Branch, Commit, and Directory Status
--   **Current Branch:** `main` (Working tree contains Phase 2B.2 updates; zero uncommitted build errors).
--   **Last Commit:** `Phase 2B.1 completed - Local Offline Resilience & Sync Telemetry`
--   **Phase 2B.2 Completed Files:** `public/sw.js` (core caching worker), `src/components/ServiceWorkerRegister.tsx` (caching loader and unregister utilities), `src/app/layout.tsx` (registration mount), `src/components/SettingsAndBackup.tsx` (caching status panel).
--   **Pending Uncommitted Files:** Phase 2B.2 implementation files.
+-   **Current Branch:** `main` (Working tree contains all Phase 2B.1, 2B.2, and 2B.3 updates; zero uncommitted build errors).
+-   **Last Commit:** `Phase 2B.2 completed - Service Worker + Cached Shell`
+-   **Phase 2B Completed Files:** `public/sw.js` (core caching worker), `src/components/ServiceWorkerRegister.tsx` (caching loader and unregister utilities), `src/lib/offline/syncQueue.ts` (offline mutation pipeline), `src/lib/supabase/context.tsx` (sync events dispatcher integration), `src/components/SettingsAndBackup.tsx` (simulated sync controller and dynamic event visualizer board).
+-   **Pending Uncommitted Files:** Phase 2B implementation files.
 -   **Safest Next Action:** Initiate the step-by-step dedicated cloud database preflight using `LIVE_BACKEND_PREFLIGHT.md`.
 
 ### 4. Critical Boundaries (Things NOT to do)
@@ -373,8 +374,8 @@ gantt
 ```
 
 ### 1. Phase 2B: Advanced Care Simulation & Offline Sync Engines (Completed)
--   **Objective:** Develop local service worker caching and real-time state telemetry buffers.
--   **Files Completed:** `src/lib/offline/localPersistence.ts`, `public/sw.js`, `src/components/ServiceWorkerRegister.tsx`.
+-   **Objective:** Develop local service worker caching, real-time state telemetry buffers, and local sync event queues.
+-   **Files Completed:** `src/lib/offline/localPersistence.ts`, `public/sw.js`, `src/components/ServiceWorkerRegister.tsx`, `src/lib/offline/syncQueue.ts`.
 
 ### 2. Phase 3A: Dedicated Supabase Backend Migration
 -   **Objective:** Move from local storage to live regional databases.
@@ -407,6 +408,7 @@ gantt
 
 ## L. Product Master Guide Revision Registry
 
+-   **Version 6.3 (May 28, 2026):** Engineered Phase 2B.3 Future Cloud Sync Queue. Deployed an offline-safe local mutation queue engine (`syncQueue.ts`) that listens to and logs checklist completions, vital records, caregiver profile switches, scorecard saves, and profile updates. Created simulated cloud sync actions and a custom visualizer details panel inside the Settings & Backup UI to display the latest logged event and payload schema. Verified full Next.js 16 build validation.
 -   **Version 6.2 (May 28, 2026):** Launched Phase 2B.2 Offline Caching Services. Created compliant browser service worker (`sw.js`) and dynamic register components (`ServiceWorkerRegister.tsx`) to cache static visual frames (CSS/JS files, SVG elements, PDF curricula) while maintaining strict bypass constraints on dynamic patient vitals and Gemini processing. Mounted dynamic status monitors in the Settings tab. Verified 0 build issues.
 -   **Version 6.1 (May 28, 2026):** Deployed Phase 2B.1 Offline Resilience Foundations. Integrated real-time local write listeners, client-side metadata persistence utilities, glassmorphic Sync Telemetry Bars, and interactive Sync simulation switches in dashboard & settings panels. Checked and validated zero build compilation errors.
 -   **Version 6.0 (May 28, 2026):** Updated current continuity snapshots, added completed Phase 2A Resource Library details, logged the strategic removal of the Vision deck, unified high-fidelity JSON storage schemas, and documented Next.js 16 build exit codes. Fully aligned with developer safety boundaries.
