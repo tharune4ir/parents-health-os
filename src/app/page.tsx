@@ -159,34 +159,34 @@ export default function Home() {
               />
             </div>
 
-            {/* Public Knowledge Base Banner (Placed Underneath as Secondary) */}
-            <div className="w-full bg-white border border-[#e2ded5] rounded-3xl p-5 mb-12 shadow-sm max-w-2xl mx-auto text-left flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all hover:border-[#0E5E5A]/20">
-              <div className="space-y-1">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#0E5E5A]/10 text-[#0E5E5A] text-[9px] font-bold uppercase tracking-wide font-mono">
-                  <BookOpen className="w-3 h-3" />
-                  Family Health Curriculum
-                </span>
-                <h3 className="text-sm md:text-base font-bold font-outfit text-[#122321]">Body & Mind OS — A Health Curriculum for Indian Families</h3>
-                <p className="text-xs text-slate-500 font-normal">A founder-built health education curriculum covering prevention, nutrition, and screening.</p>
-              </div>
-              
-              <Link 
-                href="/resources/body-mind-os"
-                className="inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-[#0E5E5A] hover:bg-[#E05E1B] text-white text-[10px] font-bold uppercase tracking-wider font-outfit transition-all shrink-0 hover:scale-[1.02] active:scale-[0.98] text-white-only"
-              >
-                Read Curriculum
-                <ArrowRight size={12} className="ml-1.5" />
-              </Link>
-            </div>
-
-            <div className="flex flex-col items-center gap-6">
+            <div className="flex flex-col items-center gap-8">
               <button
                 onClick={() => setMode("login")}
-                className="group relative flex items-center gap-6 rounded-2xl bg-[#0E5E5A] hover:bg-[#0c4e4b] text-white px-12 py-5 font-bold text-base transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-teal-900/10 active:scale-95 animate-bounce-subtle"
+                className="group relative flex items-center gap-6 rounded-2xl bg-[#0E5E5A] hover:bg-[#0c4e4b] text-white px-12 py-5 font-bold text-base transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-teal-900/10 active:scale-95 animate-bounce-subtle mb-4"
               >
                 <span className="font-[family-name:var(--font-outfit)] uppercase tracking-[0.2em] text-[11px]">Establish Care Link</span>
                 <ArrowRight size={16} strokeWidth={1.5} className="transition-transform group-hover:translate-x-1" />
               </button>
+
+              {/* Public Knowledge Base Banner (Placed Below Login Button) */}
+              <div className="w-full bg-white border border-[#e2ded5] rounded-3xl p-5 mb-4 shadow-sm max-w-2xl mx-auto text-left flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all hover:border-[#0E5E5A]/20">
+                <div className="space-y-1">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#0E5E5A]/10 text-[#0E5E5A] text-[9px] font-bold uppercase tracking-wide font-mono">
+                    <BookOpen className="w-3 h-3" />
+                    Family Health Curriculum
+                  </span>
+                  <h3 className="text-sm md:text-base font-bold font-outfit text-[#122321]">Body & Mind OS — A Health Curriculum for Indian Families</h3>
+                  <p className="text-xs text-slate-500 font-normal">A founder-built health education curriculum covering prevention, nutrition, and screening.</p>
+                </div>
+                
+                <Link 
+                  href="/resources/body-mind-os"
+                  className="inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-[#0E5E5A] hover:bg-[#E05E1B] text-white text-[10px] font-bold uppercase tracking-wider font-outfit transition-all shrink-0 hover:scale-[1.02] active:scale-[0.98] text-white-only"
+                >
+                  Read Curriculum
+                  <ArrowRight size={12} className="ml-1.5" />
+                </Link>
+              </div>
 
               <div className="flex flex-col items-center gap-2">
                 <p className="data-label text-slate-400 text-[10px] uppercase tracking-widest font-bold">
