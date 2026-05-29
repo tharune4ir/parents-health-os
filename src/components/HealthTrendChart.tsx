@@ -5,13 +5,13 @@ import { TrendingDown, Info } from "lucide-react";
 
 export function HealthTrendChart() {
     const data = [
-        { month: "Oct '25", value: 10.7, status: "Critical" },
-        { month: "Nov '25", value: 8.5, status: "Warning" },
-        { month: "Dec '25", value: 7.2, status: "Good" },
+        { month: "Oct '25", value: 8.8, status: "High Risk" },
+        { month: "Nov '25", value: 7.8, status: "Warning" },
+        { month: "Dec '25", value: 7.2, status: "Optimal" },
     ];
 
-    // Simple helpers for scaling (assuming range 6.0 to 12.0)
-    const MAX = 12.0;
+    // Simple helpers for scaling (assuming range 6.0 to 10.0 for better visual spread)
+    const MAX = 10.0;
     const MIN = 6.0;
     const RANGE = MAX - MIN;
     const getHeight = (val: number) => {
@@ -35,12 +35,12 @@ export function HealthTrendChart() {
                         </span>
                     </h3>
                     <p className="text-slate-400 text-sm font-medium leading-relaxed">
-                        Bio-marker synchronization complete. Longitudinal HbA1c has dropped by <span className="text-cyan-400 font-black">3.5%</span> over {data.length} months.
+                        Bio-marker synchronization complete. Longitudinal HbA1c has dropped by <span className="text-cyan-400 font-black">1.6 points</span> over {data.length} months.
                     </p>
                 </div>
                 <div className="bg-cyan-500/10 text-cyan-400 px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest flex items-center gap-3 border border-cyan-500/20 shadow-lg shadow-cyan-500/5">
                     <TrendingDown size={18} />
-                    -32.4% Net Improvement
+                    -18.2% Net Improvement
                 </div>
             </div>
 
@@ -52,7 +52,7 @@ export function HealthTrendChart() {
 
                 {/* Background Grid Lines */}
                 <div className="absolute inset-0 p-8 pointer-events-none flex flex-col justify-between z-0">
-                    {[12, 10, 8, 6].map((line, i) => (
+                    {[10, 9, 8, 7, 6].map((line, i) => (
                         <div key={i} className="w-full border-t border-white/5 h-0 relative">
                             <span className="absolute -left-10 -top-2 text-[9px] text-slate-600 font-black tracking-tighter uppercase">{line}%</span>
                         </div>
@@ -63,7 +63,7 @@ export function HealthTrendChart() {
                 {data.map((item, idx) => {
                     const heightPercent = getHeight(item.value);
                     const isOptimal = item.value < 7.5;
-                    const isCritical = item.value > 10;
+                    const isCritical = item.value >= 8.5;
                     
                     const colorClass = isCritical ? "bg-red-500 shadow-red-500/40" : !isOptimal ? "bg-amber-400 shadow-amber-400/40" : "bg-cyan-500 shadow-cyan-500/40";
                     const textClass = isCritical ? "text-red-400" : !isOptimal ? "text-amber-400" : "text-cyan-400";
