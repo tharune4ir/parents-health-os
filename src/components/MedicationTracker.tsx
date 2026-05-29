@@ -721,7 +721,7 @@ export function MedicationTracker({ onTriggerCall, onNavigate }: MedicationTrack
                             </div>
 
                             {/* Group Tasks by Time of Day */}
-                            {["Morning", "Afternoon", "Evening", "Night"].map((slot) => {
+                            {Array.from(new Set(carePlan.dailyTasks.map(t => t.timeOfDay || "Morning"))).map((slot) => {
                                 const tasksForSlot = carePlan.dailyTasks.filter(t => t.timeOfDay === slot || (!t.timeOfDay && slot === "Morning"));
                                 if (tasksForSlot.length === 0) return null;
 

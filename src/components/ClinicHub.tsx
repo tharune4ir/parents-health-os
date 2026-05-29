@@ -305,7 +305,7 @@ export function ClinicHub() {
         {/* COLUMN 3: CLINIC FINANCE & SAFETY BRIEFS */}
         <div className="space-y-8">
           {/* INSURANCE COVERAGE CARD */}
-          <div className="glass-card bg-[#0E5E5A] border border-[#0E5E5A]/20 rounded-[2.5rem] p-6 md:p-8 text-white relative overflow-hidden shadow-md">
+          <div className="bg-[#0E5E5A] border border-[#0E5E5A]/20 rounded-[2.5rem] p-6 md:p-8 text-white relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-2xl rounded-full" />
             
             <div className="flex justify-between items-start mb-6">

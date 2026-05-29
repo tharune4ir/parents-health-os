@@ -597,20 +597,20 @@ export function CareTeam() {
 
             {/* Right side: Instructions / Guide */}
             <div className="lg:col-span-1 space-y-6">
-              <div className="glass-card bg-[#0E5E5A] border border-white/10 rounded-[2.5rem] p-8 text-white relative overflow-hidden">
+              <div className="bg-[#0E5E5A] shadow-2xl border border-white/10 rounded-[2.5rem] p-8 text-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-36 h-36 bg-white/5 blur-2xl rounded-full" />
                 <h4 className="text-[9px] font-black text-[#E05E1B] uppercase tracking-[0.25em] mb-2">Simulated Review Path</h4>
                 <h3 className="text-xl font-bold tracking-tight uppercase font-[family-name:var(--font-outfit)]">
                   Consult Workflow Logic
                 </h3>
                 <p className="text-xs text-teal-100/80 font-light leading-relaxed mt-4">
-                  1. **Draft/Requested**: Child initiates the request with structured context attachments from vital logs, meds, and report analytics.
+                  1. <strong className="text-white font-bold">Draft/Requested:</strong> Child initiates the request with structured context attachments from vital logs, meds, and report analytics.
                 </p>
                 <p className="text-xs text-teal-100/80 font-light leading-relaxed mt-3">
-                  2. **Scheduled**: Care Coordinator synchronises slots (Simulated).
+                  2. <strong className="text-white font-bold">Scheduled:</strong> Care Coordinator synchronises slots (Simulated).
                 </p>
                 <p className="text-xs text-teal-100/80 font-light leading-relaxed mt-3">
-                  3. **Completed**: Creates follow-up guidelines, logs clinical notes, and updates medication schedules.
+                  3. <strong className="text-white font-bold">Completed:</strong> Creates follow-up guidelines, logs clinical notes, and updates medication schedules.
                 </p>
               </div>
 
