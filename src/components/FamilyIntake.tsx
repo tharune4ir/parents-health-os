@@ -1,0 +1,419 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useParentsAuth } from "../lib/supabase/context";
+import { motion } from "framer-motion";
+import { UserPlus, ShieldCheck, Heart, User, Calendar, Activity, CheckCircle, Smartphone } from "lucide-react";
+
+export function FamilyIntake() {
+  const { isSupabaseEnabled, parents, updateParentProfile, refreshData } = useParentsAuth();
+  
+  // State for Buyer Demographics
+  const [buyerName, setBuyerName] = useState("");
+  const [buyerRelation, setBuyerRelation] = useState("son");
+  const [buyerPhone, setBuyerPhone] = useState("");
+  const [buyerEmail, setBuyerEmail] = useState("");
+  const [buyerLocation, setBuyerLocation] = useState("");
+
+  // State for Parent Clinical Parameters
+  const [parentName, setParentName] = useState("");
+  const [parentAge, setParentAge] = useState("");
+  const [parentGender, setParentGender] = useState("Female");
+  const [primaryNeeds, setPrimaryNeeds] = useState("Hypertension & Diabetes Management");
+  const [mobilityStatus, setMobilityStatus] = useState("Independent");
+  const [existingDiagnoses, setExistingDiagnoses] = useState("");
+  const [allergies, setAllergies] = useState("");
+  const [bloodGroup, setBloodGroup] = useState("O+");
+
+  // Engagement Metrics Status
+  const [engagementStatus, setEngagementStatus] = useState("Pending Assessment");
+  const [notes, setNotes] = useState("");
+
+  const [notification, setNotification] = useState<string | null>(null);
+
+  // Load latest intake from localStorage on mount if it exists
+  useEffect(() => {
+    const cachedIntake = localStorage.getItem("parents_health_latest_intake");
+    if (cachedIntake) {
+      try {
+        const data = JSON.parse(cachedIntake);
+        setBuyerName(data.buyerName || "");
+        setBuyerRelation(data.buyerRelation || "son");
+        setBuyerPhone(data.buyerPhone || "");
+        setBuyerEmail(data.buyerEmail || "");
+        setBuyerLocation(data.buyerLocation || "");
+        
+        setParentName(data.parentName || "");
+        setParentAge(data.parentAge || "");
+        setParentGender(data.parentGender || "Female");
+        setPrimaryNeeds(data.primaryNeeds || "");
+        setMobilityStatus(data.mobilityStatus || "Independent");
+        setExistingDiagnoses(data.existingDiagnoses || "");
+        setAllergies(data.allergies || "");
+        setBloodGroup(data.bloodGroup || "O+");
+        setEngagementStatus(data.engagementStatus || "Pending Assessment");
+        setNotes(data.notes || "");
+      } catch (e) {
+        console.error("Error loading cached intake", e);
+      }
+    }
+  }, []);
+
+  const handleSaveIntake = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!buyerName || !parentName) {
+      setNotification("Please fill in both Buyer Name and Parent Name.");
+      return;
+    }
+
+    const intakeData = {
+      buyerName,
+      buyerRelation,
+      buyerPhone,
+      buyerEmail,
+      buyerLocation,
+      parentName,
+      parentAge,
+      parentGender,
+      primaryNeeds,
+      mobilityStatus,
+      existingDiagnoses,
+      allergies,
+      bloodGroup,
+      engagementStatus,
+      notes,
+      timestamp: new Date().toISOString()
+    };
+
+    // Save to local storage
+    localStorage.setItem("parents_health_latest_intake", JSON.stringify(intakeData));
+
+    // Save to general intake records archive
+    const existingIntakesStr = localStorage.getItem("parents_health_all_intakes") || "[]";
+    let allIntakes = [];
+    try {
+      allIntakes = JSON.parse(existingIntakesStr);
+    } catch (e) {}
+    allIntakes.push(intakeData);
+    localStorage.setItem("parents_health_all_intakes", JSON.stringify(allIntakes));
+
+    // Update or add parent in the parents list
+    const existingParentsStr = localStorage.getItem("parents_health_personal_parents");
+    let personalParents = [];
+    if (existingParentsStr) {
+      try {
+        personalParents = JSON.parse(existingParentsStr);
+      } catch (e) {}
+    } else if (parents && parents.length > 0) {
+      personalParents = [...parents];
+    }
+
+    const parentId = `sandbox-parent-${Date.now()}`;
+    const newParentRecord = {
+      id: parentId,
+      name: parentName,
+      age: parseInt(parentAge) || 70,
+      gender: parentGender,
+      risk_level: "Healthy Baseline",
+      health_index: 95,
+      scorecard_answers: {
+        answers: {
+          relation: buyerRelation,
+          age: parentAge,
+          diagnoses: existingDiagnoses.split(",").map(d => d.trim()),
+          needs: primaryNeeds,
+          mobility: mobilityStatus,
+          allergies: allergies,
+          bloodGroup: bloodGroup
+        },
+        scores: {
+          total: 5,
+          riskLevel: "Healthy Baseline",
+          categories: [
+            { category: "Clinical Needs", score: 2, label: "Mild Concerns" },
+            { category: "Daily Independence", score: 3, label: "Fully Independent" }
+          ]
+        }
+      },
+      created_at: new Date().toISOString()
+    };
+
+    // Push into sandbox list
+    personalParents.push(newParentRecord);
+    localStorage.setItem("parents_health_personal_parents", JSON.stringify(personalParents));
+    localStorage.setItem("parents_health_mode", "personal");
+    localStorage.setItem("parents_health_active_parent_id", parentId);
+
+    // Refresh context data
+    if (refreshData) {
+      await refreshData();
+    }
+
+    setNotification("Intake profile saved! Synced into local active patient list.");
+    setTimeout(() => setNotification(null), 4000);
+  };
+
+  return (
+    <div className="w-full max-w-6xl mx-auto space-y-10 pb-20">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 px-2">
+        <div>
+          <h2 className="text-2xl md:text-5xl font-bold text-[#0E5E5A] font-[family-name:var(--font-outfit)] tracking-tight uppercase">First Family Intake</h2>
+          <p className="text-xs md:text-sm text-slate-500 font-light font-[family-name:var(--font-inter)] tracking-wide mt-2">
+            Establish baseline family structure, clinical parameters, and buyer engagement details.
+          </p>
+        </div>
+        <div className="flex items-center gap-4 data-label !text-[#0E5E5A] bg-[#0E5E5A]/5 px-6 py-4 rounded-2xl border border-[#0E5E5A]/10 shadow-sm font-[family-name:var(--font-outfit)]">
+          <ShieldCheck size={20} className="text-[#0E5E5A]" />
+          <span>Local Sandbox Encryption Active</span>
+        </div>
+      </div>
+
+      {notification && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs font-medium flex items-center gap-3"
+        >
+          <CheckCircle size={18} className="text-emerald-600" />
+          {notification}
+        </motion.div>
+      )}
+
+      <form onSubmit={handleSaveIntake} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        {/* Buyer Demographics Card */}
+        <div className="glass-card p-8 rounded-[2.5rem] border border-[#e2ded5] space-y-6">
+          <div className="flex items-center gap-3 pb-2 border-b border-[#e2ded5]">
+            <div className="h-10 w-10 bg-teal-50 border border-teal-100 rounded-xl flex items-center justify-center text-[#0E5E5A]">
+              <Smartphone size={20} />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">1. Buyer / Care Sponsor Demographics</h3>
+              <p className="text-[10px] text-slate-500 font-light">Details of the family manager funding/coordinating care.</p>
+            </div>
+          </div>
+
+          <div className="space-y-4 font-[family-name:var(--font-inter)] text-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Sponsor Name</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Ramesh Dev"
+                  value={buyerName}
+                  onChange={e => setBuyerName(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50"
+                  required
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Relationship to Parent</label>
+                <select
+                  value={buyerRelation}
+                  onChange={e => setBuyerRelation(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50"
+                >
+                  <option value="son">Son</option>
+                  <option value="daughter">Daughter</option>
+                  <option value="spouse">Spouse</option>
+                  <option value="grandchild">Grandchild</option>
+                  <option value="guardian">Other Guardian</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">WhatsApp Phone</label>
+                <input
+                  type="tel"
+                  placeholder="e.g. +91 98765 43210"
+                  value={buyerPhone}
+                  onChange={e => setBuyerPhone(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Contact Email</label>
+                <input
+                  type="email"
+                  placeholder="e.g. sponsor@domain.com"
+                  value={buyerEmail}
+                  onChange={e => setBuyerEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Sponsor Geographic Location</label>
+              <input
+                type="text"
+                placeholder="e.g. San Francisco (Remote Care Sponsor)"
+                value={buyerLocation}
+                onChange={e => setBuyerLocation(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50"
+              />
+            </div>
+
+            <div className="pt-2 border-t border-[#e2ded5] mt-4">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Engagement / Onboarding Status</label>
+              <select
+                value={engagementStatus}
+                onChange={e => setEngagementStatus(e.target.value)}
+                className="w-full mt-1 px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50 font-medium"
+              >
+                <option value="Pending Assessment">Pending Assessment Checklist</option>
+                <option value="Scorecard Complete">Scorecard Complete</option>
+                <option value="Escalation Setup Done">Escalation Setup Completed</option>
+                <option value="Care Plan Active">Care Plan Signed & Active</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/* Parent Clinical Parameters Card */}
+        <div className="glass-card p-8 rounded-[2.5rem] border border-[#e2ded5] space-y-6">
+          <div className="flex items-center gap-3 pb-2 border-b border-[#e2ded5]">
+            <div className="h-10 w-10 bg-orange-50 border border-orange-100 rounded-xl flex items-center justify-center text-[#E05E1B]">
+              <Heart size={20} />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">2. Parent Clinical Parameters</h3>
+              <p className="text-[10px] text-slate-500 font-light">Critical baseline parameters logged in clinical folder.</p>
+            </div>
+          </div>
+
+          <div className="space-y-4 font-[family-name:var(--font-inter)] text-sm">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="space-y-1 md:col-span-2">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Parent Full Name</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Kamala Dev"
+                  value={parentName}
+                  onChange={e => setParentName(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50"
+                  required
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Age</label>
+                <input
+                  type="number"
+                  placeholder="e.g. 72"
+                  value={parentAge}
+                  onChange={e => setParentAge(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Gender</label>
+                <select
+                  value={parentGender}
+                  onChange={e => setParentGender(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50"
+                >
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Blood Group</label>
+                <select
+                  value={bloodGroup}
+                  onChange={e => setBloodGroup(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50"
+                >
+                  <option value="O+">O Positive (O+)</option>
+                  <option value="O-">O Negative (O-)</option>
+                  <option value="A+">A Positive (A+)</option>
+                  <option value="A-">A Negative (A-)</option>
+                  <option value="B+">B Positive (B+)</option>
+                  <option value="B-">B Negative (B-)</option>
+                  <option value="AB+">AB Positive (AB+)</option>
+                  <option value="AB-">AB Negative (AB-)</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Primary Care Needs / Demands</label>
+              <input
+                type="text"
+                placeholder="e.g. Routine vitals log, compliance tracking"
+                value={primaryNeeds}
+                onChange={e => setPrimaryNeeds(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Mobility Status</label>
+                <select
+                  value={mobilityStatus}
+                  onChange={e => setMobilityStatus(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50"
+                >
+                  <option value="Independent">Independent walking</option>
+                  <option value="Needs Assistance">Needs Cane / Walker</option>
+                  <option value="Wheelchair Bound">Wheelchair / Bed Bound</option>
+                </select>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Drug/Food Allergies</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Penicillin, Peanuts, None"
+                  value={allergies}
+                  onChange={e => setAllergies(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Existing Diagnoses (comma separated)</label>
+              <textarea
+                placeholder="e.g. Hypertension, Type 2 Diabetes, Arthritis"
+                rows={2}
+                value={existingDiagnoses}
+                onChange={e => setExistingDiagnoses(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50 resize-none"
+              />
+            </div>
+            
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Intake Interview / Coordinator Notes</label>
+              <textarea
+                placeholder="Details of initial conversation, escalation preferences, preferred contact timings, etc."
+                rows={2}
+                value={notes}
+                onChange={e => setNotes(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-[#e2ded5] focus:outline-none focus:border-[#0E5E5A] text-slate-800 bg-slate-50/50 resize-none"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="lg:col-span-2 flex justify-end">
+          <button
+            type="submit"
+            className="w-full py-5 bg-[#0E5E5A] hover:bg-[#0b4845] text-white font-bold rounded-2xl text-xs uppercase tracking-widest transition-all shadow-xl active:scale-[0.98] font-[family-name:var(--font-outfit)]"
+          >
+            Save & Sync to Local Console
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}

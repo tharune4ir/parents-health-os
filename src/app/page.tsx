@@ -97,7 +97,7 @@ export default function Home() {
         >
           <Activity size={32} className="animate-pulse" />
         </motion.div>
-        <p className="data-label text-[#0E5E5A] animate-pulse !tracking-[0.25em] text-xs">Parents Health OS // Loading</p>
+        <p className="data-label text-[#0E5E5A] animate-pulse !tracking-[0.25em] text-xs">First Family Care Console // Loading</p>
       </div>
     );
   }
@@ -123,15 +123,15 @@ export default function Home() {
                 className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-[#e2ded5] shadow-sm mb-8"
               >
                 <div className="h-1.5 w-1.5 rounded-full bg-[#E05E1B] animate-pulse" />
-                <span className="data-label text-[#0E5E5A]/80 uppercase tracking-widest text-[9px]">PARENTS HEALTH OS // ACTIVE INTERACTIVE PROTOTYPE</span>
+                <span className="data-label text-[#0E5E5A]/80 uppercase tracking-widest text-[9px]">FIRST FAMILY CARE CONSOLE // ACTIVE INTERACTIVE PROTOTYPE</span>
               </motion.div>
               
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 font-[family-name:var(--font-outfit)]">
-                <span className="text-gradient">Parents Health OS</span>
+                <span className="text-gradient">First Family Care Console</span>
               </h1>
               
               <p className="text-base md:text-lg text-slate-600 font-light max-w-2xl mx-auto leading-relaxed mb-10 font-[family-name:var(--font-inter)]">
-                A warm, family-first dashboard for <span className="text-[#0E5E5A] font-semibold">Indian Elder-Care</span>, linking parents on WhatsApp with remote care oversight for adult children.
+                A warm, family-first operating console for <span className="text-[#0E5E5A] font-semibold">Indian Elder-Care</span>, linking parents on WhatsApp with remote care operations for adult children.
               </p>
             </div>
 
@@ -497,6 +497,9 @@ import { WhatsAppDemo } from "../components/WhatsAppDemo";
 import { HeaderIcons } from "../components/HeaderIcons";
 import { ActivityFeed } from "../components/ActivityFeed";
 import { ToastProvider, useToast } from "../components/ui/Toast";
+import { FamilyIntake } from "../components/FamilyIntake";
+import { BaselineCamp } from "../components/BaselineCamp";
+import { CoordinatorBoard } from "../components/CoordinatorBoard";
 import { 
   Trash2, 
   Plus, 
@@ -606,6 +609,7 @@ function DashboardContent() {
   });
 
   const [generatedBrief, setGeneratedBrief] = useState<any>(null);
+  const [carePriority, setCarePriority] = useState<"Stable" | "Watch" | "Urgent Follow-up">("Stable");
   
   // Dynamic Lists (Observations, Appointments)
   const [observations, setObservations] = useState<any[]>([]);
@@ -630,6 +634,16 @@ function DashboardContent() {
       } else {
         setRoutineChecklist({});
       }
+
+      let savedPriority = localStorage.getItem(`parents_health_priority_${activeParent.id}`) as any;
+      if (savedPriority === "Critical") {
+        savedPriority = "Urgent Follow-up";
+      }
+      if (savedPriority) {
+        setCarePriority(savedPriority);
+      } else {
+        setCarePriority("Stable");
+      }
     }
   }, [activeParent?.id]);
 
@@ -647,6 +661,13 @@ function DashboardContent() {
     setRoutineChecklist(next);
     localStorage.setItem(`parents_health_routine_chk_${activeParent.id}`, JSON.stringify(next));
     showToast("📝 Care routine checklist updated.", "success");
+  };
+
+  const handlePriorityChange = (priority: "Stable" | "Watch" | "Urgent Follow-up") => {
+    if (!activeParent) return;
+    setCarePriority(priority);
+    localStorage.setItem(`parents_health_priority_${activeParent.id}`, priority);
+    showToast(`⚠️ Care Priority updated to ${priority}.`, "info");
   };
 
   useEffect(() => {
@@ -996,7 +1017,7 @@ function DashboardContent() {
           </button>
           <div className="flex items-center gap-2">
             <div className="h-2 w-2 rounded-full bg-[#E05E1B] shadow-[0_0_8px_rgba(224,94,27,0.6)]" />
-            <span className="font-bold tracking-tight text-white">Parents Health OS</span>
+            <span className="font-bold tracking-tight text-white">First Family Care Console</span>
           </div>
           <div className="w-10"></div>
         </div>
@@ -1015,11 +1036,11 @@ function DashboardContent() {
             <div className="flex h-20 md:h-24 items-center justify-between px-6 md:px-8 mb-4 md:mb-6">
               <div className="flex items-center gap-3 md:gap-4 cursor-pointer" onClick={() => { setActiveView("dashboard"); setIsMobileMenuOpen(false); }}>
                 <div className="h-8 w-8 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-gradient-to-br from-[#E05E1B] to-[#D97706] flex items-center justify-center text-white font-black shadow-lg shadow-amber-500/20 text-sm md:text-base">
-                  P
+                  F
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-[family-name:var(--font-outfit)] font-black text-white text-base md:text-lg leading-tight tracking-tight uppercase">Parents Health</span>
-                  <span className="data-label text-teal-200 !text-[7px] md:!text-[8px] uppercase !tracking-[0.2em]">Oversight Dashboard</span>
+                  <span className="font-[family-name:var(--font-outfit)] font-black text-white text-base md:text-lg leading-tight tracking-tight uppercase">First Family</span>
+                  <span className="data-label text-teal-200 !text-[7px] md:!text-[8px] uppercase !tracking-[0.2em]">Care Console</span>
                 </div>
               </div>
             </div>
@@ -1031,6 +1052,9 @@ function DashboardContent() {
               <NavItem icon={<Users size={18} strokeWidth={1.5} />} label="Care Team" active={activeView === "care-team"} onClick={() => { setActiveView("care-team"); setIsMobileMenuOpen(false); }} />
               <NavItem icon={<Calendar size={18} strokeWidth={1.5} />} label="Clinic Hub" isNew active={activeView === "clinic-hub"} onClick={() => { setActiveView("clinic-hub"); setIsMobileMenuOpen(false); }} />
               <NavItem icon={<MessageCircle size={18} strokeWidth={1.5} />} label="WhatsApp Demo" isNew active={activeView === "whatsapp"} onClick={() => { setActiveView("whatsapp"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<UserPlus size={18} strokeWidth={1.5} />} label="First Family Intake" isNew active={activeView === "intake"} onClick={() => { setActiveView("intake"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<Activity size={18} strokeWidth={1.5} />} label="Baseline Health Camp" isNew active={activeView === "camp"} onClick={() => { setActiveView("camp"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<Briefcase size={18} strokeWidth={1.5} />} label="Coordinator Control" isNew active={activeView === "coordinator"} onClick={() => { setActiveView("coordinator"); setIsMobileMenuOpen(false); }} />
               <NavItem icon={<ShieldCheck size={18} strokeWidth={1.5} />} label="Settings & Backup" isNew active={activeView === "settings"} onClick={() => { setActiveView("settings"); setIsMobileMenuOpen(false); }} />
             </nav>
           </div>
@@ -1274,6 +1298,58 @@ function DashboardContent() {
                         )}
                       </div>
                     </div>
+
+                    {/* Care Priority Selector */}
+                    <div className="pt-3 border-t border-slate-100 space-y-2 relative z-10">
+                      <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        <span>Care Priority Status</span>
+                        <span className={`px-2 py-0.5 rounded text-[9px] font-extrabold uppercase ${
+                          carePriority === "Urgent Follow-up" ? "bg-red-100 text-red-700 border border-red-200" :
+                          carePriority === "Watch" ? "bg-orange-100 text-orange-700 border border-orange-200" :
+                          "bg-teal-100 text-teal-700 border border-teal-200"
+                        }`}>
+                          {carePriority}
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-3 gap-1.5">
+                        {(["Stable", "Watch", "Urgent Follow-up"] as const).map(p => (
+                          <button
+                            key={p}
+                            type="button"
+                            onClick={() => handlePriorityChange(p)}
+                            className={`py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-all border ${
+                              carePriority === p
+                                ? p === "Urgent Follow-up" ? "bg-red-500 border-red-500 text-white shadow-sm font-extrabold" :
+                                  p === "Watch" ? "bg-orange-500 border-orange-500 text-white shadow-sm font-extrabold" :
+                                  "bg-[#0E5E5A] border-[#0E5E5A] text-white shadow-sm font-extrabold"
+                                : "bg-slate-50 border-slate-200 text-slate-655 hover:bg-slate-100"
+                            }`}
+                          >
+                            {p}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* WhatsApp Simulator Alerts Indicator */}
+                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-150 text-[10px] text-slate-600 space-y-1.5 relative z-10">
+                      <div className="flex items-center justify-between font-bold text-slate-700 uppercase tracking-wide">
+                        <span className="flex items-center gap-1.5">
+                          <span className="h-1.5 w-1.5 rounded-full bg-teal-500 animate-pulse" />
+                          WhatsApp Monitor
+                        </span>
+                        <span className="text-[8px] text-teal-600 font-mono">SIM ACTIVE</span>
+                      </div>
+                      <div className="font-light leading-relaxed">
+                        {carePriority === "Urgent Follow-up" ? (
+                          <span className="text-red-655 font-semibold">🚨 URGENT FOLLOW-UP: Simulated WhatsApp dispatch triggered an escalation to child.</span>
+                        ) : carePriority === "Watch" ? (
+                          <span className="text-orange-655 font-semibold">⚠️ WATCH ADVISORY: System prepared warning logs for parent checkin report.</span>
+                        ) : (
+                          <span className="text-slate-555">✅ System monitoring normal checkin signals. All systems green.</span>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   <div className="pt-4 border-t border-slate-100 mt-4 flex items-center justify-between text-[11px] text-slate-500 font-light relative z-10">
@@ -1380,6 +1456,104 @@ function DashboardContent() {
                     </button>
                     
                   </div>
+                </div>
+              </div>
+
+              {/* CLINICAL OVERSIGHT & NEXT ACTION WORKFLOWS */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* NEXT BEST ACTION */}
+                <div className="glass-card p-8 rounded-[2.5rem] border-[#e2ded5] shadow-sm flex flex-col justify-between space-y-6">
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-10 w-10 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center text-[#E05E1B]">
+                        <Play size={20} className="fill-[#E05E1B]/10" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-extrabold text-slate-800 font-[family-name:var(--font-outfit)] tracking-tight uppercase">Next Best Action</h3>
+                        <p className="text-[10px] text-slate-500 font-light mt-0.5 tracking-wider">AI DETERMINED CLINICAL ESCALATION & CHECKS</p>
+                      </div>
+                    </div>
+
+                    <div className="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 space-y-4">
+                      <div className="flex items-center gap-2">
+                        <span className={`h-2.5 w-2.5 rounded-full ${
+                          carePriority === "Urgent Follow-up" ? "bg-red-500 animate-pulse" :
+                          carePriority === "Watch" ? "bg-orange-500 animate-pulse" :
+                          "bg-teal-500"
+                        }`} />
+                        <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-600">
+                          Triage Workflow Level: {carePriority}
+                        </span>
+                      </div>
+
+                      <p className="text-sm font-semibold text-slate-700 leading-relaxed font-[family-name:var(--font-inter)]">
+                        {carePriority === "Urgent Follow-up" ? (
+                          "Urgent Follow-up Protocol Active: Open Coordinator Control console to review alerts and coordinate medical evaluation."
+                        ) : carePriority === "Watch" ? (
+                          "Active Symptom Watch: Launch the WhatsApp Sandbox demo to check in on medication compliance and log evening baseline vitals."
+                        ) : (
+                          "Routine Maintenance: Proceed to the Baseline Health Camp view to complete parent profiling and schedule clinical followups."
+                        )}
+                      </p>
+
+                      <div className="pt-2">
+                        <button
+                          onClick={() => {
+                            if (carePriority === "Urgent Follow-up") {
+                              setActiveView("coordinator");
+                            } else if (carePriority === "Watch") {
+                              setActiveView("whatsapp");
+                            } else {
+                              setActiveView("camp");
+                            }
+                          }}
+                          className={`w-full py-3.5 rounded-xl text-[10px] font-bold uppercase tracking-wider text-white shadow-md transition-all text-center flex items-center justify-center gap-2 ${
+                            carePriority === "Urgent Follow-up" ? "bg-red-600 hover:bg-red-755" :
+                            carePriority === "Watch" ? "bg-orange-500 hover:bg-orange-655" :
+                            "bg-[#0E5E5A] hover:bg-[#0c4e4b]"
+                          }`}
+                        >
+                          Execute Workflow Action <ArrowRight size={12} className="stroke-[3]" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-[9px] text-slate-400 font-light font-mono tracking-wider">
+                    ESC-TRIG: {carePriority === "Urgent Follow-up" ? "COORDINATOR_MEDICAL_LINK" : carePriority === "Watch" ? "FAMILY_SMS_SANDBOX" : "ROUTINE_TELEMETRY"}
+                  </div>
+                </div>
+
+                {/* DOCTOR BRIEF DISCUSSION GUIDE PREVIEW */}
+                <div className="glass-card p-8 rounded-[2.5rem] border-[#e2ded5] shadow-sm flex flex-col justify-between space-y-6">
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-10 w-10 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-[#0E5E5A]">
+                        <Printer size={20} />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-extrabold text-slate-800 font-[family-name:var(--font-outfit)] tracking-tight uppercase">Discussion Guide Brief</h3>
+                        <p className="text-[10px] text-slate-500 font-light mt-0.5 tracking-wider">LIVE COMPACT PREVIEW OF CONSULTATION SUMMARY</p>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-slate-50/50 border border-slate-150 text-[11px] text-slate-600 font-mono space-y-2 max-h-[14rem] overflow-y-auto">
+                      <div className="font-bold text-[9px] text-[#0E5E5A] uppercase tracking-wider">Clinical Telemetry Snapshot</div>
+                      <div className="whitespace-pre-line text-slate-700 leading-normal text-[10px]">
+                        - Parent Name: {activeParent?.name || primaryParentName}
+                        - Current Triage Status: {carePriority} Priority
+                        - Vitals Baseline: {latestVital ? `SYS ${latestVital.bp_sys} / DIA ${latestVital.bp_dia} mmHg, Glucose ${latestVital.sugar || "--"} mg/dL` : "No vitals logged today"}
+                        - Adherence Tracker: {adherencePct}% Compliance ({takenMeds} of {totalMeds} pills)
+                        - Latest Care Observations: {observations.length > 0 ? observations[0].note : "No active logs entered."}
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handleGenerateDashboardBrief}
+                    className="w-full py-3.5 rounded-xl text-[10px] font-bold uppercase tracking-wider bg-[#E05E1B]/10 hover:bg-[#E05E1B]/20 text-[#E05E1B] border border-[#E05E1B]/20 transition-all text-center flex items-center justify-center gap-2"
+                  >
+                    <Printer size={12} /> Generate & Print Doctor Brief
+                  </button>
                 </div>
               </div>
 
@@ -1830,6 +2004,9 @@ function DashboardContent() {
           {activeView === "care-team" && <CareTeam />}
           {activeView === "clinic-hub" && <ClinicHub />}
           {activeView === "whatsapp" && <WhatsAppDemo />}
+          {activeView === "intake" && <FamilyIntake />}
+          {activeView === "camp" && <BaselineCamp />}
+          {activeView === "coordinator" && <CoordinatorBoard />}
           {activeView === "settings" && <SettingsAndBackup />}
 
           {/* FOOTER */}
