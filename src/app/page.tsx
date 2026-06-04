@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Stethoscope, FileText, BookOpen, Users, Lock, ArrowRight, Activity, Bell, MessageCircle, Calendar, AlertTriangle, ShieldCheck, Heart, UserPlus, LogIn, Loader2 } from "lucide-react";
+import { Stethoscope, FileText, BookOpen, Users, Lock, ArrowRight, Activity, Bell, MessageCircle, Calendar, AlertTriangle, ShieldCheck, Heart, UserPlus, LogIn, Loader2, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { loadDemoData } from "../utils/demoData";
 import { useParentsAuth } from "../lib/supabase/context";
@@ -36,6 +36,31 @@ export default function Home() {
     language: "English"
   });
   const [consentChecked, setConsentChecked] = useState(false);
+
+  const simulateDemoAutofill = () => {
+    const demoEmail = "ramesh.dev@familycare.in";
+    const demoPassword = "CareDemo@2026";
+    setEmail("");
+    setPassword("");
+    let emailIndex = 0;
+    const typeEmail = setInterval(() => {
+      if (emailIndex < demoEmail.length) {
+        setEmail(demoEmail.substring(0, emailIndex + 1));
+        emailIndex++;
+      } else {
+        clearInterval(typeEmail);
+        let passwordIndex = 0;
+        const typePassword = setInterval(() => {
+          if (passwordIndex < demoPassword.length) {
+            setPassword(demoPassword.substring(0, passwordIndex + 1));
+            passwordIndex++;
+          } else {
+            clearInterval(typePassword);
+          }
+        }, 30);
+      }
+    }, 25);
+  };
 
   const handleAuthSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -130,32 +155,32 @@ export default function Home() {
                 <span className="text-gradient">First Family Care Console</span>
               </h1>
               
-              <p className="text-base md:text-lg text-slate-600 font-light max-w-2xl mx-auto leading-relaxed mb-10 font-[family-name:var(--font-inter)]">
-                A warm, family-first operating console for <span className="text-[#0E5E5A] font-semibold">Indian Elder-Care</span>, linking parents on WhatsApp with remote care operations for adult children.
+              <p className="text-base md:text-lg text-slate-600 font-light max-w-3xl mx-auto leading-relaxed mb-10 font-[family-name:var(--font-inter)]">
+                A warm, family-first operating console for <span className="text-[#0E5E5A] font-semibold">Indian Eldercare</span>. Adult children coordinate daily care, parents remain in their comfort zone on WhatsApp, and Anaya care automation handles routine reminders and check-ins (never as a general AI assistant, but as targeted automation). Operates as a secure, local sandbox prototype.
               </p>
             </div>
 
             {/* Core App Modules Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 px-4 md:px-0 max-w-4xl mx-auto">
               <ModuleBrief 
-                icon={<Stethoscope className="text-[#0E5E5A]" size={20} strokeWidth={1.5} />}
-                title="Health Profile"
-                desc="Comprehensive geriatric health scorecard & risk assessment."
+                icon={<UserPlus className="text-[#0E5E5A]" size={20} strokeWidth={1.5} />}
+                title="First Family Intake"
+                desc="Register elder parents, document daily schedules, emergency contacts, and log digital consent."
               />
               <ModuleBrief 
-                icon={<FileText className="text-[#0E5E5A]" size={20} strokeWidth={1.5} />}
-                title="Smart Reports"
-                desc="Clinical records synthesized into actionable insights."
-              />
-              <ModuleBrief 
-                icon={<BookOpen className="text-[#0E5E5A]" size={20} strokeWidth={1.5} />}
-                title="Daily Care"
-                desc="Adherence logging and automated vitals checking."
+                icon={<Activity className="text-[#0E5E5A]" size={20} strokeWidth={1.5} />}
+                title="Baseline Health Camp"
+                desc="Log and track quick community health camp metrics to instantly establish a vitals baseline."
               />
               <ModuleBrief 
                 icon={<MessageCircle className="text-[#0E5E5A]" size={20} strokeWidth={1.5} />}
-                title="WhatsApp Bridge"
-                desc="Simulated dialogue interface with Anaya AI Care companion."
+                title="WhatsApp Care Automation"
+                desc="Anaya coordinates reminders, tracks check-in responses, and routes concerns to children."
+              />
+              <ModuleBrief 
+                icon={<FileText className="text-[#0E5E5A]" size={20} strokeWidth={1.5} />}
+                title="Doctor-Ready Brief"
+                desc="Generate clinical consultation summaries ready for doctor review and care decisions."
               />
             </div>
 
@@ -167,26 +192,6 @@ export default function Home() {
                 <span className="font-[family-name:var(--font-outfit)] uppercase tracking-[0.2em] text-[11px]">Establish Care Link</span>
                 <ArrowRight size={16} strokeWidth={1.5} className="transition-transform group-hover:translate-x-1" />
               </button>
-
-              {/* Public Knowledge Base Banner (Placed Below Login Button) */}
-              <div className="w-full bg-white border border-[#e2ded5] rounded-3xl p-5 mb-4 shadow-sm max-w-2xl mx-auto text-left flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all hover:border-[#0E5E5A]/20">
-                <div className="space-y-1">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#0E5E5A]/10 text-[#0E5E5A] text-[9px] font-bold uppercase tracking-wide font-mono">
-                    <BookOpen className="w-3 h-3" />
-                    Family Health Curriculum
-                  </span>
-                  <h3 className="text-sm md:text-base font-bold font-outfit text-[#122321]">Body & Mind OS — A Health Curriculum for Indian Families</h3>
-                  <p className="text-xs text-slate-500 font-normal">A founder-built health education curriculum covering prevention, nutrition, and screening.</p>
-                </div>
-                
-                <Link 
-                  href="/resources/body-mind-os"
-                  className="inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-[#0E5E5A] hover:bg-[#E05E1B] text-white text-[10px] font-bold uppercase tracking-wider font-outfit transition-all shrink-0 hover:scale-[1.02] active:scale-[0.98] text-white-only"
-                >
-                  Read Curriculum
-                  <ArrowRight size={12} className="ml-1.5" />
-                </Link>
-              </div>
 
               <div className="flex flex-col items-center gap-2">
                 <p className="data-label text-slate-400 text-[10px] uppercase tracking-widest font-bold text-center">
@@ -261,6 +266,18 @@ export default function Home() {
                     />
                   </div>
                 </>
+              )}
+
+              {mode === "login" && (
+                <div className="flex justify-end -mb-1">
+                  <button
+                    type="button"
+                    onClick={simulateDemoAutofill}
+                    className="px-3.5 py-2 rounded-xl bg-teal-50 hover:bg-teal-100 border border-teal-200/50 text-[#0E5E5A] font-bold text-[9px] uppercase tracking-wider transition-all flex items-center gap-1.5 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-sm"
+                  >
+                    <Play size={10} className="fill-[#0E5E5A] text-[#0E5E5A]" /> Use Demo Caregiver
+                  </button>
+                </div>
               )}
 
               <div>
@@ -2525,7 +2542,7 @@ function NavItem({ icon, label, active = false, isNew = false, onClick }: { icon
   return (
     <button
       onClick={onClick}
-      className={`group flex w-full items-center justify-between rounded-2xl px-8 py-5 text-[11px] font-bold transition-all relative overflow-hidden font-[family-name:var(--font-outfit)] uppercase tracking-widest ${active
+      className={`group flex w-full items-center justify-between rounded-2xl px-5 py-3.5 text-[10px] font-bold transition-all relative overflow-hidden font-[family-name:var(--font-outfit)] uppercase tracking-wider ${active
         ? "text-white bg-white/10 shadow-inner border border-white/10"
         : "text-teal-150 hover:text-white hover:bg-white/[0.04]"
         }`}
@@ -2536,12 +2553,12 @@ function NavItem({ icon, label, active = false, isNew = false, onClick }: { icon
           className="absolute left-0 top-0 bottom-0 w-1 bg-[#E05E1B] shadow-[0_0_15px_rgba(224,94,27,0.8)]"
         />
       )}
-      <div className="flex items-center gap-6">
-        <span className={`${active ? "text-[#E05E1B]" : "text-teal-200/70 group-hover:text-white"} transition-colors`}>{icon}</span>
-        <span className="tracking-tight">{label}</span>
+      <div className="flex items-center gap-4 min-w-0">
+        <span className={`${active ? "text-[#E05E1B]" : "text-teal-200/70 group-hover:text-white"} transition-colors shrink-0`}>{icon}</span>
+        <span className="tracking-tight whitespace-nowrap truncate">{label}</span>
       </div>
       {isNew && !active && (
-        <span className="h-1.5 w-1.5 rounded-full bg-[#E05E1B] shadow-[0_0_10px_rgba(224,94,27,0.8)] animate-pulse" />
+        <span className="h-1.5 w-1.5 rounded-full bg-[#E05E1B] shadow-[0_0_10px_rgba(224,94,27,0.8)] animate-pulse shrink-0 ml-2" />
       )}
     </button>
   );

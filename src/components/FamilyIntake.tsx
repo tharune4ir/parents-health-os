@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParentsAuth } from "../lib/supabase/context";
 import { motion } from "framer-motion";
-import { UserPlus, ShieldCheck, Heart, User, Calendar, Activity, CheckCircle, Smartphone } from "lucide-react";
+import { UserPlus, ShieldCheck, Heart, User, Calendar, Activity, CheckCircle, Smartphone, Play, Sparkles } from "lucide-react";
 
 export function FamilyIntake() {
   const { isSupabaseEnabled, parents, updateParentProfile, refreshData } = useParentsAuth();
@@ -30,6 +30,27 @@ export function FamilyIntake() {
   const [notes, setNotes] = useState("");
 
   const [notification, setNotification] = useState<string | null>(null);
+
+  const fillDemoSponsorData = () => {
+    setBuyerName("Amit Sharma");
+    setBuyerRelation("son");
+    setBuyerPhone("+91 98765 43210");
+    setBuyerEmail("amit.sharma@gmail.com");
+    setBuyerLocation("Bengaluru, Karnataka");
+  };
+
+  const fillDemoParentData = () => {
+    setParentName("Savitri Sharma");
+    setParentAge("68");
+    setParentGender("Female");
+    setPrimaryNeeds("Geriatric Hypertension, Joint Pain, Daily Medicine Compliance Tracking");
+    setMobilityStatus("Mildly Restricted (Uses Cane)");
+    setExistingDiagnoses("Hypertension (diagnosed 2018), Osteoarthritis, Early-stage Type 2 Diabetes");
+    setAllergies("Sulfa drugs");
+    setBloodGroup("B+");
+    setEngagementStatus("Active Coordinator Monitoring");
+    setNotes("Lives independently in Pune. Son lives in Bengaluru. Needs daily reminder check-ins for morning/evening blood pressure meds.");
+  };
 
   // Load latest intake from localStorage on mount if it exists
   useEffect(() => {
@@ -182,14 +203,23 @@ export function FamilyIntake() {
       <form onSubmit={handleSaveIntake} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* Buyer Demographics Card */}
         <div className="glass-card p-8 rounded-[2.5rem] border border-[#e2ded5] space-y-6">
-          <div className="flex items-center gap-3 pb-2 border-b border-[#e2ded5]">
-            <div className="h-10 w-10 bg-teal-50 border border-teal-100 rounded-xl flex items-center justify-center text-[#0E5E5A]">
-              <Smartphone size={20} />
+          <div className="flex items-center justify-between pb-2 border-b border-[#e2ded5] w-full">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 bg-teal-50 border border-teal-100 rounded-xl flex items-center justify-center text-[#0E5E5A]">
+                <Smartphone size={20} />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">1. Buyer / Care Sponsor Demographics</h3>
+                <p className="text-[10px] text-slate-500 font-light">Details of the family manager funding/coordinating care.</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">1. Buyer / Care Sponsor Demographics</h3>
-              <p className="text-[10px] text-slate-500 font-light">Details of the family manager funding/coordinating care.</p>
-            </div>
+            <button
+              type="button"
+              onClick={fillDemoSponsorData}
+              className="px-2.5 py-1.5 rounded-lg bg-teal-50 hover:bg-teal-100 border border-teal-200 text-[#0E5E5A] font-bold text-[8px] uppercase tracking-wider transition-all flex items-center gap-1 shadow-sm hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            >
+              <Play size={8} className="fill-[#0E5E5A] text-[#0E5E5A]" /> Autofill Demo
+            </button>
           </div>
 
           <div className="space-y-4 font-[family-name:var(--font-inter)] text-sm">
@@ -275,14 +305,23 @@ export function FamilyIntake() {
 
         {/* Parent Clinical Parameters Card */}
         <div className="glass-card p-8 rounded-[2.5rem] border border-[#e2ded5] space-y-6">
-          <div className="flex items-center gap-3 pb-2 border-b border-[#e2ded5]">
-            <div className="h-10 w-10 bg-orange-50 border border-orange-100 rounded-xl flex items-center justify-center text-[#E05E1B]">
-              <Heart size={20} />
+          <div className="flex items-center justify-between pb-2 border-b border-[#e2ded5] w-full">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 bg-orange-50 border border-orange-100 rounded-xl flex items-center justify-center text-[#E05E1B]">
+                <Heart size={20} />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">2. Parent Clinical Parameters</h3>
+                <p className="text-[10px] text-slate-500 font-light">Critical baseline parameters logged in clinical folder.</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">2. Parent Clinical Parameters</h3>
-              <p className="text-[10px] text-slate-500 font-light">Critical baseline parameters logged in clinical folder.</p>
-            </div>
+            <button
+              type="button"
+              onClick={fillDemoParentData}
+              className="px-2.5 py-1.5 rounded-lg bg-orange-50 hover:bg-orange-100 border border-orange-200 text-[#E05E1B] font-bold text-[8px] uppercase tracking-wider transition-all flex items-center gap-1 shadow-sm hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            >
+              <Play size={8} className="fill-[#E05E1B] text-[#E05E1B]" /> Autofill Demo
+            </button>
           </div>
 
           <div className="space-y-4 font-[family-name:var(--font-inter)] text-sm">

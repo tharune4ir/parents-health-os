@@ -2,9 +2,6 @@ const CACHE_NAME = 'parents-health-os-shell-v1';
 
 const PRECACHE_ASSETS = [
   '/',
-  '/resources',
-  '/resources/body-mind-os',
-  '/resources/decks/body-mind-os/body-mind-os.pdf',
   '/file.svg',
   '/globe.svg',
   '/next.svg',

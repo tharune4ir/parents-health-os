@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParentsAuth } from "../lib/supabase/context";
 import { motion } from "framer-motion";
-import { Activity, ShieldCheck, UserPlus, Heart, Database, RefreshCw, Send, CheckCircle } from "lucide-react";
+import { Activity, ShieldCheck, UserPlus, Heart, Database, RefreshCw, Send, CheckCircle, Play } from "lucide-react";
 
 interface ScreenedPatient {
   id: string;
@@ -40,6 +40,16 @@ export function BaselineCamp() {
 
   const [isSyncing, setIsSyncing] = useState(false);
   const [notification, setNotification] = useState<string | null>(null);
+
+  const fillDemoScreeningData = () => {
+    setPatientName("Ramesh Kumar");
+    setPatientAge("71");
+    setPatientGender("Male");
+    setBpSys("138");
+    setBpDia("86");
+    setSugar("145");
+    setWeight("68");
+  };
 
   // Load from local storage
   useEffect(() => {
@@ -254,7 +264,16 @@ export function BaselineCamp() {
           </div>
 
           <div className="glass-card p-6 md:p-8 rounded-[2.5rem] border border-[#e2ded5] space-y-4">
-            <h3 className="text-sm font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wider">Add Patient Screening</h3>
+            <div className="flex items-center justify-between w-full">
+              <h3 className="text-sm font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wider">Add Patient Screening</h3>
+              <button
+                type="button"
+                onClick={fillDemoScreeningData}
+                className="px-2.5 py-1.5 rounded-lg bg-teal-50 hover:bg-teal-100 border border-teal-200 text-[#0E5E5A] font-bold text-[8px] uppercase tracking-wider transition-all flex items-center gap-1 shadow-sm hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              >
+                <Play size={8} className="fill-[#0E5E5A] text-[#0E5E5A]" /> Autofill Demo
+              </button>
+            </div>
             <form onSubmit={handleAddScreening} className="space-y-3 text-xs font-[family-name:var(--font-inter)]">
               <div className="grid grid-cols-3 gap-2">
                 <div className="col-span-2">
