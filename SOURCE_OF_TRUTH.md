@@ -163,7 +163,7 @@ Calculates daily caregiver protocols and schedules based on the parent's assessm
 ### Care Team Coordinator (`src/utils/careTeamEngine.ts`)
 Simulates the operations of a virtual multidisciplinary care team:
 *   **Specialist Nodes:** Dr. Aruna Desai (Family Physician), Dr. Rajan Mehta (Cardiologist), Ms. Sanya Kapoor (Nutritionist), Coach Vikram Singh (Physiotherapist), Dr. Esha Sethi (Mental Wellness), and Amit Verma (Logistics Care Coordinator).
-*   **Doctor Brief Generator:** Combines the questionnaire responses, active medications list, current vital records, and lab report biomarkers to compile a clean, PDF-ready briefing paper styled under **Discussion Summary** with a **FOR CLINICAL DISCUSSION ONLY** disclaimer. The briefing focuses on **Recommended Clinician Discussion Points** (questions to ask during the consultation) rather than diagnostic claims.
+*   **Discussion Guide Brief Generator:** Combines the questionnaire responses, active medications list, current vital records, and lab report biomarkers to compile a clean, PDF-ready briefing paper styled under **Discussion Summary** with a **FOR CLINICAL DISCUSSION ONLY** disclaimer. The briefing focuses on **Recommended Clinician Discussion Points** (questions to ask during the consultation) rather than diagnostic claims, and is reframed as a collaborative **Discussion Guide Brief** (rather than a "Clinical Brief").
 
 ### V3 Care Operations & Intake Modules
 1. **First Family Intake (`src/components/FamilyIntake.tsx`):**
@@ -175,7 +175,10 @@ Simulates the operations of a virtual multidisciplinary care team:
 3. **Coordinator Board (`src/components/CoordinatorBoard.tsx`):**
    - Admin control panel for checking alert levels, simulation events, and dispatching communication scripts.
    - Explicitly displays dispatch options as **Simulated Parent WhatsApp** and **Simulated Sponsor SMS** to represent virtual mock messaging flows.
-4. **Urgent Follow-up Triage Level:**
+4. **Command Center & Family Snapshot View:**
+   - The main dashboard screen serves as the internal company-side care operations command center.
+   - An elegant product boundary card indicates that the full console is built for the care operations team, while adult children will eventually receive a simplified **Family Snapshot View** surface (parent status, medicine confirmation, latest vitals, coordinator notes, doctor brief access, and request-a-call actions).
+5. **Urgent Follow-up Triage Level:**
    - The critical triage status level has been relabeled from "Critical" to **Urgent Follow-up** to ensure warmer, clinical discussion-oriented branding.
 
 ---
@@ -540,3 +543,152 @@ Please confirm the following values to complete this document:
 1. **WhatsApp Meta Sandbox ID:** Unknown. Confirm the phone number ID or Meta Developer Business ID to replace the dry-run simulation mode.
 2. **India DPDP Legal Consent Archiving Node:** Unknown. Identify if consent logs should stream to a dedicated external compliance ledger.
 3. **Geriatric Specialist Registration Codes:** Unknown. Provide real registration codes if care team profiles need live validation.
+
+---
+
+## 16. End-to-End Demo & Pitch Workflow (Step-by-Step)
+
+This step-by-step workflow is optimized for a complete beginner or presenter to pitch the Parents Health OS Care Operations Console to an audience or investor group in ~5-7 minutes.
+
+### Step 1: Set the Hook & Frame the Problem
+*   **Action:** Navigate to `http://localhost:3000` and display the **Command Center**.
+*   **Pitch Narrative:**
+    > *"Most healthcare apps for seniors are simple patient-facing trackers that cause high anxiety. Today, we are showcasing Parents Health OS — a company-side **Care Operations Console**. It is designed for internal clinical operations teams coordinating care for parents in India, while the parent remains WhatsApp-first and the child receives a simplified status update view."*
+*   **Visual Highlights:**
+    *   Point out the **Sandbox Data Vault** status bar showing local-first integrity.
+    *   Highlight the **Family Snapshot View** boundary card, explaining that this operations console is for internal coordinators, while the child receives a simplified planned family status dashboard.
+    *   Show the **Today's Operations Status** adherence widget and **Anaya Care Automation** card.
+
+### Step 2: Onboard a New Parent (Intake & DPDPA Compliance)
+*   **Action:** Click **First Family Intake** in the left sidebar.
+*   **Workflow:**
+    1.  Fill out the parent profile details (e.g., Name: `Devaki Devi`, Age: `72`, chronic conditions: `Type 2 Diabetes` and `Hypertension`).
+    2.  Click the DPDPA Consent toggle (explicit consent to allow Anaya AI checking).
+    3.  Click **Save & Sync to Local Console**.
+*   **Pitch Narrative:**
+    > *"Onboarding is fast and fully compliant with India's DPDP Act of 2023. No data leaves the device without explicit user opt-in. We can capture conditions and save them directly to our local-first browser cache."*
+
+### Step 3: Run the Health Camp (Baseline Gathering)
+*   **Action:** Click **Baseline Health Camp** in the left sidebar.
+*   **Workflow:**
+    1.  Show the list of attendees.
+    2.  Add a new attendee or update vitals.
+    3.  Show the sync queue indicators (`SYNCED` vs `PENDING SYNC`).
+*   **Pitch Narrative:**
+    > *"Before a senior is registered in our ongoing monitoring queue, they attend a localized Baseline Health Camp. This screen manages camp attendees and syncs their initial vitals to their permanent operations log."*
+
+### Step 4: Intervene & Escalate (WhatsApp Automation Monitor)
+*   **Action:** Click **Command Center**, toggle the priority level from `Stable` to `Urgent Follow-up`.
+*   **Workflow:**
+    1.  Notice that the **WhatsApp Automation Monitor** box instantly changes to display: *"🚨 URGENT FOLLOW-UP: Simulated WhatsApp dispatch triggered an escalation to child."*
+    2.  Click **WhatsApp Automation** in the sidebar to show the simulated conversation on the parent's phone.
+    3.  Click the simulated options on the phone mockup (like "Log BP" or "Check Medicine") to demonstrate the inbound WhatsApp messages automatically updating the console status.
+*   **Pitch Narrative:**
+    > *"If the parent's care priority status is escalated to 'Urgent Follow-up', our system triggers automatic WhatsApp communications. The elderly parent interacts entirely through simple WhatsApp templates in their local language, which translates directly back to our console's state."*
+
+### Step 5: Generate the Consultation Prep (Discussion Guide Brief)
+*   **Action:** Click **Consultation Team** in the left sidebar and go to the **Discussion Guide** tab.
+*   **Workflow:**
+    1.  Click **Generate Discussion Guide**.
+    2.  Anaya compiles the vitals history, medication list, and risk signals.
+    3.  Show the final generated sheet, highlighting the **Recommended Clinician Discussion Points** (specifically generated questions for the doctor).
+*   **Pitch Narrative:**
+    > *"Instead of generating diagnostic claims which can hallucinate, our engine compiles a highly practical Discussion Guide Brief. It provides the coordinator with exact questions to print and ask during the next physical doctor consultation, complete with full team alignment."*
+
+### Step 6: Backup & Secure Lock
+*   **Action:** Click the bottom settings icon or **Adherence & Care Logs**, then export a portable JSON file.
+*   **Pitch Narrative:**
+    > *"We have built this on a local-first offline architecture. Caregivers have full control and can export an encrypted portable backup file at any time, ensuring total data sovereignty."*
+
+---
+
+## 17. Care Operations Console User Manual
+
+Welcome to the **First Family Care Operations Console** User Manual. This guide provides step-by-step instructions for care team coordinators, health camp operators, and clinicians to navigate the system and manage senior health profiles.
+
+---
+
+### 1. System Navigation Overview
+
+The console uses a persistent left-hand navigation sidebar structured to align with daily operations workflows:
+*   **Command Center:** High-level dashboard for real-time monitoring, alerts, and system-wide sync checks.
+*   **First Family Intake:** Patient registration form to initialize records with DPDPA consent verification.
+*   **Baseline Health Camp:** Bulk screening logging area for temporary field camp registrations.
+*   **Care Operations Board:** Incident response and triage controller.
+*   **WhatsApp Automation:** View and interact with simulated messaging dialogs sent directly to/from the parent.
+*   **Parent Profiles:** Core medical history, active medications list, and background questionnaires.
+*   **Adherence & Care Logs:** Track medication adherence levels and view offline sync transactions.
+*   **Reports & Uploads:** Manage diagnostic documents and retrieve structured biomarker extractions.
+*   **Primary Clinic Hub:** Directory of physical diagnostic centers and booking configurations.
+*   **Consultation Team:** Manage specialist assignments and compile discussion guides.
+
+---
+
+### 2. Module-by-Module Operational Guide
+
+#### 2.1 Command Center
+The **Command Center** dashboard is the primary operations control surface:
+*   **Active Sandbox Vault Indicator:** Located at the top of the dashboard. Displays `SANDBOX DATA VAULT // ACTIVE`. Ensure this is highlighted green in sandbox mode.
+*   **Care Priority Status Controls:** Care coordinators can set the parent’s current risk priority:
+    - **Stable:** Standard routine. Indicators are highlighted in reassuring green.
+    - **Watch:** Mild warning signals. Yellow indicators suggest increasing call frequency or routine verification.
+    - **Urgent Follow-up:** High-priority escalation. Toggles critical warning banners across all modules and activates immediate simulated alerts.
+*   **WhatsApp Monitor Status alert box:** Appears dynamically under the family routine header. Automatically displays warnings when the priority status is escalated.
+*   **Family Snapshot View Card:** High-level boundary card explaining the product limits: the full console is reserved for the care operations team, while family sponsors (adult children) receive a simplified snapshot feed.
+
+#### 2.2 First Family Intake
+To register a new family in the platform:
+1.  Navigate to **First Family Intake**.
+2.  Provide the senior's full name, age, primary WhatsApp phone number, and location.
+3.  Specify chronic conditions (e.g., Diabetes, Hypertension, Osteoarthritis) and enter current medications.
+4.  **DPDPA Consent Toggle:** Ask the family for explicit digital consent before enabling analysis. You must click the toggle to authorize processing.
+5.  Click **Save & Sync to Local Console**. All data is automatically isolated under the new parent ID.
+
+#### 2.3 Baseline Health Camp
+Used during community screening camps to register attendees before onboarding them into active tracking:
+*   Click **Register Camp Attendee** to enter basic name, age, blood pressure, weight, and blood sugar readings.
+*   The attendee table displays the sync status of each entry:
+    - `SYNCED` indicates the record has been committed to local memory.
+    - `PENDING SYNC` indicates data is held in the temporary camp cache waiting for sync confirmation.
+
+#### 2.4 Care Operations Board
+Used by operations managers to triage escalated families:
+*   Displays a list of escalated alerts sorted by priority levels.
+*   Provides action scripts for sponsors (e.g., simulated Sponsor SMS) and caregivers to guide follow-up communications.
+*   Allows coordinators to dismiss resolved incidents or dispatch manual messages.
+
+#### 2.5 WhatsApp Automation
+Simulates the parent’s phone interface to verify conversational automation:
+*   Provides a phone mockup running a live chat window with **Anaya Care Automation**.
+*   **Quick Templates:** Tapping options inside the mockup simulator (e.g., *Log Morning Med*, *Check Vitals*) simulates inbound message responses from the parent.
+*   **Language Selection:** Toggle the simulation templates between English and Hindi to verify localized responses.
+
+#### 2.6 Parent Profiles
+Displays detailed dossiers of monitored parents:
+*   Shows active care status warnings.
+*   Provides interactive panels to edit demographic details, medical baselines, chronic conditions, and daily schedule protocols.
+
+#### 2.7 Adherence & Care Logs
+Monitors daily compliance indicators:
+*   Displays medication adherence trends (percentage charts) calculated from daily medication logs.
+*   **Backup & Restore:** Allows coordinators to export the entire local database state as a portable `.json` backup file or restore a previously saved workspace state.
+
+#### 2.8 Reports & Uploads
+Enables diagnostic file storage and AI extractions:
+*   Click **Upload Lab Report** to select a PDF or image file.
+*   Click **Analyze Report** to trigger parsing. In Local Sandbox Mode, this processes a mock report structure modeling HbA1c (7.2%) and cholesterol alerts.
+*   Outputs structured biomarkers, simplified explanations for parents, and questions to print for doctor visits.
+
+#### 2.9 Consultation Team & Discussion Guide Brief
+Preparation workspace for clinical reviews:
+*   **Specialist List:** Displays assigned care experts (Family Physician, Cardiologist, Nutritionist).
+*   **Discussion Guide Tab:** Click **Generate Discussion Guide** to compile a list of doctor-ready questions.
+*   **Clinical Warning:** All generated documents display a strict disclaimer reminding coordinators that the document is *NOT medical advice* and is designed solely to guide discussions with registered medical practitioners.
+
+---
+
+### 3. Data Sovereignty & Offline Resilience
+
+*   **Offline Mode:** If your internet connection drops, the console remains fully functional. Your mutations are securely queued in the client sync buffer.
+*   **Manual Sync:** When connectivity is restored, click **Simulate Sync** on the Command Center status bar to commit pending changes.
+*   **Backup Guidelines:** Regularly export JSON backups from the **Adherence & Care Logs** page before clearing browser history or changing devices.
