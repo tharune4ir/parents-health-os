@@ -1066,14 +1066,14 @@ function DashboardContent() {
               <NavItem icon={<LayoutDashboard size={18} strokeWidth={1.5} />} label="Command Center" active={activeView === "dashboard"} onClick={() => { setActiveView("dashboard"); setIsMobileMenuOpen(false); }} />
               <NavItem icon={<UserPlus size={18} strokeWidth={1.5} />} label="First Family Intake" active={activeView === "intake"} onClick={() => { setActiveView("intake"); setIsMobileMenuOpen(false); }} />
               <NavItem icon={<Activity size={18} strokeWidth={1.5} />} label="Baseline Health Camp" active={activeView === "camp"} onClick={() => { setActiveView("camp"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<Briefcase size={18} strokeWidth={1.5} />} label="Care Operations Board" active={activeView === "coordinator"} onClick={() => { setActiveView("coordinator"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<Stethoscope size={18} strokeWidth={1.5} />} label="Family Records" active={activeView === "clinical"} onClick={() => { setActiveView("clinical"); setIsMobileMenuOpen(false); }} />
               <NavItem icon={<MessageCircle size={18} strokeWidth={1.5} />} label="WhatsApp Automation" active={activeView === "whatsapp"} onClick={() => { setActiveView("whatsapp"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<Stethoscope size={18} strokeWidth={1.5} />} label="Parent Profiles" active={activeView === "clinical"} onClick={() => { setActiveView("clinical"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<BookOpen size={18} strokeWidth={1.5} />} label="Adherence & Care Logs" active={activeView === "medicines"} onClick={() => { setActiveView("medicines"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<FileText size={18} strokeWidth={1.5} />} label="Reports & Uploads" active={activeView === "smart-reports"} onClick={() => { setActiveView("smart-reports"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<Calendar size={18} strokeWidth={1.5} />} label="Primary Clinic Hub" active={activeView === "clinic-hub"} onClick={() => { setActiveView("clinic-hub"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<Users size={18} strokeWidth={1.5} />} label="Consultation Team" active={activeView === "care-team"} onClick={() => { setActiveView("care-team"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<ShieldCheck size={18} strokeWidth={1.5} />} label="System & Backup" active={activeView === "settings"} onClick={() => { setActiveView("settings"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<BookOpen size={18} strokeWidth={1.5} />} label="Care Logs" active={activeView === "medicines"} onClick={() => { setActiveView("medicines"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<Briefcase size={18} strokeWidth={1.5} />} label="Care Operations Board" active={activeView === "coordinator"} onClick={() => { setActiveView("coordinator"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<FileText size={18} strokeWidth={1.5} />} label="Reports & Records" active={activeView === "smart-reports"} onClick={() => { setActiveView("smart-reports"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<Users size={18} strokeWidth={1.5} />} label="Doctor Briefs" active={activeView === "care-team"} onClick={() => { setActiveView("care-team"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<Calendar size={18} strokeWidth={1.5} />} label="Consults" active={activeView === "clinic-hub"} onClick={() => { setActiveView("clinic-hub"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<ShieldCheck size={18} strokeWidth={1.5} />} label="Settings & Backup" active={activeView === "settings"} onClick={() => { setActiveView("settings"); setIsMobileMenuOpen(false); }} />
             </nav>
           </div>
 
@@ -1568,7 +1568,7 @@ function DashboardContent() {
                   </div>
                 </div>
 
-                {/* DOCTOR BRIEF DISCUSSION GUIDE PREVIEW */}
+                {/* DOCTOR BRIEF PREVIEW */}
                 <div className="glass-card p-8 rounded-[2.5rem] border-[#e2ded5] shadow-sm flex flex-col justify-between space-y-6">
                   <div>
                     <div className="flex items-center gap-3 mb-4">
@@ -1576,7 +1576,7 @@ function DashboardContent() {
                         <Printer size={20} />
                       </div>
                       <div>
-                        <h3 className="text-xl font-extrabold text-slate-800 font-[family-name:var(--font-outfit)] tracking-tight uppercase">Discussion Guide Brief</h3>
+                        <h3 className="text-xl font-extrabold text-slate-800 font-[family-name:var(--font-outfit)] tracking-tight uppercase">Doctor Briefs</h3>
                         <p className="text-[10px] text-slate-500 font-light mt-0.5 tracking-wider">LIVE COMPACT PREVIEW OF CONSULTATION SUMMARY</p>
                       </div>
                     </div>
@@ -2473,7 +2473,7 @@ function DashboardContent() {
                   <Printer size={20} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-extrabold text-slate-800 uppercase tracking-tight font-[family-name:var(--font-outfit)]">Clinical Consultation Brief</h3>
+                  <h3 className="text-xl font-extrabold text-slate-800 uppercase tracking-tight font-[family-name:var(--font-outfit)]">Doctor Brief</h3>
                   <p className="text-[10px] text-slate-500 font-light mt-0.5 uppercase tracking-wider">PREVIEW Doctor Brief — ready to print or share</p>
                 </div>
               </div>
@@ -2501,14 +2501,14 @@ function DashboardContent() {
                       printWindow.document.write(`
                         <html>
                           <head>
-                            <title>Parents Health OS - Clinical Doctor Brief</title>
+                            <title>Parents Health OS - Doctor Brief</title>
                             <style>
                               body { font-family: monospace; padding: 40px; color: #333; line-height: 1.5; white-space: pre-wrap; font-size: 13px; }
                               hr { border: 0; border-top: 1px dashed #ccc; margin: 20px 0; }
                             </style>
                           </head>
                           <body>
-                            <h2>Parents Health OS — Clinical Brief</h2>
+                            <h2>Parents Health OS — Doctor Brief</h2>
                             <hr />
                             \${generatedBrief ? generatedBrief.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : ""}
                             <hr />

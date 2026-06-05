@@ -163,7 +163,7 @@ Calculates daily caregiver protocols and schedules based on the parent's assessm
 ### Care Team Coordinator (`src/utils/careTeamEngine.ts`)
 Simulates the operations of a virtual multidisciplinary care team:
 *   **Specialist Nodes:** Dr. Aruna Desai (Family Physician), Dr. Rajan Mehta (Cardiologist), Ms. Sanya Kapoor (Nutritionist), Coach Vikram Singh (Physiotherapist), Dr. Esha Sethi (Mental Wellness), and Amit Verma (Logistics Care Coordinator).
-*   **Discussion Guide Brief Generator:** Combines the questionnaire responses, active medications list, current vital records, and lab report biomarkers to compile a clean, PDF-ready briefing paper styled under **Discussion Summary** with a **FOR CLINICAL DISCUSSION ONLY** disclaimer. The briefing focuses on **Recommended Clinician Discussion Points** (questions to ask during the consultation) rather than diagnostic claims, and is reframed as a collaborative **Discussion Guide Brief** (rather than a "Clinical Brief").
+*   **Doctor Brief Generator:** Combines the questionnaire responses, active medications list, current vital records, and lab report biomarkers to compile a clean, PDF-ready briefing paper styled under **Discussion Summary** with a **FOR CLINICAL DISCUSSION ONLY** disclaimer. The briefing focuses on **Recommended Clinician Discussion Points** (questions to ask during the consultation) rather than diagnostic claims, and is reframed as a collaborative **Doctor Brief** (rather than a "Clinical Brief").
 
 ### V3 Care Operations & Intake Modules
 1. **First Family Intake (`src/components/FamilyIntake.tsx`):**
@@ -586,17 +586,17 @@ This step-by-step workflow is optimized for a complete beginner or presenter to 
 *   **Pitch Narrative:**
     > *"If the parent's care priority status is escalated to 'Urgent Follow-up', our system triggers automatic WhatsApp communications. The elderly parent interacts entirely through simple WhatsApp templates in their local language, which translates directly back to our console's state."*
 
-### Step 5: Generate the Consultation Prep (Discussion Guide Brief)
-*   **Action:** Click **Consultation Team** in the left sidebar and go to the **Discussion Guide** tab.
+### Step 5: Generate the Consultation Prep (Doctor Brief)
+*   **Action:** Click **Doctor Briefs** in the left sidebar and go to the **Doctor Briefs** tab.
 *   **Workflow:**
-    1.  Click **Generate Discussion Guide**.
+    1.  Click **Generate Doctor Brief**.
     2.  Anaya compiles the vitals history, medication list, and risk signals.
     3.  Show the final generated sheet, highlighting the **Recommended Clinician Discussion Points** (specifically generated questions for the doctor).
 *   **Pitch Narrative:**
-    > *"Instead of generating diagnostic claims which can hallucinate, our engine compiles a highly practical Discussion Guide Brief. It provides the coordinator with exact questions to print and ask during the next physical doctor consultation, complete with full team alignment."*
+    > *"Instead of generating diagnostic claims which can hallucinate, our engine compiles a highly practical Doctor Brief. It provides the coordinator with exact questions to print and ask during the next physical doctor consultation, complete with full team alignment."*
 
 ### Step 6: Backup & Secure Lock
-*   **Action:** Click the bottom settings icon or **Adherence & Care Logs**, then export a portable JSON file.
+*   **Action:** Click the bottom settings icon or **Care Logs**, then export a portable JSON file.
 *   **Pitch Narrative:**
     > *"We have built this on a local-first offline architecture. Caregivers have full control and can export an encrypted portable backup file at any time, ensuring total data sovereignty."*
 
@@ -614,13 +614,14 @@ The console uses a persistent left-hand navigation sidebar structured to align w
 *   **Command Center:** High-level dashboard for real-time monitoring, alerts, and system-wide sync checks.
 *   **First Family Intake:** Patient registration form to initialize records with DPDPA consent verification.
 *   **Baseline Health Camp:** Bulk screening logging area for temporary field camp registrations.
-*   **Care Operations Board:** Incident response and triage controller.
+*   **Family Records:** Core medical history, active medications list, and background questionnaires.
 *   **WhatsApp Automation:** View and interact with simulated messaging dialogs sent directly to/from the parent.
-*   **Parent Profiles:** Core medical history, active medications list, and background questionnaires.
-*   **Adherence & Care Logs:** Track medication adherence levels and view offline sync transactions.
-*   **Reports & Uploads:** Manage diagnostic documents and retrieve structured biomarker extractions.
-*   **Primary Clinic Hub:** Directory of physical diagnostic centers and booking configurations.
-*   **Consultation Team:** Manage specialist assignments and compile discussion guides.
+*   **Care Logs:** Track medication adherence levels and view offline sync transactions.
+*   **Care Operations Board:** Incident response and triage controller.
+*   **Reports & Records:** Manage diagnostic documents and retrieve structured biomarker extractions.
+*   **Doctor Briefs:** Manage specialist assignments and compile Doctor Briefs.
+*   **Consults:** Directory of physical diagnostic centers and booking configurations.
+*   **Settings & Backup:** Manage local backups, sync queue triggers, and configuration parameters.
 
 ---
 
@@ -663,26 +664,26 @@ Simulates the parent’s phone interface to verify conversational automation:
 *   **Quick Templates:** Tapping options inside the mockup simulator (e.g., *Log Morning Med*, *Check Vitals*) simulates inbound message responses from the parent.
 *   **Language Selection:** Toggle the simulation templates between English and Hindi to verify localized responses.
 
-#### 2.6 Parent Profiles
+#### 2.6 Family Records
 Displays detailed dossiers of monitored parents:
 *   Shows active care status warnings.
 *   Provides interactive panels to edit demographic details, medical baselines, chronic conditions, and daily schedule protocols.
 
-#### 2.7 Adherence & Care Logs
+#### 2.7 Care Logs
 Monitors daily compliance indicators:
 *   Displays medication adherence trends (percentage charts) calculated from daily medication logs.
 *   **Backup & Restore:** Allows coordinators to export the entire local database state as a portable `.json` backup file or restore a previously saved workspace state.
 
-#### 2.8 Reports & Uploads
+#### 2.8 Reports & Records
 Enables diagnostic file storage and AI extractions:
 *   Click **Upload Lab Report** to select a PDF or image file.
 *   Click **Analyze Report** to trigger parsing. In Local Sandbox Mode, this processes a mock report structure modeling HbA1c (7.2%) and cholesterol alerts.
 *   Outputs structured biomarkers, simplified explanations for parents, and questions to print for doctor visits.
 
-#### 2.9 Consultation Team & Discussion Guide Brief
+#### 2.9 Doctor Briefs
 Preparation workspace for clinical reviews:
-*   **Specialist List:** Displays assigned care experts (Family Physician, Cardiologist, Nutritionist).
-*   **Discussion Guide Tab:** Click **Generate Discussion Guide** to compile a list of doctor-ready questions.
+*   **Specialist Roster:** Displays assigned care experts (Family Physician, Cardiologist, Nutritionist).
+*   **Doctor Briefs Tab:** Click **Generate Doctor Brief** to compile a list of doctor-ready questions.
 *   **Clinical Warning:** All generated documents display a strict disclaimer reminding coordinators that the document is *NOT medical advice* and is designed solely to guide discussions with registered medical practitioners.
 
 ---
@@ -691,4 +692,4 @@ Preparation workspace for clinical reviews:
 
 *   **Offline Mode:** If your internet connection drops, the console remains fully functional. Your mutations are securely queued in the client sync buffer.
 *   **Manual Sync:** When connectivity is restored, click **Simulate Sync** on the Command Center status bar to commit pending changes.
-*   **Backup Guidelines:** Regularly export JSON backups from the **Adherence & Care Logs** page before clearing browser history or changing devices.
+*   **Backup Guidelines:** Regularly export JSON backups from the **Care Logs** page before clearing browser history or changing devices.
