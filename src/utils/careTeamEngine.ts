@@ -96,15 +96,15 @@ export interface DoctorBrief {
 export const DEFAULT_CARE_TEAM: CareTeamMember[] = [
   {
     id: "ct-anaya",
-    name: "Anaya",
-    role: "AI Care Assistant",
-    specialty: "Care Coordination & Health Insights",
+    name: "Care Automation Module (Anaya)",
+    role: "Checklists & Alerts Coordinator",
+    specialty: "Routine Check-ins & Care Automation",
     languages: ["English", "Hindi", "Telugu"],
     availabilityLabel: "Always active",
     consultModes: ["whatsapp"],
     status: "assigned",
-    registrationNumber: "N/A — AI System",
-    bio: "Anaya coordinates daily care, synthesises health records, and surfaces key insights for the care team. Powered by Parents Health OS.",
+    registrationNumber: "N/A — Care Automation System",
+    bio: "Coordinates daily check-ins, runs automated medication alerts, and logs coordinator follow-up checklists for the care team.",
     isAI: true,
   },
   {
@@ -165,7 +165,7 @@ export const DEFAULT_CARE_TEAM: CareTeamMember[] = [
     consultModes: ["phone", "video"],
     status: "assigned",
     registrationNumber: "Demo registration pending",
-    bio: "Specialises in elderly anxiety, sleep disorders, cognitive engagement, and caregiver-senior communication therapy.",
+    bio: "Specialises in elderly anxiety, sleep disorders, cognitive engagement, and family-senior communication coaching.",
   },
   {
     id: "ct-coordinator",
@@ -392,7 +392,7 @@ export function generateDoctorBrief(
     questionsToAsk: questionsToAsk as string[],
     caregiverNotes: "",
     disclaimer:
-      "⚠️ This brief is prepared for discussion with a qualified doctor and is NOT medical advice. It is generated from sandbox data for care coordination purposes only.",
+      "⚠️ This brief is prepared for discussion with a registered medical practitioner and is NOT medical advice. It is generated from sandbox data for care coordination purposes only.",
   };
 
   // Persist

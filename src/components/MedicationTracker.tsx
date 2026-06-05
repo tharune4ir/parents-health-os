@@ -489,7 +489,7 @@ export function MedicationTracker({ onTriggerCall, onNavigate }: MedicationTrack
                     </h2>
                     
                     <p className="text-slate-500 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed mb-10 font-[family-name:var(--font-inter)]">
-                        To construct a clinical daily care plan, track medication schedules, and monitor physical trends, Anaya needs a brief baseline health assessment of your parent.
+                        To construct a clinical daily care plan, track medication schedules, and monitor physical trends, the care operations console needs a brief baseline health assessment of the parent.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -622,7 +622,7 @@ export function MedicationTracker({ onTriggerCall, onNavigate }: MedicationTrack
                 <div>
                     <h2 className="text-2xl md:text-5xl font-bold text-[#0E5E5A] tracking-tight uppercase font-[family-name:var(--font-outfit)]">Care Plan Hub</h2>
                     <p className="text-xs md:text-sm text-slate-400 font-light font-[family-name:var(--font-inter)] tracking-wide mt-1.5">
-                        Clinically structured care tasks, active therapies, and compliance monitoring powered by Anaya.
+                        Clinically structured care tasks, active therapies, and compliance monitoring powered by Anaya care automation.
                     </p>
                 </div>
                 
@@ -795,13 +795,13 @@ export function MedicationTracker({ onTriggerCall, onNavigate }: MedicationTrack
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-3xl rounded-full -mr-16 -mt-16" />
                                 
                                 <h3 className="text-[10px] font-bold text-[#0E5E5A] flex items-center gap-3 tracking-[0.2em] uppercase mb-6">
-                                    <MessageSquare size={14} className="text-emerald-600" /> Anaya Care Companion Chat Simulator (Sandbox)
+                                    <MessageSquare size={14} className="text-emerald-600" /> Anaya WhatsApp Automation Chat Simulator (Sandbox)
                                 </h3>
 
                                 <div className="space-y-4">
                                     {/* Preview message */}
                                     <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 relative">
-                                        <span className="absolute -top-2.5 left-5 px-3 py-0.5 rounded-full bg-emerald-600 text-[7px] font-black text-white uppercase tracking-widest shadow-sm">ANAYA OUTGOING PREVIEW</span>
+                                        <span className="absolute -top-2.5 left-5 px-3 py-0.5 rounded-full bg-emerald-600 text-[7px] font-black text-white uppercase tracking-widest shadow-sm">ANAYA AUTOMATION PREVIEW</span>
                                         <p className="text-slate-700 text-xs leading-relaxed italic mt-2">
                                             "{carePlan.whatsappPrompts[0]?.message}"
                                         </p>

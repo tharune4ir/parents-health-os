@@ -244,16 +244,16 @@ export function WhatsAppDemo() {
         </div>
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <span className="data-label text-[#E05E1B] !text-[9px] !tracking-[0.3em] uppercase bg-orange-50 px-3 py-1 rounded-full border border-orange-100">Anaya WhatsApp Gateway</span>
-            <h1 className="text-3xl md:text-5xl font-black text-[#0E5E5A] font-[family-name:var(--font-outfit)] tracking-tight mt-4 uppercase leading-none">WhatsApp oversight</h1>
+            <span className="data-label text-[#E05E1B] !text-[9px] !tracking-[0.3em] uppercase bg-orange-50 px-3 py-1 rounded-full border border-orange-100">WhatsApp Automation</span>
+            <h1 className="text-3xl md:text-5xl font-black text-[#0E5E5A] font-[family-name:var(--font-outfit)] tracking-tight mt-4 uppercase leading-none">WhatsApp Automation</h1>
             <p className="text-slate-600 text-sm font-light mt-3 max-w-2xl font-[family-name:var(--font-inter)] leading-relaxed">
-              See how **Anaya (The AI Care Companion)** interacts with your parents. Instead of you nagging them, Anaya chats with them on WhatsApp in their native language to ensure they take their pills and check their vitals. Here, you can test and monitor compliance check-ins, trigger scheduled clinical templates, and simulate parent responses interactively.
+              See how **Anaya (WhatsApp Care Automation)** interacts with parents. Instead of the family calling daily, Anaya sends routine reminders, tracks check-in responses, and flags concerns for human escalation. Here, you can test routine check-ins, trigger scheduled templates, and simulate parent responses interactively.
             </p>
           </div>
           
           <div className="flex items-center gap-3 bg-[#E5F5F0] border border-teal-100 rounded-2xl px-5 py-3 self-start md:self-auto shrink-0 shadow-sm">
             <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="data-label !text-emerald-700 !text-[8px] !tracking-[0.2em] font-black uppercase">Parents Health OS Sandbox // Simulated Data Only</span>
+            <span className="data-label !text-emerald-700 !text-[8px] !tracking-[0.2em] font-black uppercase">First Family Care Operations Sandbox // Simulated Data Only</span>
           </div>
         </div>
       </div>
@@ -355,7 +355,7 @@ export function WhatsAppDemo() {
           {/* TEMPLATE SCHEDULER */}
           <div className="glass-card p-6 md:p-8 rounded-[2.5rem] border-[#e2ded5] space-y-6 bg-white/70 shadow-sm">
             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-3 flex items-center justify-between">
-              <span>CLINICAL TEMPLATE REGISTRY</span>
+              <span>AUTOMATION TEMPLATE REGISTRY</span>
               <span className="data-label !text-teal-600 !text-[8px] !tracking-[0.1em] uppercase bg-teal-50 px-2 py-0.5 rounded border border-teal-100">Meta Verified</span>
             </h3>
 
@@ -460,7 +460,7 @@ export function WhatsAppDemo() {
                 <span>DISPATCHING Reminders...</span>
               ) : (
                 <>
-                  <span>Dispatch WhatsApp Template ({selectedLanguage.toUpperCase()})</span>
+                  <span>Dispatch WhatsApp Automation ({selectedLanguage.toUpperCase()})</span>
                   <SendIcon size={12} strokeWidth={2} />
                 </>
               )}
@@ -470,11 +470,11 @@ export function WhatsAppDemo() {
           {/* PARENT REPLY SIMULATOR */}
           <div className="glass-card p-6 md:p-8 rounded-[2.5rem] border-[#e2ded5] space-y-6 bg-white/70 shadow-sm">
             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-3">
-              SIMULATE PARENT KEYWORD INTAKE
+              SIMULATE PARENT KEYWORD CHECK-IN
             </h3>
 
             <p className="text-[11px] text-slate-500 font-light font-[family-name:var(--font-inter)] leading-normal mt-1">
-              Select one of the pre-configured compliance logs triggers to see how Anaya logs daily compliance parameters dynamically inside the database, or write a custom dialogue response.
+              Select one of the pre-configured check-in shortcuts to see how Anaya logs daily routine check-in responses dynamically inside the local database, or write a custom dialogue response.
             </p>
 
             {/* Quick-reply Pill simulation shortcuts */}
@@ -483,19 +483,19 @@ export function WhatsAppDemo() {
                 onClick={() => handleSimulateReply("YES")}
                 className="px-4 py-2.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-250 text-emerald-700 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all"
               >
-                Simulate DPDP Opt-In ("YES")
+                Simulate Consent Opt-In ("YES")
               </button>
               <button 
                 onClick={() => handleSimulateReply("Taken")}
                 className="px-4 py-2.5 bg-blue-50 hover:bg-blue-100 border border-blue-250 text-blue-700 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all"
               >
-                Simulate Pill Taken ("Taken")
+                Simulate Routine Log ("Taken")
               </button>
               <button 
                 onClick={() => handleSimulateReply("120/80")}
                 className="px-4 py-2.5 bg-orange-50 hover:bg-orange-100 border border-orange-250 text-orange-750 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all"
               >
-                Simulate Vitals BP ("120/80")
+                Simulate Vitals Snapshot ("120/80")
               </button>
               <button 
                 onClick={() => handleSimulateReply("STOP")}
@@ -540,7 +540,7 @@ export function WhatsAppDemo() {
                     <div className="absolute bottom-0 right-0 h-2.5 w-2.5 bg-emerald-400 rounded-full border-2 border-[#0E5E5A] shadow-inner"></div>
                   </div>
                   <div>
-                    <h3 className="font-bold text-[12px] tracking-tight leading-tight font-[family-name:var(--font-outfit)]">Anaya (Care Bot)</h3>
+                    <h3 className="font-bold text-[12px] tracking-tight leading-tight font-[family-name:var(--font-outfit)]">Anaya Care Automation</h3>
                     <div className="flex items-center gap-1">
                       <span className="w-1 h-1 rounded-full bg-emerald-300 animate-pulse"></span>
                       <p className="text-[7px] text-teal-100 font-light tracking-wide font-mono uppercase">Online</p>

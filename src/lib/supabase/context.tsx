@@ -491,7 +491,7 @@ export function ParentsAuthProvider({ children }: { children: React.ReactNode })
       setUser({ id: "sandbox-child-id", email: "child@parentshealth.in" });
       setProfile({
         id: "sandbox-child-id",
-        full_name: "Demo Caregiver",
+        full_name: "Demo Staff",
         phone: "+91 99999 99999",
         role: "child",
         created_at: new Date().toISOString(),

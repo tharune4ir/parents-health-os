@@ -127,7 +127,7 @@ export async function POST(req: Request) {
     }
 
     if (!replyText) {
-      replyText = `Namaste ${parentName}! 🙏 This is Anaya, your care companion. I have logged your message: "${body}". Have a peaceful day!`;
+      replyText = `Namaste ${parentName}! 🙏 This is Anaya care automation. I have logged your message: "${body}". Have a peaceful day!`;
     }
 
     // 3. Record outbound simulated reply from Anaya to DB

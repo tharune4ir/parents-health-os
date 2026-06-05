@@ -170,7 +170,7 @@ export function BaselineCamp() {
       localStorage.setItem("parents_health_personal_parents", JSON.stringify(personalParents));
       saveRosterToLocalStorage(updatedScreened);
       setIsSyncing(false);
-      setNotification(`Simulated Sync Successful! Registered ${unsyncedCount} patients into local active patient list.`);
+      setNotification(`Simulated Sync Successful! Registered ${unsyncedCount} screenings into local active patient list.`);
 
       if (refreshData) {
         await refreshData();
@@ -186,9 +186,9 @@ export function BaselineCamp() {
     <div className="w-full max-w-6xl mx-auto space-y-10 pb-20">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 px-2">
         <div>
-          <h2 className="text-2xl md:text-5xl font-bold text-[#0E5E5A] font-[family-name:var(--font-outfit)] tracking-tight uppercase">Health Camp Mode</h2>
+          <h2 className="text-2xl md:text-5xl font-bold text-[#0E5E5A] font-[family-name:var(--font-outfit)] tracking-tight uppercase">Baseline Health Camp</h2>
           <p className="text-xs md:text-sm text-slate-500 font-light font-[family-name:var(--font-inter)] tracking-wide mt-2">
-            Offline-first clinical intake screening portal for community health camps.
+            Offline-first field screening portal for community health camps. Capture vitals snapshot into the screening queue.
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -209,7 +209,7 @@ export function BaselineCamp() {
             ) : (
               <>
                 <Database size={16} />
-                Simulated Sync {unsyncedCount} Profiles to Local Console
+                Simulated Sync {unsyncedCount} Field Screenings to Local Console
               </>
             )}
           </button>
@@ -352,7 +352,7 @@ export function BaselineCamp() {
                   type="submit"
                   className="w-full py-4 bg-[#0E5E5A] hover:bg-[#0b4845] text-white font-bold rounded-xl uppercase tracking-wider text-[10px] transition-all shadow-md active:scale-95"
                 >
-                  Log Diagnostics Record
+                  Log Vitals Snapshot
                 </button>
               </div>
             </form>
@@ -364,8 +364,8 @@ export function BaselineCamp() {
           <div className="glass-card p-6 md:p-8 rounded-[2.5rem] border border-[#e2ded5] space-y-6">
             <div className="flex items-center justify-between border-b border-[#e2ded5] pb-4">
               <div>
-                <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">Camp Diagnostics Registry</h3>
-                <p className="text-[10px] text-slate-500 font-light">Patients screened in the queue waiting for dashboard sync.</p>
+                <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">Camp Screening Registry</h3>
+                <p className="text-[10px] text-slate-500 font-light">Attendees screened in the queue waiting for local sync.</p>
               </div>
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-orange-500 animate-pulse" />
@@ -377,7 +377,7 @@ export function BaselineCamp() {
 
             {screenedPatients.length === 0 ? (
               <div className="py-20 text-center text-slate-400 font-light text-sm font-[family-name:var(--font-inter)]">
-                No patient screenings logged yet. Fill out the screening entry details to begin the offline queue.
+                No camp attendee screenings logged yet. Fill out the screening entry details to begin the offline queue.
               </div>
             ) : (
               <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
@@ -400,7 +400,7 @@ export function BaselineCamp() {
                           <span className="text-[9px] font-medium text-slate-500 uppercase">Age {p.age} • {p.gender}</span>
                           {hasAnomaly && (
                             <span className="text-[8px] font-bold text-red-600 bg-red-50 border border-red-100 px-1.5 py-0.5 rounded uppercase tracking-wider">
-                              Anomaly
+                              Follow-up Required
                             </span>
                           )}
                         </div>
@@ -414,11 +414,11 @@ export function BaselineCamp() {
                       <div className="flex items-center gap-2 justify-end">
                         {p.synced ? (
                           <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-lg uppercase tracking-wider">
-                            Synced
+                            Simulated Synced
                           </span>
                         ) : (
                           <span className="text-[9px] font-bold text-amber-600 bg-amber-50 border border-amber-100 px-2.5 py-1 rounded-lg uppercase tracking-wider animate-pulse">
-                            Pending Sync
+                            Pending Local Sync
                           </span>
                         )}
                       </div>

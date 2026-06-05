@@ -101,14 +101,14 @@ export function CoordinatorBoard() {
     <div className="w-full max-w-6xl mx-auto space-y-10 pb-20">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 px-2">
         <div>
-          <h2 className="text-2xl md:text-5xl font-bold text-[#0E5E5A] font-[family-name:var(--font-outfit)] tracking-tight uppercase">Coordinator Control</h2>
+          <h2 className="text-2xl md:text-5xl font-bold text-[#0E5E5A] font-[family-name:var(--font-outfit)] tracking-tight uppercase">Care Operations Board</h2>
           <p className="text-xs md:text-sm text-slate-500 font-light font-[family-name:var(--font-inter)] tracking-wide mt-2">
-            Centralized hub for active care assignments, escalations, alerts, and instant guardian overrides.
+            Centralized hub for active follow-ups, triage alerts, and manual priority overrides.
           </p>
         </div>
         <div className="flex items-center gap-4 data-label !text-[#E05E1B] bg-orange-50 px-6 py-4 rounded-2xl border border-orange-100 shadow-sm font-[family-name:var(--font-outfit)]">
           <AlertOctagon size={20} className="text-[#E05E1B]" />
-          <span>Active Escaped Status: {escalations.filter(e => e.priority !== "Stable").length} Watch list</span>
+          <span>Active Alerts: {escalations.filter(e => e.priority !== "Stable").length} Escalations</span>
         </div>
       </div>
 
@@ -127,7 +127,7 @@ export function CoordinatorBoard() {
         {/* Escalation Queue List */}
         <div className="lg:col-span-7">
           <div className="glass-card p-6 md:p-8 rounded-[2.5rem] border border-[#e2ded5] space-y-6">
-            <h3 className="text-sm font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wider">Escalation Board</h3>
+            <h3 className="text-sm font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wider">Operations Queue</h3>
             
             <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 text-xs font-[family-name:var(--font-inter)]">
               {escalations.map(e => {
@@ -274,13 +274,13 @@ export function CoordinatorBoard() {
 
           {/* Assignments Panel */}
           <div className="glass-card p-6 md:p-8 rounded-[2.5rem] border border-[#e2ded5] space-y-4">
-            <h3 className="text-sm font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wider">Clinical Assignments</h3>
+            <h3 className="text-sm font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wider">Operations Assignments</h3>
             
             <div className="space-y-3 text-xs font-[family-name:var(--font-inter)] text-slate-600">
               <div className="flex justify-between items-center bg-slate-50/50 p-3 rounded-xl border border-slate-200">
                 <div>
-                  <div className="font-bold text-slate-800">Anaya AI Agent</div>
-                  <div className="text-[10px] text-slate-500">Auto-checkin Engine</div>
+                  <div className="font-bold text-slate-800">Anaya Care Automation</div>
+                  <div className="text-[10px] text-slate-500">Check-in Automation & Alert Routing</div>
                 </div>
                 <span className="text-[9px] font-bold text-emerald-600 uppercase">ACTIVE</span>
               </div>

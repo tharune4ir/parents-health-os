@@ -23,8 +23,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "First Family Care Console | Eldercare Oversight Platform",
-  description: "A premium family oversight dashboard for India's elder care, connecting remote adult children to parents' health via smart WhatsApp check-ins and clinical analysis.",
+  title: "Parents Health OS — Care Operations Console",
+  description: "A secure, local-first internal operations console for WhatsApp-first eldercare coordination in India, linking parents' routines with care coordinators and doctors.",
 };
 
 export default function RootLayout({

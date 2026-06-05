@@ -249,7 +249,7 @@ export function ClinicalEngine() {
         // Validation check for Stage A
         if (stage === "A") {
             if (!answers.relation) {
-                showToast("Please enter relation to caregiver.", "error");
+                showToast("Please enter relation to care recipient.", "error");
                 return;
             }
             if (!answers.age || isNaN(Number(answers.age))) {
@@ -305,11 +305,11 @@ export function ClinicalEngine() {
     };
 
     const handleReset = async () => {
-        if (confirm("Are you sure? This will clear the baseline parent health profile completely.")) {
+        if (confirm("Are you sure? This will clear the baseline care-recipient profile completely.")) {
             await resetScorecard();
             resetStateToDefaults();
             localStorage.removeItem("parents_health_assessment_data_v2");
-            showToast("Profile reset successfully. Please complete Stage A again.", "info");
+            showToast("Record baseline reset successfully. Please complete Stage A again.", "info");
         }
     };
 
@@ -332,10 +332,10 @@ export function ClinicalEngine() {
                 <div className="mb-8 flex flex-col sm:flex-row sm:items-start justify-between gap-4 px-2">
                     <div>
                         <h2 className="text-2xl md:text-5xl font-bold text-[#0E5E5A] font-[family-name:var(--font-outfit)] uppercase tracking-tight mb-2 md:mb-3">
-                            Care Profile Builder
+                            Family Records & Care Profile
                         </h2>
                         <p className="text-xs md:text-sm text-slate-600 font-normal tracking-wide leading-relaxed">
-                            Establish a warm, proactive care baseline for your parent. Minimum completion of **Stage A** is required to activate Daily Logs.
+                            Manage the care-recipient record area. Establish the baseline, conditions, daily risk parameters, and coordinator notes. Minimum completion of **Stage A** is required to activate routine logs.
                         </p>
                     </div>
                     <button
@@ -343,7 +343,7 @@ export function ClinicalEngine() {
                         className="group flex items-center gap-3 text-slate-500 hover:text-red-600 transition-all px-4 py-2.5 rounded-2xl bg-teal-50/60 border border-[#0E5E5A]/10 hover:bg-red-50 hover:border-red-200 active:scale-95 cursor-pointer text-xs font-semibold"
                     >
                         <RotateCcw size={14} className="group-hover:rotate-180 transition-transform duration-700 opacity-60 text-red-500" />
-                        Reset Onboarding
+                        Reset Record Baseline
                     </button>
                 </div>
 
@@ -411,14 +411,14 @@ export function ClinicalEngine() {
                                 <div className="border-b border-slate-100 pb-4 mb-4">
                                     <h3 className="text-lg font-bold text-[#0E5E5A] font-[family-name:var(--font-outfit)] flex items-center gap-3">
                                         <User size={20} className="text-[#E05E1B]" />
-                                        STAGE A: Primary Baseline Profile (Setup Required)
+                                        STAGE A: Care Recipient Profile & Setup
                                     </h3>
-                                    <p className="text-xs text-slate-500 mt-1">Provide core identification, diagnosed health parameters, and emergency logistics.</p>
+                                    <p className="text-xs text-slate-500 mt-1">Provide core identification, baseline diagnostics, emergency logistics, and family context.</p>
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div>
-                                        <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">Relation to you</label>
+                                        <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">Relation to Sponsor</label>
                                         <select
                                             value={answers.relation}
                                             onChange={e => updateField("relation", e.target.value)}
@@ -758,7 +758,7 @@ export function ClinicalEngine() {
                                             <Star size={20} className="text-[#E05E1B]" />
                                             STAGE D: Daily Care Routine Preferences (Optional)
                                         </h3>
-                                        <p className="text-xs text-slate-500 mt-1">Configure frequencies and channels for physical measurements and Anaya reminders.</p>
+                                        <p className="text-xs text-slate-500 mt-1">Configure frequencies and channels for physical measurements and care automation reminders.</p>
                                     </div>
                                     <button
                                         type="button"
@@ -885,7 +885,7 @@ export function ClinicalEngine() {
                         <scores.RiskIcon size={24} strokeWidth={2} className="shrink-0 mt-1 opacity-80" />
                         <div>
                             <h4 className="font-bold text-xs uppercase tracking-widest leading-tight mb-2 font-[family-name:var(--font-outfit)]">{scores.riskLevel}</h4>
-                            <p className="text-[11px] font-medium opacity-60 uppercase tracking-tighter">Automatic Care Profile Analysis</p>
+                            <p className="text-[11px] font-medium opacity-60 uppercase tracking-tighter">Automatic Operational Profile Analysis</p>
                         </div>
                     </div>
 

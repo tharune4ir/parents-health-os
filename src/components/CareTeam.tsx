@@ -150,7 +150,7 @@ export function CareTeam() {
       labReports
     );
     setDoctorBrief(brief);
-    showToast("Structured Doctor Discussion Brief generated successfully!", "success");
+    showToast("Discussion Guide brief generated successfully!", "success");
   };
 
   // Add custom follow-up
@@ -193,10 +193,10 @@ export function CareTeam() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h2 className="text-3xl md:text-5xl font-bold text-[#0E5E5A] tracking-tight uppercase font-[family-name:var(--font-outfit)]">
-            Care & Clinic
+            Discussion Guide Briefs & Coordination
           </h2>
           <p className="text-sm text-slate-600 font-normal mt-2 font-[family-name:var(--font-inter)] tracking-wide">
-            Coordinate with {parentName}&apos;s assigned Indian care specialists, generate consultation briefs, and track follow-ups.
+            Prepare discussion guide briefs, coordinate clinical consultation prep, and manage coordinator follow-up checklists for {parentName}.
           </p>
         </div>
 
@@ -230,7 +230,7 @@ export function CareTeam() {
                 : "text-slate-500 hover:text-slate-800"
             }`}
           >
-            Doctor Brief
+            Discussion Guide
           </button>
         </div>
       </div>
@@ -273,7 +273,7 @@ export function CareTeam() {
             onClick={() => setActiveTab("brief")}
             className="px-6 py-3 bg-[#0E5E5A]/5 hover:bg-[#0E5E5A]/10 text-[#0E5E5A] text-[9px] font-black uppercase tracking-widest rounded-xl transition-all"
           >
-            Review Clinical Brief
+            Review Discussion Guide
           </button>
         </div>
       </div>
@@ -339,7 +339,7 @@ export function CareTeam() {
                         onClick={() => showToast("Navigating to AI Dialogue Insights...", "info")}
                         className="w-full py-5 rounded-2xl bg-[#0E5E5A] text-white font-bold text-[9px] uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-[#0c4e4b] transition-all shadow-md"
                       >
-                        Launch AI Assistant
+                        Launch Care Automation
                       </button>
                     ) : (
                       <button
@@ -349,7 +349,7 @@ export function CareTeam() {
                         }}
                         className="w-full py-5 rounded-2xl border border-[#0E5E5A]/20 hover:border-transparent bg-teal-50/40 hover:bg-[#0E5E5A] hover:text-white text-[#0E5E5A] font-bold text-[9px] uppercase tracking-widest flex items-center justify-center gap-3 transition-all"
                       >
-                        Request Review <ArrowRight size={12} />
+                        Schedule Consult Prep <ArrowRight size={12} />
                       </button>
                     )}
                   </div>
@@ -476,14 +476,14 @@ export function CareTeam() {
             {/* Left side: Consult Requests list */}
             <div className="lg:col-span-2 space-y-6">
               <h3 className="text-xl font-bold text-[#0E5E5A] uppercase tracking-tight flex items-center gap-3 font-[family-name:var(--font-outfit)] px-2">
-                <Calendar size={20} /> Active Consult Simulation Logs
+                <Calendar size={20} /> Clinic Consultation Prep logs
               </h3>
 
               {consults.length === 0 ? (
                 <div className="glass-card bg-white p-12 text-center border border-[#e2ded5] rounded-[2.5rem]">
                   <ClipboardList size={40} className="mx-auto text-slate-300 mb-4" />
-                  <p className="text-slate-500 text-sm">No consultations logged for this parent yet.</p>
-                  <p className="text-xs text-slate-400 mt-2">Use the &apos;Assigned Team&apos; tab to request a simulated consult.</p>
+                  <p className="text-slate-500 text-sm">No clinic consultations logged for this parent yet.</p>
+                  <p className="text-xs text-slate-400 mt-2">Use the &apos;Assigned Team&apos; tab to initiate clinic consultation prep.</p>
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -535,10 +535,10 @@ export function CareTeam() {
                         {req.attachments.carePlanSummary && <span className="text-[#0E5E5A]">✓ Care Plan</span>}
                       </div>
 
-                      {/* Caregiver note */}
+                      {/* Coordinator note */}
                       {req.caregiverNotes && (
                         <p className="text-xs text-slate-600 font-light italic leading-relaxed border-l-2 border-[#0E5E5A]/20 pl-4">
-                          Caregiver note: &quot;{req.caregiverNotes}&quot;
+                          Coordinator note: &quot;{req.caregiverNotes}&quot;
                         </p>
                       )}
 
@@ -547,18 +547,17 @@ export function CareTeam() {
                         <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider">
                           Logged: {new Date(req.createdAt).toLocaleDateString()}
                         </span>
-                        
                         <div className="flex gap-2">
                           {req.status === "requested" && (
                             <button
                               onClick={() => {
                                 updateConsultStatus(parentId, req.id, "scheduled");
                                 setConsults(getConsultRequests(parentId));
-                                showToast("Simulation: Consultation Scheduled with doctor.", "success");
+                                showToast("Clinic consultation prep scheduled.", "success");
                               }}
                               className="px-5 py-2.5 bg-[#0E5E5A]/5 hover:bg-[#0E5E5A]/10 text-[#0E5E5A] text-[9px] font-black uppercase tracking-widest rounded-xl transition-all"
                             >
-                              Schedule Consult
+                              Schedule Clinic Consult
                             </button>
                           )}
                           {req.status === "scheduled" && (
@@ -569,11 +568,11 @@ export function CareTeam() {
                                 // Auto add followups upon simulation completion
                                 handleAddFollowup("Update medicine list based on consultation review", "medicine", "Within 2 days");
                                 handleAddFollowup("Track daily BP for 7 days post review", "vitals", "Next 7 days");
-                                showToast("Consult Completed! Added automated care plan follow-up tasks.", "success");
+                                showToast("Clinic consult prep completed! Added automated follow-up tasks.", "success");
                               }}
                               className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[9px] font-black uppercase tracking-widest rounded-xl transition-all"
                             >
-                              Complete Consult
+                              Complete Clinic-Bound Prep
                             </button>
                           )}
                           
@@ -599,18 +598,18 @@ export function CareTeam() {
             <div className="lg:col-span-1 space-y-6">
               <div className="bg-[#0E5E5A] shadow-2xl border border-white/10 rounded-[2.5rem] p-8 text-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-36 h-36 bg-white/5 blur-2xl rounded-full" />
-                <h4 className="text-[9px] font-black text-[#E05E1B] uppercase tracking-[0.25em] mb-2">Simulated Review Path</h4>
+                <h4 className="text-[9px] font-black text-[#E05E1B] uppercase tracking-[0.25em] mb-2">Simulated Consultation Prep Path</h4>
                 <h3 className="text-xl font-bold tracking-tight uppercase font-[family-name:var(--font-outfit)]">
-                  Consult Workflow Logic
+                  Consultation Prep Workflow Logic
                 </h3>
                 <p className="text-xs text-teal-100/80 font-light leading-relaxed mt-4">
-                  1. <strong className="text-white font-bold">Draft/Requested:</strong> Child initiates the request with structured context attachments from vital logs, meds, and report analytics.
+                  1. <strong className="text-white font-bold">Draft/Requested:</strong> Care Coordinator initiates the prep request with structured context attachments from vital logs, meds, and report analytics.
                 </p>
                 <p className="text-xs text-teal-100/80 font-light leading-relaxed mt-3">
-                  2. <strong className="text-white font-bold">Scheduled:</strong> Care Coordinator synchronises slots (Simulated).
+                  2. <strong className="text-white font-bold">Scheduled:</strong> Consultation prep session synchronized.
                 </p>
                 <p className="text-xs text-teal-100/80 font-light leading-relaxed mt-3">
-                  3. <strong className="text-white font-bold">Completed:</strong> Creates follow-up guidelines, logs clinical notes, and updates medication schedules.
+                  3. <strong className="text-white font-bold">Completed:</strong> Finalizes clinical prep guidelines, logs clinical briefs, and updates schedules.
                 </p>
               </div>
 
@@ -641,17 +640,17 @@ export function CareTeam() {
                   Rule-Based Engine
                 </span>
                 <h3 className="text-2xl font-bold text-[#0E5E5A] uppercase tracking-tight font-[family-name:var(--font-outfit)]">
-                  Doctor Discussion Summary Generator
+                  Discussion Guide Brief Generator
                 </h3>
                 <p className="text-xs text-slate-600 font-light leading-relaxed">
-                  Instantly structure {parentName}&apos;s current conditions, vital metrics, active medications, and recent red-flag metrics to bring to your next real clinic consult.
+                  Instantly structure {parentName}&apos;s current conditions, vital metrics, active medications, and recent red-flag metrics into a discussion guide brief for consultation prep.
                 </p>
               </div>
               <button
                 onClick={handleGenerateBrief}
                 className="px-8 py-5 bg-[#0E5E5A] hover:bg-[#0c4e4b] text-white font-black text-[10px] uppercase tracking-widest rounded-2xl flex items-center justify-center gap-3 transition-all shrink-0 cursor-pointer"
               >
-                <Sparkles size={14} /> Generate Clinical Brief
+                <Sparkles size={14} /> Generate Discussion Guide
               </button>
             </div>
 
@@ -661,14 +660,14 @@ export function CareTeam() {
                 {/* Visual Stamp */}
                 <div className="absolute top-8 right-8 border border-[#E05E1B]/30 rounded-3xl p-3 bg-[#E05E1B]/5 text-[#E05E1B] transform rotate-3 flex items-center gap-2 max-w-xs">
                   <Stethoscope size={16} />
-                  <span className="text-[8px] font-black uppercase tracking-widest">For Clinical Discussion Only</span>
+                  <span className="text-[8px] font-black uppercase tracking-widest">For Discussion with Registered Practitioner Only</span>
                 </div>
 
                 {/* Brief Title */}
                 <div>
-                  <h4 className="text-[10px] font-black text-[#E05E1B] uppercase tracking-[0.3em]">Structured Clinician Overview</h4>
+                  <h4 className="text-[10px] font-black text-[#E05E1B] uppercase tracking-[0.3em]">Discussion Guide Brief</h4>
                   <h3 className="text-3xl font-bold text-slate-800 uppercase tracking-tighter mt-1 font-[family-name:var(--font-outfit)]">
-                    Discussion Summary: {doctorBrief.parentName}
+                    Discussion Guide Brief: {doctorBrief.parentName}
                   </h3>
                   <p className="text-xs text-slate-500 mt-1.5">
                     Generated on {new Date(doctorBrief.generatedAt).toLocaleString()} • {doctorBrief.ageLanguage}
@@ -742,7 +741,7 @@ export function CareTeam() {
 
                 {/* Core agendas & checkups */}
                 <div className="pt-8 border-t border-slate-100 space-y-4">
-                  <h5 className="text-[10px] font-black text-[#0E5E5A] uppercase tracking-widest">Recommended Clinician Discussion Points</h5>
+                  <h5 className="text-[10px] font-black text-[#0E5E5A] uppercase tracking-widest">Questions for Doctor / Coordinator Notes</h5>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {doctorBrief.questionsToAsk.map((q, i) => (
                       <div key={i} className="flex items-start gap-4 p-4 bg-slate-50 rounded-2xl border">
@@ -921,7 +920,7 @@ export function CareTeam() {
                 {/* Notes */}
                 <div>
                   <label className="text-[9px] font-black text-slate-600 uppercase tracking-widest block mb-2">
-                    Additional Caregiver Notes
+                    Additional Coordinator Notes
                   </label>
                   <textarea
                     rows={2}

@@ -169,7 +169,7 @@ export async function POST(req: Request) {
     }
     // Default reply text (Anaya AI dialogue simulator reply)
     else {
-      replyText = `Namaste ${parent.name}! 🙏 This is Anaya, your care companion. I have logged your message: "${body}". Have a peaceful day!`;
+      replyText = `Namaste ${parent.name}! 🙏 This is Anaya care automation. I have logged your message: "${body}". Have a peaceful day!`;
     }
 
     // 3. Dispatch automated reply from Anaya back to parent

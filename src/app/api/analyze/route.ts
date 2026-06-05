@@ -232,21 +232,21 @@ export async function POST(req: Request) {
     let modelString = "gemini-2.5-flash"; 
     let model = genAI.getGenerativeModel({ model: modelString });
 
-    const prompt = `You are Anaya's clinical data intelligence core for "Parents Health OS".
+    const prompt = `You are Anaya's care coordination intelligence core for the Care Operations Console.
     Your role is to analyze the attached medical document (lab report, prescription, scan, or discharge summary) and extract structured insights.
     
     TONE & CLINICAL SAFETY MANDATE:
     1. NEVER diagnose, prescribe, or suggest medication adjustments.
     2. Enforce absolute clinical safety: all findings must be presented in a comforting, highly reassuring, yet objective manner. No alarmist language.
     3. Ensure every analysis is watermarked as an AI-generated summary and ends with a clear physician validation disclaimer.
-    4. Provide two distinct summaries: one detailed for the adult child caregiver, and one ultra-comforting, simplified, warm summary designed for the elderly parent (suitable for WhatsApp digestion).
+    4. Provide two distinct summaries: one detailed for the care coordinator/coordinator control panel, and one ultra-comforting, simplified, warm summary designed for the elderly parent (suitable for WhatsApp digestion).
     
     Patient Clinical Context (Profile):
     ${clinicalContext}
-
+ 
     Medical History (Past Reports Summary):
     ${historyContext}
-
+ 
     TASKS:
     1. **Classify Document:** Is it a Lab Report, Prescription, Scan Report, Discharge Summary, or Other?
     2. **Patient Name:** Extract the patient name ONLY if it is clearly visible. If not visible or ambiguous, omit it.
@@ -259,17 +259,17 @@ export async function POST(req: Request) {
        - Add any special instructions (e.g., avoid dairy, take with water).
        - Assess confidence as high, medium, or low.
        - Set source as "from uploaded report".
-    5. **Physician Questions:** Formulate 3 intelligent, supportive questions the caregiver can print or ask the doctor at the next checkup.
+    5. **Physician Questions:** Formulate 3 intelligent, supportive questions the family/coordinator can print or ask the doctor at the next checkup.
     6. **Red Flags:** Conservatively highlight any urgent clinical markers needing physical checkups, using extremely gentle, reassuring tone.
     7. **Disclaimers:** Add a standard AI-generated clinical safety verification disclaimer.
-
+ 
     OUTPUT FORMAT: You MUST return a valid JSON object matching the following structure exactly. Do not output any prose outside this JSON block:
     \`\`\`json
     {
       "reportType": "Lab Report | Prescription | Scan Report | Discharge Summary | Other",
       "reportDate": "YYYY-MM-DD",
       "patientName": "Name or empty string if not visible",
-      "summaryForChild": "Clear explanation of findings in simple English for the child caregiver.",
+      "summaryForChild": "Clear explanation of findings in simple English for the care coordinator/family.",
       "summaryForParent": "Ultra-comforting, simplified explanation of the health status suitable for parent digestion via WhatsApp.",
       "keyFindings": [
         "Finding description in supportive simple language."

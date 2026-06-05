@@ -391,10 +391,10 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                             <div>
                                 <h5 className="text-[11px] font-semibold text-amber-600 tracking-wider uppercase font-[family-name:var(--font-outfit)]">Clinical Sandbox & AI Consent Notice</h5>
                                 <p className="text-[10px] text-slate-500 font-light mt-1 font-[family-name:var(--font-inter)] leading-relaxed">
-                                    AI report analysis uses the configured Gemini API. Only upload reports you are comfortable processing through this AI service. For testing, use synthetic or redacted reports. Parents Health OS and Anaya do not diagnose or replace a doctor.
+                                    AI report analysis uses the configured Gemini API. Only upload reports you are comfortable processing through this AI service. For testing, use synthetic or redacted reports. Parents Health OS and Anaya care automation do not diagnose or replace a doctor.
                                 </p>
                                 <p className="text-[9px] text-slate-400 font-medium mt-2 leading-relaxed italic">
-                                    ⚠️ Parents Health OS and Anaya do not provide diagnosis, prescriptions, emergency medical care, or doctor replacement. They help organize, summarize, and coordinate family care information.
+                                    ⚠️ Parents Health OS and Anaya care automation do not provide diagnosis, prescriptions, emergency medical care, or doctor replacement. They help organize, summarize, and coordinate family care information.
                                 </p>
                             </div>
                         </div>
@@ -419,7 +419,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                         </div>
                         <p className="text-[10px] text-slate-500 font-light font-[family-name:var(--font-inter)] leading-relaxed">
                             {useMock 
-                                ? "Instant simulated parsing is active using Anaya's mock engine. No external API credentials required." 
+                                ? "Instant simulated parsing is active using the local mock parser. No external API credentials required." 
                                 : "Live clinical reading is enabled. Uploaded records will call Gemini AI for diagnostic extraction."}
                         </p>
                     </div>
@@ -465,7 +465,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                 <div className="p-5 rounded-2xl border border-teal-600/30 bg-[#0E5E5A]/[0.02] text-[11px] text-slate-700 font-light leading-relaxed space-y-3">
                                     <span className="font-bold text-[#0E5E5A] block uppercase tracking-wider text-[9px] mb-1">🔒 Explicit Data & AI Consent Required</span>
                                     <p>
-                                        Parents Health OS and its Anaya diagnostics suite respect patient privacy. To route this physical document safely through the Google Gemini API, you must explicitly review and consent:
+                                        Parents Health OS report analysis respects patient privacy. To route this physical document safely through the Google Gemini API, you must explicitly review and consent:
                                     </p>
                                     <label className="flex items-start gap-3 cursor-pointer text-slate-800 font-medium select-none bg-white/40 p-3 rounded-xl hover:bg-white/60 transition-all border border-[#e2ded5]">
                                         <input
@@ -701,7 +701,7 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                             </div>
                                             <div className="flex flex-col items-end gap-1.5 shrink-0 text-right">
                                                 <div className="data-label !text-[#0E5E5A] bg-[#0E5E5A]/5 px-4 py-2 border border-[#0E5E5A]/10 rounded-xl font-[family-name:var(--font-outfit)]">
-                                                    Anaya OCR Engine v2.5
+                                                    Anaya Report Parser v2.5
                                                 </div>
                                                 <span className="text-[9px] text-slate-400 font-light font-[family-name:var(--font-inter)] tracking-tighter">AI watermarked analysis context</span>
                                             </div>
@@ -712,13 +712,13 @@ export function SmartReport({ onNavigate }: SmartReportProps) {
                                             {/* DUAL DIGEST SUMMARY */}
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                                 
-                                                {/* CAREGIVER (CHILD) DIGEST */}
+                                                {/* COORDINATOR DIGEST */}
                                                 <div className="p-6 md:p-8 rounded-[2.5rem] border border-white/5 bg-[#0E5E5A]/[0.01] shadow-inner relative overflow-hidden space-y-4">
                                                     <div className="flex items-center gap-3">
                                                         <div className="h-8 w-8 bg-white/5 border border-white/10 text-[#0E5E5A] rounded-xl flex items-center justify-center">
                                                             <FileSearch size={16} />
                                                         </div>
-                                                        <h5 className="text-[12px] font-bold text-slate-800 tracking-wider uppercase font-[family-name:var(--font-outfit)]">Longitudinal Caregiver Insight</h5>
+                                                        <h5 className="text-[12px] font-bold text-slate-800 tracking-wider uppercase font-[family-name:var(--font-outfit)]">Longitudinal Coordinator Insight</h5>
                                                     </div>
                                                     <p className="text-slate-600 text-sm font-light font-[family-name:var(--font-inter)] leading-relaxed">
                                                         {analysisData.summaryForChild || analysisData.summary || "Summary parsed."}

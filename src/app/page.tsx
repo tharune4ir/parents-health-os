@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Stethoscope, FileText, BookOpen, Users, Lock, ArrowRight, Activity, Bell, MessageCircle, Calendar, AlertTriangle, ShieldCheck, Heart, UserPlus, LogIn, Loader2, Sparkles } from "lucide-react";
+import { Stethoscope, FileText, BookOpen, Users, Lock, ArrowRight, Activity, Bell, MessageCircle, Calendar, AlertTriangle, ShieldCheck, Heart, UserPlus, LogIn, Loader2, Sparkles, LayoutDashboard, Smartphone } from "lucide-react";
 import Link from "next/link";
 import { loadDemoData } from "../utils/demoData";
 import { useParentsAuth } from "../lib/supabase/context";
@@ -275,7 +275,7 @@ export default function Home() {
                     onClick={simulateDemoAutofill}
                     className="px-3.5 py-2 rounded-xl bg-teal-50 hover:bg-teal-100 border border-teal-200/50 text-[#0E5E5A] font-bold text-[9px] uppercase tracking-wider transition-all flex items-center gap-1.5 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-sm"
                   >
-                    <Play size={10} className="fill-[#0E5E5A] text-[#0E5E5A]" /> Use Demo Caregiver
+                    <Play size={10} className="fill-[#0E5E5A] text-[#0E5E5A]" /> Use Demo Staff
                   </button>
                 </div>
               )}
@@ -975,7 +975,7 @@ function DashboardContent() {
 
   const getAnayaSummary = () => {
     const pName = activeParent?.name?.split(' ')[0] || 'Parent';
-    let summary = `Hello! I am Anaya, your daily elder-care companion. Today's care routine is active for ${pName}. `;
+    let summary = `Anaya care automation has executed routine check-ins for ${pName}. This system sends daily reminders, tracks responses, and escalates missed tasks to human coordinators. `;
     
     if (totalMeds === 0) {
       summary += "No medications are scheduled in the routine yet. ";
@@ -1063,16 +1063,17 @@ function DashboardContent() {
             </div>
 
             <nav className="p-4 px-6 space-y-2">
-              <NavItem icon={<Stethoscope size={18} strokeWidth={1.5} />} label="Parent Profile" active={activeView === "clinical"} onClick={() => { setActiveView("clinical"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<FileText size={18} strokeWidth={1.5} />} label="Reports & Insights" isNew active={activeView === "smart-reports"} onClick={() => { setActiveView("smart-reports"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<BookOpen size={18} strokeWidth={1.5} />} label="Daily Care Logs" active={activeView === "medicines"} onClick={() => { setActiveView("medicines"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<Users size={18} strokeWidth={1.5} />} label="Care Team" active={activeView === "care-team"} onClick={() => { setActiveView("care-team"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<Calendar size={18} strokeWidth={1.5} />} label="Clinic Hub" isNew active={activeView === "clinic-hub"} onClick={() => { setActiveView("clinic-hub"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<MessageCircle size={18} strokeWidth={1.5} />} label="WhatsApp Demo" isNew active={activeView === "whatsapp"} onClick={() => { setActiveView("whatsapp"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<UserPlus size={18} strokeWidth={1.5} />} label="First Family Intake" isNew active={activeView === "intake"} onClick={() => { setActiveView("intake"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<Activity size={18} strokeWidth={1.5} />} label="Baseline Health Camp" isNew active={activeView === "camp"} onClick={() => { setActiveView("camp"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<Briefcase size={18} strokeWidth={1.5} />} label="Coordinator Control" isNew active={activeView === "coordinator"} onClick={() => { setActiveView("coordinator"); setIsMobileMenuOpen(false); }} />
-              <NavItem icon={<ShieldCheck size={18} strokeWidth={1.5} />} label="Settings & Backup" isNew active={activeView === "settings"} onClick={() => { setActiveView("settings"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<LayoutDashboard size={18} strokeWidth={1.5} />} label="Command Center" active={activeView === "dashboard"} onClick={() => { setActiveView("dashboard"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<UserPlus size={18} strokeWidth={1.5} />} label="First Family Intake" active={activeView === "intake"} onClick={() => { setActiveView("intake"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<Activity size={18} strokeWidth={1.5} />} label="Baseline Health Camp" active={activeView === "camp"} onClick={() => { setActiveView("camp"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<Briefcase size={18} strokeWidth={1.5} />} label="Care Operations Board" active={activeView === "coordinator"} onClick={() => { setActiveView("coordinator"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<MessageCircle size={18} strokeWidth={1.5} />} label="WhatsApp Automation" active={activeView === "whatsapp"} onClick={() => { setActiveView("whatsapp"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<Stethoscope size={18} strokeWidth={1.5} />} label="Parent Profiles" active={activeView === "clinical"} onClick={() => { setActiveView("clinical"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<BookOpen size={18} strokeWidth={1.5} />} label="Adherence & Care Logs" active={activeView === "medicines"} onClick={() => { setActiveView("medicines"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<FileText size={18} strokeWidth={1.5} />} label="Reports & Uploads" active={activeView === "smart-reports"} onClick={() => { setActiveView("smart-reports"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<Calendar size={18} strokeWidth={1.5} />} label="Primary Clinic Hub" active={activeView === "clinic-hub"} onClick={() => { setActiveView("clinic-hub"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<Users size={18} strokeWidth={1.5} />} label="Consultation Team" active={activeView === "care-team"} onClick={() => { setActiveView("care-team"); setIsMobileMenuOpen(false); }} />
+              <NavItem icon={<ShieldCheck size={18} strokeWidth={1.5} />} label="System & Backup" active={activeView === "settings"} onClick={() => { setActiveView("settings"); setIsMobileMenuOpen(false); }} />
             </nav>
           </div>
 
@@ -1088,7 +1089,7 @@ function DashboardContent() {
                     {profile?.full_name || "Family Monitor"}
                   </span>
                   <span className="text-[8px] text-teal-200/50 truncate font-light font-[family-name:var(--font-inter)]">
-                    {user?.email || "active-caregiver"}
+                    {user?.email || "active-staff"}
                   </span>
                 </div>
               </div>
@@ -1165,11 +1166,11 @@ function DashboardContent() {
                     <span className="truncate max-w-[150px] md:max-w-none text-[#0E5E5A]">{primaryParentName}</span>
                   )}
                   <span className="hidden md:inline text-slate-350 font-light mx-4">/</span>
-                  <span className="text-slate-500 font-medium text-sm md:text-base md:mt-0 mt-1 uppercase md:normal-case">FAMILY MEMBER OVERVIEW</span>
+                  <span className="text-slate-500 font-medium text-sm md:text-base md:mt-0 mt-1 uppercase md:normal-case">CARE OPERATIONS OVERVIEW</span>
                 </h1>
                 <div className="flex items-center gap-3 mt-1.5 md:mt-2">
                   <div className="h-1.5 w-1.5 rounded-full bg-[#E05E1B] animate-pulse shadow-[0_0_10px_rgba(224,94,27,0.5)]" />
-                  <p className="data-label text-slate-555 text-[8px] md:text-[10px] !tracking-[0.2em] uppercase">FAMILY NETWORK STATUS // CONNECTED</p>
+                  <p className="data-label text-slate-555 text-[8px] md:text-[10px] !tracking-[0.2em] uppercase">FAMILY ROUTINE STATUS // CONNECTED</p>
                 </div>
               </div>
             </div>
@@ -1267,17 +1268,17 @@ function DashboardContent() {
                   <div className="relative z-10 space-y-6">
                     <div className="flex items-center justify-between">
                       <span className="data-label !text-[#E05E1B] !text-[8px] bg-orange-50 border border-orange-100 px-3 py-1 rounded-full uppercase tracking-widest font-bold">
-                        {appMode === "personal" ? "Personal Mode" : "Demo Mode"}
+                        {appMode === "personal" ? "Ops Sandbox Mode" : "Demo Mode"}
                       </span>
                       <span className="text-slate-400 text-[10px] font-mono tracking-wider">{todayStr}</span>
                     </div>
                     
                     <div>
                       <h3 className="text-3xl font-extrabold text-slate-800 font-[family-name:var(--font-outfit)] tracking-tight uppercase">
-                        Today's Care Status
+                        Today's Operations Status
                       </h3>
                       <p className="text-sm text-slate-500 font-light mt-1 font-[family-name:var(--font-inter)] leading-relaxed">
-                        Continuous active monitoring for <span className="font-semibold text-slate-700">{activeParent?.name || primaryParentName}</span>.
+                        Daily operations view for <span className="font-semibold text-slate-700">{activeParent?.name || primaryParentName}</span>.
                       </p>
                     </div>
 
@@ -1353,7 +1354,7 @@ function DashboardContent() {
                       <div className="flex items-center justify-between font-bold text-slate-700 uppercase tracking-wide">
                         <span className="flex items-center gap-1.5">
                           <span className="h-1.5 w-1.5 rounded-full bg-teal-500 animate-pulse" />
-                          WhatsApp Monitor
+                          WhatsApp Automation Monitor
                         </span>
                         <span className="text-[8px] text-teal-600 font-mono">SIM ACTIVE</span>
                       </div>
@@ -1376,25 +1377,25 @@ function DashboardContent() {
                 </div>
 
                 {/* DYNAMIC LOCAL ANAYA CARE COMPANION SUMMARY CARD */}
-                <div className="lg:col-span-2 p-8 md:p-10 rounded-[2.5rem] bg-gradient-to-br from-[#0E5E5A] to-[#0A4B48] text-white shadow-xl flex flex-col justify-between relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 p-10 opacity-[0.03] transition-transform duration-1000 group-hover:scale-110">
-                    <Activity size={200} className="text-white" />
+                <div className="lg:col-span-1 p-8 rounded-[2.5rem] bg-gradient-to-br from-[#0E5E5A] to-[#0A4B48] text-white shadow-xl flex flex-col justify-between relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-8 opacity-[0.03] transition-transform duration-1000 group-hover:scale-110">
+                    <Activity size={180} className="text-white" />
                   </div>
                   <div className="relative z-10 space-y-6">
                     <div className="flex items-center gap-3">
                       {/* Anaya Avatar with animated aura */}
-                      <div className="relative h-12 w-12 rounded-2xl bg-teal-100/10 border border-white/20 flex items-center justify-center text-teal-300 shadow-inner group-hover:rotate-6 transition-transform">
+                      <div className="relative h-12 w-12 rounded-2xl bg-teal-100/10 border border-white/20 flex items-center justify-center text-teal-300 shadow-inner group-hover:rotate-6 transition-transform shrink-0">
                         <div className="absolute inset-0 rounded-2xl bg-teal-400/20 animate-ping opacity-60" />
                         <MessageCircle size={22} className="relative z-10" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-white font-[family-name:var(--font-outfit)] uppercase tracking-wide">Anaya AI Assistant</h4>
-                        <p className="text-[9px] text-teal-200/70 tracking-widest font-mono uppercase">REAL-TIME DETERMINISTIC CARE BRIEF</p>
+                        <h4 className="text-lg font-bold text-white font-[family-name:var(--font-outfit)] uppercase tracking-wide">Anaya Care Automation</h4>
+                        <p className="text-[8px] text-teal-200/70 tracking-widest font-mono uppercase">ROUTINE CHECK-IN & ESCALATION SUMMARY</p>
                       </div>
                     </div>
 
-                    <div className="p-5 md:p-6 rounded-2xl bg-white/[0.04] border border-white/[0.06] backdrop-blur-md">
-                      <p className="text-white-only opacity-90 font-light leading-relaxed text-sm font-[family-name:var(--font-inter)]">
+                    <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/[0.06] backdrop-blur-md">
+                      <p className="text-white-only opacity-90 font-light leading-relaxed text-xs font-[family-name:var(--font-inter)]">
                         "{getAnayaSummary()}"
                       </p>
                     </div>
@@ -1405,9 +1406,36 @@ function DashboardContent() {
                     <div className="h-5 w-5 rounded-md bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-[#E05E1B] shrink-0 mt-0.5">
                       <AlertTriangle size={12} className="stroke-[2.5]" />
                     </div>
-                    <p className="text-[10px] text-white-only opacity-75 leading-relaxed font-light">
-                      <strong className="text-white-only font-semibold">Clinical Safety Lock Notice:</strong> Anaya acts as a wellness tracker and context brief builder. She does not diagnose or replace a medical professional. For any persistent physiological variations, sudden pain, or chest discomfort, please contact your emergency care physician or primary doctor immediately.
+                    <p className="text-[9px] text-white-only opacity-75 leading-relaxed font-light">
+                      <strong className="text-white-only font-semibold">Safety Notice:</strong> Anaya supports wellness tracking, reminders, and operational summaries. It does not diagnose, prescribe, or replace a registered medical professional.
                     </p>
+                  </div>
+                </div>
+
+                {/* FAMILY SNAPSHOT VIEW CARD */}
+                <div className="lg:col-span-1 p-8 rounded-[2.5rem] bg-slate-50 border border-[#e2ded5] shadow-sm flex flex-col justify-between relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-8 opacity-[0.03] transition-transform duration-1000 group-hover:scale-110">
+                    <Smartphone size={180} className="text-[#0E5E5A]" />
+                  </div>
+                  <div className="relative z-10 space-y-6">
+                    <div className="flex items-center gap-3">
+                      <div className="h-12 w-12 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-[#0E5E5A] shrink-0 group-hover:rotate-6 transition-transform">
+                        <Smartphone size={22} />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">Family Snapshot View</h4>
+                        <p className="text-[8px] text-teal-600 tracking-widest font-mono uppercase">Planned Child-Facing Surface</p>
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-slate-600 font-light leading-relaxed font-[family-name:var(--font-inter)]">
+                      The full console is designed for the care operations team. Adult children would receive a simpler family update surface: parent status, medicine confirmation, latest vitals, coordinator note, doctor brief access, and request-a-call action.
+                    </p>
+                  </div>
+                  
+                  <div className="pt-4 border-t border-slate-200 mt-6 flex items-center justify-between text-[10px] text-slate-400 font-medium uppercase tracking-wider relative z-10">
+                    <span>Scope: Planned Update</span>
+                    <span className="text-[#0E5E5A] font-bold">Future Release</span>
                   </div>
                 </div>
 
@@ -1418,7 +1446,7 @@ function DashboardContent() {
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <div className="h-2 w-2 rounded-full bg-[#E05E1B]" />
-                    <h4 className="text-xs font-bold text-slate-500 font-[family-name:var(--font-outfit)] tracking-wider uppercase">Caregiver Actions</h4>
+                    <h4 className="text-xs font-bold text-slate-500 font-[family-name:var(--font-outfit)] tracking-wider uppercase">Coordinator Actions</h4>
                   </div>
                   
                   {/* Grid of Action Buttons */}
@@ -1445,7 +1473,7 @@ function DashboardContent() {
                       className="px-5 py-3 rounded-xl text-[10px] font-bold uppercase tracking-wider bg-[#0E5E5A]/5 hover:bg-[#0E5E5A]/10 text-[#0E5E5A] border border-[#0E5E5A]/10 hover:border-[#0E5E5A]/20 transition-all flex items-center justify-center gap-2"
                     >
                       <Calendar size={12} />
-                      Book Consult
+                      Schedule Consult
                     </button>
                     
                     <button 
@@ -1487,7 +1515,7 @@ function DashboardContent() {
                       </div>
                       <div>
                         <h3 className="text-xl font-extrabold text-slate-800 font-[family-name:var(--font-outfit)] tracking-tight uppercase">Next Best Action</h3>
-                        <p className="text-[10px] text-slate-500 font-light mt-0.5 tracking-wider">AI DETERMINED CLINICAL ESCALATION & CHECKS</p>
+                        <p className="text-[10px] text-slate-500 font-light mt-0.5 tracking-wider">AUTOMATED TRIAGE ACTION & ESCALATION WORKFLOW</p>
                       </div>
                     </div>
 
@@ -1505,11 +1533,11 @@ function DashboardContent() {
 
                       <p className="text-sm font-semibold text-slate-700 leading-relaxed font-[family-name:var(--font-inter)]">
                         {carePriority === "Urgent Follow-up" ? (
-                          "Urgent Follow-up Protocol Active: Open Coordinator Control console to review alerts and coordinate medical evaluation."
+                          "Urgent Follow-up Protocol Active: Open the Care Operations Board to verify priority alerts and coordinate medical validation."
                         ) : carePriority === "Watch" ? (
-                          "Active Symptom Watch: Launch the WhatsApp Sandbox demo to check in on medication compliance and log evening baseline vitals."
+                          "Active Routine Watch: Open WhatsApp Automation to trigger routine check-ins and log evening baseline vitals."
                         ) : (
-                          "Routine Maintenance: Proceed to the Baseline Health Camp view to complete parent profiling and schedule clinical followups."
+                          "Routine Maintenance: Open Baseline Health Camp to register attendees and establish a vitals benchmark."
                         )}
                       </p>
 
@@ -1554,7 +1582,7 @@ function DashboardContent() {
                     </div>
 
                     <div className="p-4 rounded-2xl bg-slate-50/50 border border-slate-150 text-[11px] text-slate-600 font-mono space-y-2 max-h-[14rem] overflow-y-auto">
-                      <div className="font-bold text-[9px] text-[#0E5E5A] uppercase tracking-wider">Clinical Telemetry Snapshot</div>
+                      <div className="font-bold text-[9px] text-[#0E5E5A] uppercase tracking-wider">Operations Data Snapshot</div>
                       <div className="whitespace-pre-line text-slate-700 leading-normal text-[10px]">
                         - Parent Name: {activeParent?.name || primaryParentName}
                         - Current Triage Status: {carePriority} Priority

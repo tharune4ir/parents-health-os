@@ -138,15 +138,15 @@ export function loadDemoData() {
     const careTeam = [
         {
             id: "ct-anaya",
-            name: "Anaya",
-            role: "AI Care Assistant",
-            specialty: "Care Coordination & Health Insights",
+            name: "Care Automation Module (Anaya)",
+            role: "Checklists & Alerts Coordinator",
+            specialty: "Routine Check-ins & Care Automation",
             languages: ["English", "Hindi", "Telugu"],
             availabilityLabel: "Always active",
             consultModes: ["whatsapp"],
             status: "assigned",
-            registrationNumber: "N/A — AI Companion",
-            bio: "Coordinates daily care, compiles reports, and triggers proactive alerts. Powered by Parents Health OS.",
+            registrationNumber: "N/A — Care Automation System",
+            bio: "Coordinates daily check-ins, runs automated medication alerts, and logs coordinator follow-up checklists for the care team.",
             isAI: true
         },
         {
@@ -312,7 +312,7 @@ export function loadDemoData() {
             "How do we safely coordinate physiotherapy exercises alongside her respiratory triggers?"
         ],
         caregiverNotes: "Winter triggers cause short breath. Joint pain makes morning walking difficult.",
-        disclaimer: "⚠️ This brief is prepared for discussion with a qualified doctor and is NOT medical advice. It is generated from sandbox data for care coordination purposes only."
+        disclaimer: "⚠️ This brief is prepared for discussion with a registered medical practitioner and is NOT medical advice. It is generated from sandbox data for care coordination purposes only."
     };
     localStorage.setItem("phos_doctor_brief_sandbox-parent-id", JSON.stringify(doctorBrief));
 

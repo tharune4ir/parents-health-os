@@ -425,7 +425,7 @@ export function SettingsAndBackup() {
               <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] tracking-tight uppercase">Customizable Parent Profile Setup</h3>
               <p className="text-xs text-slate-600 font-light mt-1">Configure active health dimensions and contact registries locally.</p>
               <p className="text-[10px] text-slate-500 font-medium mt-2 max-w-xl leading-relaxed italic">
-                ⚠️ Parents Health OS and Anaya do not provide diagnosis, prescriptions, emergency medical care, or doctor replacement. They help organize, summarize, and coordinate family care information.
+                ⚠️ Parents Health OS and Anaya care automation do not provide diagnosis, prescriptions, emergency medical care, or doctor replacement. They help organize, summarize, and coordinate family care information.
               </p>
             </div>
             
@@ -558,7 +558,7 @@ export function SettingsAndBackup() {
                     value={formData.health_concerns}
                     onChange={(e) => setFormData(prev => ({ ...prev, health_concerns: e.target.value }))}
                     className="w-full px-4 py-3 border border-[#e2ded5] bg-white/70 rounded-xl focus:border-[#0E5E5A] focus:outline-none transition-all text-xs h-20"
-                    placeholder="Describe any frequent health issues or details you want Anaya/doctors to monitor specifically..."
+                    placeholder="Describe any frequent health issues or details the care team should monitor specifically..."
                   />
                 </div>
               </div>
@@ -714,7 +714,7 @@ export function SettingsAndBackup() {
           <div className="p-6 bg-amber-50 border border-amber-200 rounded-[2rem] flex gap-4 text-xs text-amber-800 leading-relaxed">
             <AlertTriangle size={24} className="shrink-0 text-amber-600 mt-1" />
             <div>
-              <span className="font-bold block uppercase tracking-wider text-[10px] text-amber-900 mb-1">Local Sandbox Mode: Caregiver Data Isolation Active</span>
+              <span className="font-bold block uppercase tracking-wider text-[10px] text-amber-900 mb-1">Local Sandbox Mode: Care Operations Data Isolation Active</span>
               <p className="mb-2">
                 All patient profiles, daily checklist activities, tracked vitals, and medical logs are stored <strong>100% locally in your browser's private storage (LocalStorage)</strong>.
               </p>
@@ -1058,7 +1058,7 @@ export function SettingsAndBackup() {
               <div className="space-y-1">
                 <h4 className="text-xs font-black uppercase text-slate-800 tracking-wider">Enable Row Level Security (RLS) policies</h4>
                 <p className="text-xs text-slate-500 leading-relaxed font-light">
-                  Implement tight authentication policies. Enable RLS on every table so that children and caregivers can only view or modify records belonging to their shared <code>family_id</code> network.
+                  Implement tight authentication policies. Enable RLS on every table so that coordinators and family members can only view or modify records belonging to their shared <code>family_id</code> network.
                 </p>
               </div>
             </div>
@@ -1110,7 +1110,7 @@ export function SettingsAndBackup() {
                   <strong className="text-slate-800">Section 6 (Consent-Driven Processing):</strong> Processing only happens after receiving explicit, unambiguous consent from the child on behalf of the senior parent.
                 </li>
                 <li>
-                  <strong className="text-slate-800">Section 11 (Right to Correct / Complete):</strong> Parents or child caregivers have full right to edit display names, relationships, age, and health history parameters (active in <strong>Personal Profiles</strong> tab).
+                  <strong className="text-slate-800">Section 11 (Right to Correct / Complete):</strong> Parents or authorized care coordinators have full right to edit display names, relationships, age, and health history parameters (active in <strong>Personal Profiles</strong> tab).
                 </li>
                 <li>
                   <strong className="text-slate-800">Section 12 (Right to Erase / Revoke):</strong> You have the absolute right to revoke consent and erase all care log data instantly.

@@ -180,7 +180,7 @@ export function FamilyIntake() {
         <div>
           <h2 className="text-2xl md:text-5xl font-bold text-[#0E5E5A] font-[family-name:var(--font-outfit)] tracking-tight uppercase">First Family Intake</h2>
           <p className="text-xs md:text-sm text-slate-500 font-light font-[family-name:var(--font-inter)] tracking-wide mt-2">
-            Establish baseline family structure, clinical parameters, and buyer engagement details.
+            Establish baseline family structure, operational diagnostics, and sponsor coordination details.
           </p>
         </div>
         <div className="flex items-center gap-4 data-label !text-[#0E5E5A] bg-[#0E5E5A]/5 px-6 py-4 rounded-2xl border border-[#0E5E5A]/10 shadow-sm font-[family-name:var(--font-outfit)]">
@@ -209,8 +209,8 @@ export function FamilyIntake() {
                 <Smartphone size={20} />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">1. Buyer / Care Sponsor Demographics</h3>
-                <p className="text-[10px] text-slate-500 font-light">Details of the family manager funding/coordinating care.</p>
+                <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">1. Sponsor / Primary Contact</h3>
+                <p className="text-[10px] text-slate-500 font-light">Details of the family manager / care sponsor funding and coordinating care.</p>
               </div>
             </div>
             <button
@@ -288,7 +288,7 @@ export function FamilyIntake() {
             </div>
 
             <div className="pt-2 border-t border-[#e2ded5] mt-4">
-              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Engagement / Onboarding Status</label>
+              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Engagement & Coordinator Follow-up Status</label>
               <select
                 value={engagementStatus}
                 onChange={e => setEngagementStatus(e.target.value)}
@@ -311,8 +311,8 @@ export function FamilyIntake() {
                 <Heart size={20} />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">2. Parent Clinical Parameters</h3>
-                <p className="text-[10px] text-slate-500 font-light">Critical baseline parameters logged in clinical folder.</p>
+                <h3 className="text-lg font-bold text-slate-800 font-[family-name:var(--font-outfit)] uppercase tracking-wide">2. Care Recipient & Family Context</h3>
+                <p className="text-[10px] text-slate-500 font-light">Critical baseline parameters, care needs, and family context.</p>
               </div>
             </div>
             <button
@@ -327,7 +327,7 @@ export function FamilyIntake() {
           <div className="space-y-4 font-[family-name:var(--font-inter)] text-sm">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-1 md:col-span-2">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Parent Full Name</label>
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Care Recipient Full Name</label>
                 <input
                   type="text"
                   placeholder="e.g. Kamala Dev"
@@ -449,7 +449,7 @@ export function FamilyIntake() {
             type="submit"
             className="w-full py-5 bg-[#0E5E5A] hover:bg-[#0b4845] text-white font-bold rounded-2xl text-xs uppercase tracking-widest transition-all shadow-xl active:scale-[0.98] font-[family-name:var(--font-outfit)]"
           >
-            Save & Sync to Local Console
+            Save & Sync to Local Operations Console
           </button>
         </div>
       </form>
