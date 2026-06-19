@@ -1,99 +1,78 @@
-# Parents Health OS: The Context-Aware Health OS for the Elderly
-**Current Version:** 2.2+ (Premium Dark Glassmorphism & Neural Typography Edition)
+# Parents Health OS: The Context-Aware Eldercare Assistant 🩺✨
 
-![Parents Health OS Dashboard](https://via.placeholder.com/1200x600?text=Parents-Health+OS+Dark+Glassmorphism+Interface)
+> **"Because elderly health is about context, not just numbers."**
 
----
-
-## 🚀 The Core Innovation: "Context-Awareness"
-
-Most health apps see medical data in isolation. If a patient has blood sugar of `160 mg/dL`, a standard app flags it as "High".
-**Parents Health OS** interprets data through its **Clinical Engine** first. It sees:
-> *"Patient is 75 years old + has a history of hypoglycemia (low sugar falls)."*
-
-It then intelligently decides:
-> *"For this specific patient, 160 is actually a SAFE target to prevent fatal falls. Do not alarm."*
-
-This **System Context** is what separates Parents-Health from generic AI wrappers. It builds a digital twin of the patient to provide personalized, clinical-grade insights, now presented through a world-class **Dark Glassmorphism UI** with high-contrast **Neural Typography**.
+Welcome to **Parents Health OS** (First Family Care Console), a warm, clinical-grade operating console designed for care teams and families managing the health of aging parents in India.
 
 ---
 
-## 🌟 Key Features (v2.2+)
+## 🚀 The Core Philosophy
+Most health apps raise panic alarms when a patient's blood glucose hits `160 mg/dL` or their systolic blood pressure fluctuates.
+In geriatrics, keeping a diabetic senior’s sugar slightly elevated is often a deliberate clinical choice. Strict sugar control can lead to **hypoglycemia** (low sugar), which causes dizziness, balance loss, and catastrophic falls.
 
-### 1. 🩺 Health Assessment (Clinical Engine)
-*   **Establish Baseline:** A 15-question geriatric assessment (covering 10 clinical pillars) calculates a personalized **Risk Score (0-175)**.
-*   **AI Calibration:** The system's AI sensitivity and alert thresholds are calibrated based on this clinical profile.
-
-### 2. 🏥 Clinic Hub (Clinical Operations)
-*   **Protocol Schedule:** Streamlined glassmorphic interface for booking geriatric specialists and care team nodes.
-*   **Parents-Health Senior Shield:** Integrated insurance wallet system with real-time operational credit management.
-
-### 📄 Diagnostics & Trends (Smart Reports)
-*   **Gemini AI Engine:** Deep neural analysis of PDFs, lab reports, and medical artifacts using Google Gemini 2.5 Flash.
-*   **Neural Narrative:** Synthesizes months of medical history into a single, cohesive clinical story.
-
-### 4. 💊 Wellness Hub (Daily Protocol)
-*   **Adherence Tracking:** Proactive medication management with premium "Tick to Take" logging and "Relation to Food" logic.
-*   **IoT Synchronization:** Real-time dual-sync simulation for **FreeStyle Libre (CGM)** and **Apple Watch**.
-
-### 💬 WhatsApp Bot (Neural Companion)
-*   A zero-learning-curve interface demonstrating how seniors can interact with Parents Health OS using familiar tools (WhatsApp), re-imagined with a premium dark frame.
+**Parents Health OS** evaluates vitals through a **personalized clinical context**—suppressing false alarms and framing daily targets based on age, chronic conditions, and baseline mobility.
 
 ---
 
-## 🎨 Design System: "Neural Glass"
-*   **Aesthetic:** Deep slate backgrounds (`slate-950`) with translucent `backdrop-blur-xl` layers.
-*   **Typography:** High-contrast **Clean White** headers (`font-black`) for maximum legibility in geriatric contexts.
-*   **Accents:** Cyan and Blue glowing blueprint grids to represent clinical precision.
+## 🌟 Key Features
+
+*   **🩺 Context-Aware Triage:** Warm, clinical priority grading (Stable, Watch, and **Urgent Follow-up**) preventing alarm fatigue.
+*   **📋 First Family Intake:** Onboard seniors with a comprehensive 15-pillar geriatric checklist and chronic condition baselines.
+*   **🎪 Baseline Health Camp:** A dedicated camp registry to capture field vitals (BP, glucose, pulse, weight) and sync them to core profiles.
+*   **📱 WhatsApp Care Companion:** Simulated phone interface showing how seniors interact with **Anaya** (the Care Automation Assistant) via simple WhatsApp templates in their preferred language.
+*   **🔬 Smart PDF Lab Analysis:** Upload blood panel PDFs and parse key findings using Google Gemini AI, translating clinical jargon into simple, comforting terms.
+*   **🏥 Specialist Roster & Doctor Briefs:** Compile recent logs, reports, and daily compliance records into clean, print-ready clinician discussion briefs.
+*   **🔒 Strict DPDPA Consent Compliance:** In compliance with India's Digital Personal Data Protection Act, 2023, data is stored locally first and never analyzed by external AI without explicit consent toggles.
 
 ---
 
-## 🛠 Tech Stack
-*   **Framework:** Next.js 15 (App Router)
-*   **Styling:** Tailwind CSS 4 + Framer Motion 12
-*   **AI Engine:** Google Gemini 2.5 Flash (Context-Aware Multimodal)
-*   **Storage:** `LocalStorage` (100% Client-Side Privacy)
+## 🚀 The Zero-Setup Sandbox Mode
+
+By default, the application runs in a **100% Client-Side Local Sandbox Mode** with zero server overhead.
+- All personal health records (PHRs) are processed on-device and stored in the browser's `localStorage` as a zero-knowledge vault.
+- Bypassing live database connections guarantees complete privacy and offline resilience.
 
 ---
 
-## ⚡ Getting Started
-1.  **Clone the Repository:**
-    ```bash
-    git clone https://github.com/tharungajula2/parents-health-os.git
-    cd parents-health-os
-    ```
-2.  **Install Dependencies:**
-    ```bash
-    npm install
-    ```
-3.  **Launch:**
-    ```bash
-    npm run dev
-    ```
-    Access at `http://localhost:3000`. No password required (Sandbox Mode).
+## 🛠 Developer & Deployment Operations
+
+For full instructions, schemas, and architecture maps, please refer to the detailed system blueprint: [Parents Health OS Source of Truth](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/2_parents-health-os/parents-health-os/ParentsHealthOS_SOURCE_OF_TRUTH_2026-06-19.md).
+
+### Quick Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/tharungajula2/parents-health-os.git
+   cd parents-health-os
+   ```
+
+2. **Install node dependencies:**
+   Ensure you have Node.js 18.17+ installed, and run:
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables:**
+   Create a `.env.local` file in the root folder to define your API keys:
+   ```bash
+   # Gemini API Key (Required for AI report parsing, fallback mock active if empty)
+   NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+
+4. **Start the local server:**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your web browser.
 
 ---
 
-## 🔐 Privacy & Security
-*   **Zero-Server Storage:** All medical data stays in the user's browser via `localStorage`.
-*   **Privacy Secure:** Technical badges in footer confirm local-first execution.
+### Supabase Cloud Mode Migration
 
----
-
-## 🔒 Project Safety & Agent Rules
-
-This repository has strict guardrails to prevent accidental database operations on protected live projects.
-
-| Document | Purpose |
-|---|---|
-| [`PROJECT_SAFETY_LOCK.md`](./PROJECT_SAFETY_LOCK.md) | Hard safety boundary — protected projects, forbidden operations, env rules |
-| [`AGENT_RULES.md`](./AGENT_RULES.md) | AI agent operational rules — read before every session |
-| [`LIVE_BACKEND_PREFLIGHT.md`](./LIVE_BACKEND_PREFLIGHT.md) | Step-by-step process for future live Supabase backend migration |
-
-> **Current backend mode:** Sandbox / localStorage only. No live Supabase project is connected.
-> The protected project `trelis-life` must never be used for Parents Health OS.
-
----
-
-**Designed & Conceptualized by [Tharun Gajula](https://github.com/tharungajula2)**
-*Strategic Vision Prototype for Geriatrics & Clinical Product Architecture.*
+When you are ready to transition from sandbox mode to a live database, uncomment the variables in `.env.local`:
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+```
+Upon detection of these keys, the application automatically mounts Supabase authentication and mounts the PostgreSQL data sync engines. 
+*(Note: A startup safety check in `src/lib/supabase/client.ts` blocks any connections to the protected client `trelis-life` database to protect production resources).*
