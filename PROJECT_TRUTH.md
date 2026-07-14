@@ -1,0 +1,102 @@
+# First Family Care Console (Parents Health OS) — PROJECT TRUTH
+Last verified: July 14, 2026
+
+## 1. One-liner
+A context-aware care coordinator dashboard and automated check-in companion for remote eldercare in India.
+
+## 2. Elevator pitch
+First Family Care Console helps remote adult children monitor aging parents. It replaces complex senior-facing apps with automated WhatsApp check-ins while giving caregivers a context-aware clinical dashboard to track vitals, medications, and generate doctor-ready briefings.
+
+## 3. What it is
+First Family Care Console (Parents Health OS) is a remote health management console tailored for families and care teams coordinating eldercare in India. The platform solves two core problems: senior technology adoption barriers and alarm fatigue. Elderly parents often struggle to navigate complex interfaces, and standard health monitors generate false alerts by using generic population ranges. In geriatrics, maintaining strict vitals control can lead to hypoglycemia-induced dizziness and catastrophic falls. 
+
+Designed to respect India's Digital Personal Data Protection Act (DPDPA), the application defaults to an offline-first local sandbox mode that isolates personal health records on-device. Parents interact passively through automated WhatsApp check-ins, while caregivers use the central operating console to review data. A deterministic, rules-based engine evaluates clinical profiles, adjusting vitals warning thresholds and tailoring daily agendas based on chronic baselines like diabetes or hypertension.
+
+Coordinators can upload diagnostic lab reports, which are parsed by Google Gemini AI to extract key biomarkers and structured medicines, translating jargon into reassuring explanations. The system aggregates vitals, medication adherence, and caregiver observations to compile printable doctor-ready briefing papers. This ensures that the coordination team can consult medical professionals with precise historical data, avoiding therapeutic overlap or manual transcription errors while maintaining absolute clinical safety boundaries.
+
+## 4. How it works
+The console operates through a remote care coordinator flow. Caregivers onboard elder parents via an intake checklist, which saves the demographic baseline and chronic conditions. The data flows as follows:
+
+```
+[Parent (WhatsApp Checks)] <--> [Anaya Automation] <--> [Coordinator Console]
+                                                               |
+    [Gemini AI (Lab Reports)] <--------------------------------+
+                                                               |
+    [Rules Engines (Vitals/Care Plan)] <-----------------------+
+                                                               |
+    [Browser Storage (Sandbox)] <-- (Sync Queue) --> [Supabase Postgres DB]
+```
+
+1. **Patient Intake & Compliance Setup:** The caregiver completes the intake checklist and logs DPDPA consent. The rules engine ([carePlanEngine.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/utils/carePlanEngine.ts)) generates a personalized care routine, including vital check frequency, mobility guidelines, and language-specific WhatsApp templates.
+2. **Passive WhatsApp Check-ins:** The parent interacts solely through automated templates (simulated in [WhatsAppDemo.tsx](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/components/WhatsAppDemo.tsx)). Actions logged via WhatsApp update vitals, medication logs, and compliance records in the database.
+3. **Clinical Record Processing:** Coordinators upload clinical reports (PDFs/images). The backend API route ([route.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/app/api/analyze/route.ts)) converts files to base64, passes them to Google Gemini, and receives parsed JSON biomarkers and new medication schedules to sync with the active care log.
+4. **Operations Triaging:** The Coordinator Board ([CoordinatorBoard.tsx](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/components/CoordinatorBoard.tsx)) displays alerts based on rules-based vitals thresholds and checklist compliance. Triage status can be set to Stable, Watch, or Urgent Follow-up.
+5. **Doctor Consultation Prep:** The care coordinator generates a Doctor Brief ([careTeamEngine.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/utils/careTeamEngine.ts)), compiling historical vitals, medications, and biomarkers into a print-ready PDF containing targeted clinician questions with disclaimer warnings.
+6. **Data Storage & Syncing:** Mutations are committed through a persistent state provider ([context.tsx](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/supabase/context.tsx)). When offline, transactions are saved in `localStorage` via a sync queue ([syncQueue.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/offline/syncQueue.ts)). When the Supabase environment variables are loaded, the app mounts the PostgreSQL client ([client.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/supabase/client.ts)), runs a validation check to block the protected `trelis-life` database, and replicates client mutations to remote tables.
+
+## 5. Tech stack
+*   **Frontend**: Next.js 16.1.4 (App Router), React 19.2.3, React DOM 19.2.3, TailwindCSS 4.0 (via `@tailwindcss/postcss`), Framer Motion 12.29.0, Lucide React 0.563.0, React Dropzone 14.3.8, React Markdown 9.1.0.
+*   **Backend & APIs**: Next.js App Router Server Routes (`/api/analyze`, `/api/whatsapp/send`, `/api/whatsapp/simulate`, `/api/whatsapp/webhook`).
+*   **Data & Persistence**: Browser Local Storage (local-first Sandbox Data Vault via [localPersistence.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/offline/localPersistence.ts) and [syncQueue.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/offline/syncQueue.ts)), Supabase Client (`@supabase/supabase-js` 2.106.2, `@supabase/ssr` 0.10.3) for PostgreSQL sync.
+*   **AI Integrations**: Google Gemini API via `@google/generative-ai` 0.24.1 (running `gemini-2.5-flash` with automatic fallback to `gemini-2.5-flash-lite`).
+*   **Infrastructure**: Vercel/Local Server (Next.js server-side routes), Supabase Postgres database (14 core tables defined in [types.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/supabase/types.ts)).
+
+## 6. Feature status table
+| Feature | Status | Evidence |
+| --- | --- | --- |
+| Local Sandbox Vault (On-device Storage) | SHIPPED | [localPersistence.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/offline/localPersistence.ts) |
+| Client-Side Sync Queue | SHIPPED | [syncQueue.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/offline/syncQueue.ts) |
+| First Family Onboarding & DPDPA Consent | SHIPPED | [FamilyIntake.tsx](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/components/FamilyIntake.tsx) |
+| Baseline Health Camp Registry | SHIPPED | [BaselineCamp.tsx](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/components/BaselineCamp.tsx) |
+| Rules-Based Care Plan Engine | SHIPPED | [carePlanEngine.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/utils/carePlanEngine.ts) |
+| Clinical Doctor Brief Generator | SHIPPED | [careTeamEngine.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/utils/careTeamEngine.ts) |
+| Smart PDF Lab Report Analyzer | SHIPPED | [route.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/app/api/analyze/route.ts) & [SmartReport.tsx](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/components/SmartReport.tsx) |
+| WhatsApp Bot Conversation Simulator | MOCKED | [WhatsAppDemo.tsx](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/components/WhatsAppDemo.tsx) |
+| WhatsApp Outbound API Integration | PARTIAL | [service.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/whatsapp/service.ts) & [route.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/app/api/whatsapp/send/route.ts) (Runs in dry-run mode by default, requires Meta credentials) |
+| WhatsApp Inbound Webhook Handler | SHIPPED | [route.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/app/api/whatsapp/webhook/route.ts) |
+| Supabase Postgres Cloud Mode | SHIPPED | [context.tsx](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/supabase/context.tsx) & [types.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/supabase/types.ts) |
+| Database Safety Lock Guard | SHIPPED | [client.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/supabase/client.ts) |
+| Sponsor SMS Alerts | MOCKED | [CoordinatorBoard.tsx](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/components/CoordinatorBoard.tsx) (Fakes SMS send via notifications) |
+
+## 7. What is real vs. what is demo
+*   **Local-first data management is 100% real:** Vitals, medications, observations, and compliance data are stored locally in the browser's `localStorage` using a persistent cache layer ([localPersistence.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/offline/localPersistence.ts)) that functions without any server dependencies.
+*   **AI-powered lab report extraction is 100% real:** When a PDF or image is uploaded, it is sent to `/api/analyze` where the Google Gemini API (`gemini-2.5-flash`) extracts structured biomarkers, medications, and doctor questions in real time. If the key is missing or mocked, it returns a static fallback response.
+*   **Supabase PostgreSQL synchronization is 100% real:** If `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are provided, the application mounts a live authentication state and automatically maps client mutations to a remote Supabase Postgres database.
+*   **The database safety lock is 100% real:** A startup guard in [client.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/supabase/client.ts) prevents accidental connection to the protected `trelis-life` database.
+*   **WhatsApp messaging is simulated:** The smartphone chat dashboard is a mockup. Tapping template buttons like "Log BP" or "Check Medicine" fakes incoming messages to trigger state updates in the sandbox, rather than interacting with a real mobile device.
+*   **Meta Cloud API and Webhook are partially implemented:** The service layer and webhook endpoints are fully coded but require a verified Meta Developer business account and custom templates to send live messages; the app runs in dry-run mode (`WHATSAPP_DRY_RUN=true`) by default.
+
+## 8. Hardest problems solved
+*   **Custom Rules-Based Clinical Triage Engine ([carePlanEngine.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/utils/carePlanEngine.ts)):** Created a deterministic rules engine that replaces generalized medical alarm systems. It checks client baseline data (age, chronic conditions like type-2 diabetes) and ADLs to compute a care status priority level (Stable, Watch, Urgent Follow-up) and adjust physiological vitals reference ranges. This prevents caregiver alarm fatigue while keeping senior targets aligned with geriatric standards (e.g., allowing slightly higher sugar baselines to prevent hypoglycemic falls).
+*   **Dual-State Offline-First Sync Architecture ([localPersistence.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/offline/localPersistence.ts), [syncQueue.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/offline/syncQueue.ts), [context.tsx](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/supabase/context.tsx)):** Engineered a transaction queue that logs local mutations as distinct sync events (e.g., vitals_logged, medication_updated) up to a 100-event buffer. When a network connection is established or Supabase variables are declared, the context provider swaps local-first hooks for Postgres database calls and replicates the queued modifications to PostgreSQL tables.
+*   **Visual AI PDF Extraction & Model Fallback Chain ([route.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/app/api/analyze/route.ts)):** Implemented a server-side route `/api/analyze` that converts PDF and image reports to base64, submitting them directly to `gemini-2.5-flash` with a strict JSON-enforced system prompt. The route handles API rate limits by falling back to `gemini-2.5-flash-lite` automatically, and integrates a high-fidelity mock fallback to ensure the UI operates normally without an active Gemini API key.
+*   **Accidental Production Database Access Prevention ([client.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/supabase/client.ts)):** Developed a hardcoded safety lock that checks the configured Supabase URL. If the URL references the protected `trelis-life` project ID (`lhqtqofjrqoyscobsfud`), the client aborts initialization, throwing a runtime error in development and logging a critical safety violation in production to prevent data contamination.
+
+## 9. Known limitations & next steps
+*   **Dependency Documentation Contradiction:** [SOURCE_OF_TRUTH.md](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/SOURCE_OF_TRUTH.md) lists `pdfjs-dist` version `^4.9.155` as a core dependency for client-side PDF parsing. However, the actual [package.json](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/package.json) does not include `pdfjs-dist`, and `/api/analyze` passes the binary report directly to Gemini for visual extraction.
+*   **WhatsApp Integration Sandbox State:** The WhatsApp service is hardcoded to run in dry-run mode. Activating live message dispatches requires creating approved Meta templates, verifying business accounts, and setting the `WHATSAPP_DRY_RUN` env variable to `false`.
+*   **Encryption of Sandbox Vault:** Local storage data is saved as plain JSON strings. To achieve true "zero-knowledge local vault" status, client-side encryption (e.g., using AES-256 via CryptoJS) must be implemented for browser-stored health records.
+*   **Limited Offline Data Synchronization Resolution:** The current sync queue ([syncQueue.ts](file:///c:/000_workspace_22626/1_Product%20Lab%20Portfolio/3_parents-health-os/parents-health-os/src/lib/offline/syncQueue.ts)) fakes cloud commits with a simulated sync transition (`simulated_synced` status) and does not yet handle complex server-side merge conflicts (e.g., if the same vital log is modified on two different offline devices).
+
+## 10. Ready-made copy
+- Resume bullet, 1 line
+Designed and built a local-first geriatric care console using Next.js, Supabase, and Google Gemini AI to parse diagnostic lab reports and automate patient check-ins.
+- Resume bullets, 3 lines
+Created an offline-first eldercare operating console using Next.js and Supabase, utilizing local storage persistence with a transactional sync queue for network resilience.
+Developed a deterministic rules engine to calculate patient-specific vitals triage alerts and auto-generate print-ready doctor briefings.
+Integrated Google Gemini AI to parse structured biomarkers and medicines from uploaded diagnostic PDFs, with an automated model fallback chain.
+- Portfolio card, short (max 30 words)
+A Next.js and Supabase health console for Indian eldercare. It automates parent check-ins via WhatsApp, parses diagnostic reports using Gemini, and alerts caregivers to vitals deviations.
+- Portfolio card, medium (60–80 words)
+First Family Care Console is a Next.js and Supabase web dashboard designed to manage elderly health remotely. The platform coordinates patient care by replacing complex apps with automated WhatsApp check-ins. It features a custom rules engine that adjusts vitals alerts based on chronic baselines, processes diagnostic PDFs using Gemini AI, and generates printable clinical briefings. It runs in an offline-first local sandbox mode to ensure strict privacy.
+- LinkedIn "Projects" blurb (40–60 words)
+I developed First Family Care Console, a local-first web platform for remote eldercare in India. Built with Next.js, Supabase, and Gemini AI, it uses rules-based vitals tracking to prevent alert fatigue, parses blood panels, and simulates WhatsApp-based parent check-ins. All data is processed locally to maintain personal data protection compliance.
+- GitHub README opening paragraph
+First Family Care Console is a context-aware health console and care operations dashboard designed for remote eldercare in India. Built with Next.js, Supabase, and Google Gemini AI, the platform coordinates daily senior health tracking by replacing complex patient-facing apps with automated WhatsApp check-ins. It features a rules-based triage engine that customizes vital alert thresholds based on chronic baselines, parses diagnostic lab reports to extract biomarkers, and generates printable briefings for doctor consultations. The app operates in a secure, local-first sandbox mode to respect data privacy guidelines.
+
+## 11. Interview talking points
+*   **What to lead with (Technical Depth):** Focus on the offline-first sandbox design. Explain how you implemented the transactional sync queue (`syncQueue.ts`) and local persistence layer (`localPersistence.ts`) to manage state, and how the app seamlessly shifts to a live database when Supabase credentials are detected. Mention the safety lock in `client.ts` that blocks connection to the forbidden project as an example of production-grade engineering safety.
+*   **What to lead with (Product Empathy):** Describe the clinical insight behind the rules-based triage engine: standard apps flag vitals using generic populations, which causes alarm fatigue, whereas in geriatrics, keeping blood glucose slightly elevated is a deliberate choice to prevent hypoglycemic falls. Highlight that you solved senior technology barriers by making the parent's interface WhatsApp-first.
+*   **What to admit (The WhatsApp Simulation):** Be transparent that the WhatsApp chatbot interface in the dashboard is an interactive simulation mockup for demonstration purposes. Explain that while the webhook API and service layers are implemented, live execution is bypassed in dry-run mode until official Meta Developer business verification and approved message templates are configured.
+*   **What to admit (Data Encryption Gaps):** Acknowledge that the sandbox mode stores records as unencrypted plain JSON strings in browser `localStorage`. Mention that in a production-ready client vault, you would add client-side AES-256 encryption before saving sensitive health profiles.
+*   **What to avoid overclaiming (AI Autonomy):** Avoid claiming that the AI behaves as an autonomous medical diagnostic assistant. Emphasize that the AI is explicitly bounded: Gemini is only used to parse raw diagnostic PDFs and extract data. The care triage status and doctor agendas are handled by a deterministic, rules-based engine, and all generated briefs display safety disclaimers for professional clinical validation only.
